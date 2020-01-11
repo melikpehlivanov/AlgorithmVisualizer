@@ -1,0 +1,8 @@
+.grid {
+    margin: 100px 0 0 !important;
+}
+
+.main-grid {
+    position: absolute !important;
+    z-index: 1;
+}
