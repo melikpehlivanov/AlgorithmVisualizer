@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 import { Container } from 'reactstrap';
 import { NavMenu } from '../Navbar/NavMenu';
 
-export class Layout extends Component {
-  static displayName = Layout.name;
-
+export class MainLayout extends Component {
   render () {
     return (
       <div>
@@ -16,3 +14,5 @@ export class Layout extends Component {
     );
   }
 }
+
+export default MainLayout;
