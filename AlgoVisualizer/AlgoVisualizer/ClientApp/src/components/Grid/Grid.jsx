@@ -111,6 +111,5 @@ const setWallNode = (grid, row, col) => {
         isWall: !node.isWall,
     };
     newGrid[row][col] = newNode;
-    console.log(newNode);
     return newGrid;
 };
