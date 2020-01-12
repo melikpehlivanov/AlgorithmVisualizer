@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { NavMenu } from '../Navbar/NavMenu';
+import { NavMenu } from '../../Navbar/NavMenu';
 
 export class GridLayout extends Component {
   render () {
