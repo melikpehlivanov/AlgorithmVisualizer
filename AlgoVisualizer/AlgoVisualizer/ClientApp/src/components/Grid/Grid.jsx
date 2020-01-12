@@ -143,6 +143,7 @@ const setStartNode = (grid, row, col) => {
     const newGrid = grid.slice();
     newGrid[StartNodeRow][StartNodeCol].isStart=false;
     newGrid[row][col].isStart = true;
+    newGrid[row][col].isWall = false;
 
     StartNodeRow = row;
     StartNodeCol = col;
