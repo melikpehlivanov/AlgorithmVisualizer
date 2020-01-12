@@ -4,7 +4,7 @@ import { Home } from './components/Home';
 import { FetchData } from './components/FetchData';
 import { Counter } from './components/Counter';
 import Grid from './components/Grid/Grid'
-import {GridLayout} from './components/Layouts/GridLayout'
+import {GridLayout} from './components/Layouts/GridLayout/GridLayout'
 
 import './custom.css'
 import AppRoute from './components/AppRoute';
