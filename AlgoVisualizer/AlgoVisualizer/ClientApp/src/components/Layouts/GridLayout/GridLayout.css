@@ -21,7 +21,7 @@
 .dumbbell {
     width: 30px;
     height: 25px;
-    background-image: url(/static/media/dumbbell-solid.f22d5d7e.svg);
+    background-image: url(./dumbbell-solid.svg);
     margin: 0 1em 0 2.5em;
     float: left;
 }
