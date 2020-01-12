@@ -3,6 +3,10 @@ import Node from './Node/Node'
 
 import './Grid.css'
 
+const ShiftKeyCode = 16;
+const KeyDownEvent = "keydown";
+const KeyUpEvent = "keyup";
+
 const Rows = 21;
 const Cols = 60;
 
@@ -17,21 +21,42 @@ export default class Grid extends Component {
         this.state = {
             grid: [],
             isMouseStillClicked: false,
+            isShiftStillPressed: false,
+        };
+        
+        // These events will be improved in future releases with faster solution
+        this.handleKeyPress = this.handleKeyPress.bind(this);
+        this.handleKeyUp = this.handleKeyUp.bind(this);
+    }
+
+    handleKeyPress(e) {
+        if(e.keyCode === ShiftKeyCode) {
+          this.setState({isShiftStillPressed: true});
         }
     }
 
+    handleKeyUp(e){
+        if(e.keyCode === ShiftKeyCode) {
+            this.setState({isShiftStillPressed: false});
+          } 
+    }
+
     componentDidMount(){
+        document.addEventListener(KeyDownEvent, this.handleKeyPress);
+        document.addEventListener(KeyUpEvent, this.handleKeyUp);
         this.setState({grid: getInitialGrid()});
     }
 
-    handleOnClickEvent(event, row, col){
-        
+    componentWillUnmount(){
+        document.removeEventListener(KeyDownEvent, this.handleKeyPress);
+        document.removeEventListener(KeyUpEvent, this.handleKeyUp);
     }
 
-    handleMouseDown(event, row, col) {
-        //const newGrid = setWallNode(this.state.grid, row, col);
-        //this.setState({grid: newGrid, isMouseStillClicked: true});
+    handleMouseDown() {
+        this.setState({isMouseStillClicked: true});
+    }
 
+    handleOnClick(event, row, col){
         let newGrid;
         if(event){
             if(event.ctrlKey){
@@ -41,19 +66,28 @@ export default class Grid extends Component {
                 newGrid = setEndNode(this.state.grid, row, col);
             }
             if(event.shiftKey){
-                newGrid = setStartNode(this.state.grid, row, col);
+                newGrid = setWeightNode(this.state.grid, row, col);
             }
         }
+        if(!event.shiftKey && !event.ctrlKey && !event.altKey){
+            newGrid = setWallNode(this.state.grid, row, col);
+        }
 
-        newGrid = setWallNode(this.state.grid, row, col);
-        this.setState({grid: newGrid, isMouseStillClicked: true});
+        this.setState({grid: newGrid});
     }
 
-    handleMouseEnter(row, col) {
+    handleMouseOver(event, row, col) {
         if (!this.state.isMouseStillClicked) 
             return;
-
-        const newGrid = setWallNode(this.state.grid, row, col);
+            
+        let newGrid;
+        if(event && this.state.isShiftStillPressed){
+            newGrid = setWeightNode(this.state.grid, row, col);
+        }
+        else{
+            newGrid = setWallNode(this.state.grid, row, col);
+        }
+        
         this.setState({grid: newGrid});
     }
     
@@ -73,7 +107,7 @@ export default class Grid extends Component {
                     return(
                             <div id={`row-${rowIndex}`} key={rowIndex}>
                                 {row.map((node, nodeIndex) => {
-                                    const {row, col, isStart, isEnd, isWall} = node;
+                                    const {row, col, isStart, isEnd, isWall, isWeight} = node;
                                     return(
                                         <Node key={nodeIndex}
                                             row={row}
@@ -81,10 +115,11 @@ export default class Grid extends Component {
                                             isStart={isStart}
                                             isEnd={isEnd}
                                             isWall={isWall}
-                                            onMouseDown={(event, row, col) => this.handleMouseDown(event, row, col)}
-                                            onMouseEnter={(row, col) => this.handleMouseEnter(row, col)}
+                                            isWeight={isWeight}
+                                            onClick={(event, row, col) => this.handleOnClick(event, row, col)}
+                                            onMouseOver={(event, row, col) => this.handleMouseOver(event, row, col)}
+                                            onMouseDown={() => this.handleMouseDown()}
                                             onMouseUp={() => this.handleMouseUp()}
-                                            //onClick={(event, row, col) => this.handleOnClickEvent(event, row, col)}
                                             >
                                         </Node>
                                     );
@@ -118,6 +153,7 @@ const createNode = (row, col) => {
         isStart: row === StartNodeRow && col === StartNodeCol,
         isEnd: row === EndNodeRow && col === EndNodeCol,
         isWall: false,
+        isWeight: false,
     };
 };
 
@@ -130,6 +166,22 @@ const setWallNode = (grid, row, col) => {
     const newNode = {
         ...node,
         isWall: !node.isWall,
+        isWeight: false,
+    };
+    newGrid[row][col] = newNode;
+    return newGrid;
+};
+
+const setWeightNode = (grid, row, col) => {
+    if(!isPlaceable(row, col))
+        return grid;
+
+    const newGrid = grid.slice();
+    const node = newGrid[row][col];
+    const newNode = {
+        ...node,
+        isWeight: !node.isWeight,
+        isWall: false
     };
     newGrid[row][col] = newNode;
     return newGrid;
@@ -144,6 +196,7 @@ const setStartNode = (grid, row, col) => {
     newGrid[StartNodeRow][StartNodeCol].isStart=false;
     newGrid[row][col].isStart = true;
     newGrid[row][col].isWall = false;
+    newGrid[row][col].isWeight = false;
 
     StartNodeRow = row;
     StartNodeCol = col;
@@ -160,6 +213,7 @@ const setEndNode = (grid, row, col) => {
     newGrid[EndNodeRow][EndNodeCol].isEnd=false;
     newGrid[row][col].isEnd = true;
     newGrid[row][col].isWall = false;
+    newGrid[row][col].isWeight = false;
 
     EndNodeRow = row;
     EndNodeCol = col;

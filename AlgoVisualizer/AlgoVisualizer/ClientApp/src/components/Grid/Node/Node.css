@@ -21,6 +21,14 @@
     background-color: purple;
 }
 
+.node-dumbbell{
+    width: 74%;
+    height: 60%;
+    background-image: url(/static/media/dumbbell-solid.f22d5d7e.svg);
+    display: inline-block;
+    margin-left: 3px;
+}
+
 .node-visited {
     animation-name: visitedAnimation;
     animation-duration: 1.5s;
