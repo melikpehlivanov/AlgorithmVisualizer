@@ -151,6 +151,22 @@ const setStartNode = (grid, row, col) => {
     return newGrid;
 }
 
+const setEndNode = (grid, row, col) => {
+    if(!isPlaceable(row, col)){
+        return grid;
+    }
+
+    const newGrid = grid.slice();
+    newGrid[EndNodeRow][EndNodeCol].isEnd=false;
+    newGrid[row][col].isEnd = true;
+    newGrid[row][col].isWall = false;
+
+    EndNodeRow = row;
+    EndNodeCol = col;
+
+    return newGrid;
+}
+
 function isPlaceable(row, col){
     if((row === StartNodeRow && col === StartNodeCol) 
         || (row === EndNodeRow && col === EndNodeCol)){
