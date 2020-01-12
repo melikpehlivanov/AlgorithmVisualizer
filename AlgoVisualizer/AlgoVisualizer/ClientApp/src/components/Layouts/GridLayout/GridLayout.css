@@ -1,8 +1,27 @@
 .main-grid{
-    padding-left: 2rem !important;
-    padding-right: 1.5rem !important;
+    padding-left: 1rem !important;
 }
 
-li{
+#algo-legend > ul li{
+    display: inline-block;
     list-style: none;
+    padding: 0 28px 0 0;
+    margin-bottom: 0.5em;
+}
+
+#algo-legend div {
+    border: 1px solid rgb(12, 53, 71);
+    width: 25px;
+    height: 25px;
+    display: inline-block;
+    top: 0.35em;
+    margin: 0 1em 0 2.5em
+}
+
+.dumbbell {
+    width: 30px;
+    height: 25px;
+    background-image: url(/static/media/dumbbell-solid.f22d5d7e.svg);
+    margin: 0 1em 0 2.5em;
+    float: left;
 }
