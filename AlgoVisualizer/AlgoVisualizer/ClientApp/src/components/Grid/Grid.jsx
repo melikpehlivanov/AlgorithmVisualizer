@@ -3,13 +3,13 @@ import Node from './Node/Node'
 
 import './Grid.css'
 
-const StartNodeRow = 5;
-const StartNodeCol = 15;
-const EndNodeRow = 10;
-const EndNodeCol = 35;
-
 const Rows = 21;
 const Cols = 60;
+
+let StartNodeRow = 5;
+let StartNodeCol = 15;
+let EndNodeRow = 10;
+let EndNodeCol = 35;
 
 export default class Grid extends Component {
     constructor(){
@@ -24,10 +24,30 @@ export default class Grid extends Component {
         this.setState({grid: getInitialGrid()});
     }
 
-    handleMouseDown(row, col) {
-        const newGrid = setWallNode(this.state.grid, row, col);
+    handleOnClickEvent(event, row, col){
+        
+    }
+
+    handleMouseDown(event, row, col) {
+        //const newGrid = setWallNode(this.state.grid, row, col);
+        //this.setState({grid: newGrid, isMouseStillClicked: true});
+
+        let newGrid;
+        if(event){
+            if(event.ctrlKey){
+                newGrid = setStartNode(this.state.grid, row, col);
+            }
+            if(event.altKey){
+                newGrid = setEndNode(this.state.grid, row, col);
+            }
+            if(event.shiftKey){
+                newGrid = setStartNode(this.state.grid, row, col);
+            }
+        }
+
+        newGrid = setWallNode(this.state.grid, row, col);
         this.setState({grid: newGrid, isMouseStillClicked: true});
-      }
+    }
 
     handleMouseEnter(row, col) {
         if (!this.state.isMouseStillClicked) 
@@ -61,9 +81,10 @@ export default class Grid extends Component {
                                             isStart={isStart}
                                             isEnd={isEnd}
                                             isWall={isWall}
-                                            onMouseDown={(row, col) => this.handleMouseDown(row, col)}
+                                            onMouseDown={(event, row, col) => this.handleMouseDown(event, row, col)}
                                             onMouseEnter={(row, col) => this.handleMouseEnter(row, col)}
                                             onMouseUp={() => this.handleMouseUp()}
+                                            //onClick={(event, row, col) => this.handleOnClickEvent(event, row, col)}
                                             >
                                         </Node>
                                     );
@@ -101,7 +122,7 @@ const createNode = (row, col) => {
 };
 
 const setWallNode = (grid, row, col) => {
-    if((row === StartNodeRow && col === StartNodeCol) || (row === EndNodeRow && col === EndNodeCol))
+    if(!isPlaceable(row, col))
         return grid;
 
     const newGrid = grid.slice();
@@ -113,3 +134,27 @@ const setWallNode = (grid, row, col) => {
     newGrid[row][col] = newNode;
     return newGrid;
 };
+
+const setStartNode = (grid, row, col) => {
+    if(!isPlaceable(row, col)){
+        return grid;
+    }
+
+    const newGrid = grid.slice();
+    newGrid[StartNodeRow][StartNodeCol].isStart=false;
+    newGrid[row][col].isStart = true;
+
+    StartNodeRow = row;
+    StartNodeCol = col;
+
+    return newGrid;
+}
+
+function isPlaceable(row, col){
+    if((row === StartNodeRow && col === StartNodeCol) 
+        || (row === EndNodeRow && col === EndNodeCol)){
+        return false;
+    }
+
+    return true;
+}
