@@ -1,10 +1,9 @@
-import React, { Component, Fragment } from 'react';
-import { GridNavbar } from '../../Navbar/GridNavbar';
-
-import './GridLayout.css';
+import React, { Component, Fragment } from "react";
+import "./GridLayout.css";
+import GridNavbar from "../../Navbar/GridNavbar";
 
 export class GridLayout extends Component {
-  render () {
+  render() {
     return (
       <Fragment>
         <GridNavbar />
@@ -40,12 +39,8 @@ export class GridLayout extends Component {
             </li>
           </ul>
         </div>
-        <div className="main-grid">
-          {this.props.children}
-        </div>
+        <div className="main-grid">{this.props.children}</div>
       </Fragment>
     );
   }
 }
-
-export default GridLayout;
