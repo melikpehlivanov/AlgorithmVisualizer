@@ -11,11 +11,7 @@ export default class Node extends Component {
             isEnd,
             isWall,
             isWeight,
-            onClick,
-            onMouseOver,
-            onMouseDown,
-            onMouseUp,
-          } = this.props;
+          } = this.props.node;
           const extraClassName = isStart
             ? 'node-start'
             : isEnd
@@ -28,10 +24,10 @@ export default class Node extends Component {
             <div
                 id={`${row}-${col}`}
                 className={extraClassName ? `node ${extraClassName}` : 'node'}
-                onClick={(event) => onClick(event, row, col)}
-                onMouseOver={(event) => onMouseOver(event, row, col)}
-                onMouseDown={() => onMouseDown()}
-                onMouseUp={() => onMouseUp()}
+                onClick={(event) => this.props.onClick(event, row, col)}
+                onMouseOver={(event) => this.props.onMouseOver(event, row, col)}
+                onMouseDown={() => this.props.onMouseDown()}
+                onMouseUp={() => this.props.onMouseUp()}
                 >
                   {isWeight ? <i className="node-dumbbell"></i> : ''}
                 </div>

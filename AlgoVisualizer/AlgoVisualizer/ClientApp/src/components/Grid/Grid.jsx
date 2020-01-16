@@ -1,5 +1,7 @@
-import React, { Component, Fragment } from 'react'
-import Node from './Node/Node'
+import React, { Component, Fragment } from 'react';
+import {connect} from 'react-redux';
+import Node from './Node/Node';
+import setGrid from '../../actions'
 
 import './Grid.css'
 
@@ -15,16 +17,17 @@ let StartNodeCol = 15;
 let EndNodeRow = 10;
 let EndNodeCol = 35;
 
-export default class Grid extends Component {
+export class Grid extends Component {
     constructor(){
         super();
         this.state = {
-            grid: [],
+            isWeightNodeAllowed: true,
             isMouseStillClicked: false,
             isShiftStillPressed: false,
         };
-        
-        // These events will be improved in future releases with faster solution
+
+        // These events will be improved in future releases with faster and more elegant solution 
+        // P.S (Keep in mind that the main focus for this project is the backend(the actual algo's implementation), not the front end)
         this.handleKeyPress = this.handleKeyPress.bind(this);
         this.handleKeyUp = this.handleKeyUp.bind(this);
     }
@@ -44,7 +47,7 @@ export default class Grid extends Component {
     componentDidMount(){
         document.addEventListener(KeyDownEvent, this.handleKeyPress);
         document.addEventListener(KeyUpEvent, this.handleKeyUp);
-        this.setState({grid: getInitialGrid()});
+        this.props.setGrid(getInitialGrid());
     }
 
     componentWillUnmount(){
@@ -60,20 +63,20 @@ export default class Grid extends Component {
         let newGrid;
         if(event){
             if(event.ctrlKey){
-                newGrid = setStartNode(this.state.grid, row, col);
+                newGrid = setStartNode(this.props.grid, row, col);
             }
             if(event.altKey){
-                newGrid = setEndNode(this.state.grid, row, col);
+                newGrid = setEndNode(this.props.grid, row, col);
             }
             if(event.shiftKey){
-                newGrid = setWeightNode(this.state.grid, row, col);
+                newGrid = setWeightNode(this.props.grid, row, col);
             }
         }
         if(!event.shiftKey && !event.ctrlKey && !event.altKey){
-            newGrid = setWallNode(this.state.grid, row, col);
+            newGrid = setWallNode(this.props.grid, row, col);
         }
 
-        this.setState({grid: newGrid});
+        this.props.setGrid(newGrid);
     }
 
     handleMouseOver(event, row, col) {
@@ -82,13 +85,13 @@ export default class Grid extends Component {
             
         let newGrid;
         if(event && this.state.isShiftStillPressed){
-            newGrid = setWeightNode(this.state.grid, row, col);
+            newGrid = setWeightNode(this.props.grid, row, col);
         }
         else{
-            newGrid = setWallNode(this.state.grid, row, col);
+            newGrid = setWallNode(this.props.grid, row, col);
         }
         
-        this.setState({grid: newGrid});
+        this.props.setGrid(newGrid);
     }
     
     handleMouseUp() {
@@ -96,26 +99,17 @@ export default class Grid extends Component {
     }      
 
     render() {
-        const {grid} = this.state;
-
+        const {grid} = this.props;
         return (
             <Fragment>
-            <button className="btn btn-primary">Visualize Algo</button>
-            
             <div className="grid">
                 {grid.map((row, rowIndex) => {
                     return(
                             <div id={`row-${rowIndex}`} key={rowIndex}>
                                 {row.map((node, nodeIndex) => {
-                                    const {row, col, isStart, isEnd, isWall, isWeight} = node;
                                     return(
                                         <Node key={nodeIndex}
-                                            row={row}
-                                            col={col}
-                                            isStart={isStart}
-                                            isEnd={isEnd}
-                                            isWall={isWall}
-                                            isWeight={isWeight}
+                                            node={node}
                                             onClick={(event, row, col) => this.handleOnClick(event, row, col)}
                                             onMouseOver={(event, row, col) => this.handleMouseOver(event, row, col)}
                                             onMouseDown={() => this.handleMouseDown()}
@@ -229,3 +223,17 @@ function isPlaceable(row, col){
 
     return true;
 }
+
+const mapStateToProps = (state) => {
+    return{
+      grid: state.grid.data
+    };
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        setGrid: (grid) => { dispatch(setGrid(grid)) }
+    }
+};
+  
+export default connect(mapStateToProps, mapDispatchToProps)(Grid);  
