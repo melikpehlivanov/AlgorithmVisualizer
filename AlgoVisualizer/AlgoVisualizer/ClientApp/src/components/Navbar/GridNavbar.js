@@ -33,7 +33,9 @@ const algorithms = [
 export function GridNavbar(){
     return(
         <Navbar className="navbar-expand-sm navbar-toggleable-sm ng-white border-bottom box-shadow mb-3" bg="light" expand="lg">
-            <Navbar.Brand href="#home">AlgoVisualizer</Navbar.Brand>
+            <Navbar.Brand>
+                <NavLink tag={Link} className="text-dark" to="/">AlgoVisualizer</NavLink>
+            </Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="mr-auto">
