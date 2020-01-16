@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { NavMenu } from '../../Navbar/NavMenu';
+import { GridNavbar } from '../../Navbar/GridNavbar';
 
 import './GridLayout.css';
 
@@ -7,7 +7,7 @@ export class GridLayout extends Component {
   render () {
     return (
       <Fragment>
-        <NavMenu />
+        <GridNavbar />
         <div id="algo-legend">
           <ul>
             <li>
