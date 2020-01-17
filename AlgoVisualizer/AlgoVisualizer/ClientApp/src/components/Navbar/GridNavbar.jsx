@@ -20,24 +20,24 @@ export class GridNavbar extends Component {
     const { algorithm, algorithms } = this.props;
     return (
       <Navbar
-        className='navbar-expand-sm navbar-toggleable-sm ng-white border-bottom box-shadow mb-3'
-        bg='light'
-        expand='lg'
+        className="navbar-expand-sm navbar-toggleable-sm ng-white border-bottom box-shadow mb-3"
+        bg="light"
+        expand="lg"
       >
         <Navbar.Brand>
-          <NavLink tag={Link} className='text-dark' to='/'>
+          <NavLink tag={Link} className="text-dark" to="/">
             AlgoVisualizer
           </NavLink>
         </Navbar.Brand>
-        <Navbar.Toggle aria-controls='basic-navbar-nav' />
-        <Navbar.Collapse id='basic-navbar-nav'>
-          <Nav className='mr-auto'>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="mr-auto">
             <NavItem>
-              <NavLink tag={Link} className='text-dark' to='/'>
+              <NavLink tag={Link} className="text-dark" to="/">
                 Home
               </NavLink>
             </NavItem>
-            <NavDropdown title='Algorithms' id='basic-nav-dropdown'>
+            <NavDropdown title="Algorithms" id="basic-nav-dropdown">
               {algorithms.map((currentElement, index) => {
                 return (
                   <NavDropdown.Item
@@ -56,15 +56,13 @@ export class GridNavbar extends Component {
             </NavDropdown>
             <NavItem>
               {algorithm !== '' ? (
-                <Button className='ml-3' variant='success'>
+                <Button className="ml-3 mr-3" variant="success">
                   Visualize {algorithm}
                 </Button>
               ) : (
                 ''
               )}
-            </NavItem>
-            <NavItem>
-              <Button variant='danger' onClick={this.props.clearState}>
+              <Button variant="danger" onClick={this.props.clearState}>
                 Clear board
               </Button>
             </NavItem>
