@@ -21,11 +21,11 @@ export class GridNavbar extends Component {
     return (
       <Navbar
         className="navbar-expand-sm navbar-toggleable-sm ng-white border-bottom box-shadow mb-3"
-        bg="light"
+        bg="dark"
         expand="lg"
       >
         <Navbar.Brand>
-          <NavLink tag={Link} className="text-dark" to="/">
+          <NavLink tag={Link} className="text-white" to="/">
             AlgoVisualizer
           </NavLink>
         </Navbar.Brand>
@@ -33,11 +33,14 @@ export class GridNavbar extends Component {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
             <NavItem>
-              <NavLink tag={Link} className="text-dark" to="/">
+              <NavLink tag={Link} className="text-white" to="/">
                 Home
               </NavLink>
             </NavItem>
-            <NavDropdown title="Algorithms" id="basic-nav-dropdown">
+            <NavDropdown
+              title={<span className="text-white">Algorithms</span>}
+              id="basic-nav-dropdown"
+            >
               {algorithms.map((currentElement, index) => {
                 return (
                   <NavDropdown.Item

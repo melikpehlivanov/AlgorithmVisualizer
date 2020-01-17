@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import Node from './Node/Node';
-import { setGrid } from '../../actions';
+import { setGrid, removeWeightNodes } from '../../actions';
 import {
   getInitialGrid,
   setWallNode,
@@ -103,7 +103,17 @@ export class Grid extends Component {
   }
 
   render() {
-    const { grid, algorithmDescription, isLoading } = this.props;
+    const {
+      grid,
+      algorithmDescription,
+      isLoading,
+      isWeightNodeAllowed
+    } = this.props;
+
+    if (!isWeightNodeAllowed) {
+      this.props.removeWeightNodes();
+    }
+
     return (
       <Fragment>
         <p className="text-center">{algorithmDescription}</p>
@@ -153,6 +163,9 @@ const mapDispatchToProps = dispatch => {
   return {
     setGrid: grid => {
       dispatch(setGrid(grid));
+    },
+    removeWeightNodes: () => {
+      dispatch(removeWeightNodes());
     }
   };
 };
