@@ -10,8 +10,6 @@ import './custom.css'
 import AppRoute from './components/AppRoute';
 
 export default class App extends Component {
-  static displayName = App.name;
-
   render () {
     return (
         <Switch>
