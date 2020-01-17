@@ -1,3 +1,12 @@
+import {
+  SET_GRID,
+  SET_ALGORITHM,
+  SET_ALGORITHM_DESCRIPTION,
+  CLEAR_STATE
+} from '../constants/gridConstants';
+
+import { getInitialGrid } from '../helpers/gridHelper';
+
 const availableAlgorithms = [
   {
     value: 'astar',
@@ -29,7 +38,8 @@ const availableAlgorithms = [
 ];
 
 const initialState = {
-  data: [],
+  isLoading: true,
+  data: getInitialGrid,
   algorithms: availableAlgorithms,
   algorithm: '',
   algorithmDescription: '',
@@ -38,10 +48,31 @@ const initialState = {
 
 const gridReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'SET_GRID':
-      return { ...state, data: action.payload };
-    case 'SET_ALGORITHM':
-      return { ...state, algorithm: action.payload };
+    case SET_GRID:
+      return { ...state, data: action.payload, isLoading: false };
+    case SET_ALGORITHM:
+      let algorithm = state.algorithms.find(el => el.value === action.payload);
+      if (algorithm) {
+        return {
+          ...state,
+          algorithm: action.payload,
+          isWeightNodeAllowed: algorithm.isWeight
+        };
+      }
+      break;
+    case SET_ALGORITHM_DESCRIPTION:
+      if (action.payload) {
+        return { ...state, algorithmDescription: action.payload };
+      }
+      break;
+    case CLEAR_STATE:
+      state = initialState;
+
+      return {
+        ...state,
+        data: getInitialGrid(),
+        isLoading: false
+      };
     default:
       return state;
   }
