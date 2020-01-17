@@ -2,25 +2,24 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import Node from './Node/Node';
 import { setGrid } from '../../actions';
+import {
+  getInitialGrid,
+  setWallNode,
+  setWeightNode,
+  setStartNode,
+  setEndNode
+} from '../../helpers/gridHelper';
+
 import './Grid.css';
 
 const ShiftKeyCode = 16;
 const KeyDownEvent = 'keydown';
 const KeyUpEvent = 'keyup';
 
-const Rows = 21;
-const Cols = 60;
-
-let StartNodeRow = 5;
-let StartNodeCol = 15;
-let EndNodeRow = 10;
-let EndNodeCol = 35;
-
 export class Grid extends Component {
   constructor() {
     super();
     this.state = {
-      isWeightNodeAllowed: true,
       isMouseStillClicked: false,
       isShiftStillPressed: false
     };
@@ -67,7 +66,7 @@ export class Grid extends Component {
       if (event.altKey) {
         newGrid = setEndNode(this.props.grid, row, col);
       }
-      if (event.shiftKey) {
+      if (this.props.isWeightNodeAllowed && event.shiftKey) {
         newGrid = setWeightNode(this.props.grid, row, col);
       }
     }
@@ -75,20 +74,28 @@ export class Grid extends Component {
       newGrid = setWallNode(this.props.grid, row, col);
     }
 
-    this.props.setGrid(newGrid);
+    if (newGrid) {
+      this.props.setGrid(newGrid);
+    }
   }
 
   handleMouseOver(event, row, col) {
     if (!this.state.isMouseStillClicked) return;
 
     let newGrid;
-    if (event && this.state.isShiftStillPressed) {
+    if (
+      event &&
+      this.props.isWeightNodeAllowed &&
+      this.state.isShiftStillPressed
+    ) {
       newGrid = setWeightNode(this.props.grid, row, col);
     } else {
       newGrid = setWallNode(this.props.grid, row, col);
     }
 
-    this.props.setGrid(newGrid);
+    if (newGrid) {
+      this.props.setGrid(newGrid);
+    }
   }
 
   handleMouseUp() {
@@ -96,137 +103,49 @@ export class Grid extends Component {
   }
 
   render() {
-    const { grid } = this.props;
+    const { grid, algorithmDescription, isLoading } = this.props;
     return (
       <Fragment>
-        <div className='grid'>
-          {grid.map((row, rowIndex) => {
-            return (
-              <div id={`row-${rowIndex}`} key={rowIndex}>
-                {row.map((node, nodeIndex) => {
-                  return (
-                    <Node
-                      key={nodeIndex}
-                      node={node}
-                      onClick={(event, row, col) =>
-                        this.handleOnClick(event, row, col)
-                      }
-                      onMouseOver={(event, row, col) =>
-                        this.handleMouseOver(event, row, col)
-                      }
-                      onMouseDown={() => this.handleMouseDown()}
-                      onMouseUp={() => this.handleMouseUp()}
-                    ></Node>
-                  );
-                })}
-              </div>
-            );
-          })}
-        </div>
+        <p className="text-center">{algorithmDescription}</p>
+        {isLoading ? (
+          <p>Loading...</p>
+        ) : (
+          <div className="grid">
+            {grid.map((row, rowIndex) => {
+              return (
+                <div id={`row-${rowIndex}`} key={rowIndex}>
+                  {row.map((node, nodeIndex) => {
+                    return (
+                      <Node
+                        key={nodeIndex}
+                        node={node}
+                        onClick={(event, row, col) =>
+                          this.handleOnClick(event, row, col)
+                        }
+                        onMouseOver={(event, row, col) =>
+                          this.handleMouseOver(event, row, col)
+                        }
+                        onMouseDown={() => this.handleMouseDown()}
+                        onMouseUp={() => this.handleMouseUp()}
+                      ></Node>
+                    );
+                  })}
+                </div>
+              );
+            })}
+          </div>
+        )}
       </Fragment>
     );
   }
 }
 
-const getInitialGrid = () => {
-  const grid = [];
-  for (let row = 0; row < Rows; row++) {
-    const currentRow = [];
-    for (let col = 0; col < Cols; col++) {
-      currentRow.push(createNode(row, col));
-    }
-    grid.push(currentRow);
-  }
-  return grid;
-};
-
-const createNode = (row, col) => {
-  return {
-    row,
-    col,
-    isStart: row === StartNodeRow && col === StartNodeCol,
-    isEnd: row === EndNodeRow && col === EndNodeCol,
-    isWall: false,
-    isWeight: false
-  };
-};
-
-const setWallNode = (grid, row, col) => {
-  if (!isPlaceable(row, col)) return grid;
-
-  const newGrid = grid.slice();
-  const node = newGrid[row][col];
-  const newNode = {
-    ...node,
-    isWall: !node.isWall,
-    isWeight: false
-  };
-  newGrid[row][col] = newNode;
-  return newGrid;
-};
-
-const setWeightNode = (grid, row, col) => {
-  if (!isPlaceable(row, col)) return grid;
-
-  const newGrid = grid.slice();
-  const node = newGrid[row][col];
-  const newNode = {
-    ...node,
-    isWeight: !node.isWeight,
-    isWall: false
-  };
-  newGrid[row][col] = newNode;
-  return newGrid;
-};
-
-const setStartNode = (grid, row, col) => {
-  if (!isPlaceable(row, col)) {
-    return grid;
-  }
-
-  const newGrid = grid.slice();
-  newGrid[StartNodeRow][StartNodeCol].isStart = false;
-  newGrid[row][col].isStart = true;
-  newGrid[row][col].isWall = false;
-  newGrid[row][col].isWeight = false;
-
-  StartNodeRow = row;
-  StartNodeCol = col;
-
-  return newGrid;
-};
-
-const setEndNode = (grid, row, col) => {
-  if (!isPlaceable(row, col)) {
-    return grid;
-  }
-
-  const newGrid = grid.slice();
-  newGrid[EndNodeRow][EndNodeCol].isEnd = false;
-  newGrid[row][col].isEnd = true;
-  newGrid[row][col].isWall = false;
-  newGrid[row][col].isWeight = false;
-
-  EndNodeRow = row;
-  EndNodeCol = col;
-
-  return newGrid;
-};
-
-function isPlaceable(row, col) {
-  if (
-    (row === StartNodeRow && col === StartNodeCol) ||
-    (row === EndNodeRow && col === EndNodeCol)
-  ) {
-    return false;
-  }
-
-  return true;
-}
-
 const mapStateToProps = state => {
   return {
-    grid: state.grid.data
+    isLoading: state.grid.isLoading,
+    grid: state.grid.data,
+    algorithmDescription: state.grid.algorithmDescription,
+    isWeightNodeAllowed: state.grid.isWeightNodeAllowed
   };
 };
 
