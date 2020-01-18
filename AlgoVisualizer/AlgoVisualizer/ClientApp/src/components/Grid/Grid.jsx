@@ -1,14 +1,14 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import Node from './Node/Node';
-import { setGrid, removeWeightNodes } from '../../actions';
 import {
-  getInitialGrid,
-  setWallNode,
-  setWeightNode,
+  initializeGrid,
   setStartNode,
-  setEndNode
-} from '../../helpers/gridHelper';
+  setEndNode,
+  setWeightNode,
+  setWallNode,
+  removeWeightNodes
+} from '../../actions';
 
 import './Grid.css';
 
@@ -24,8 +24,6 @@ export class Grid extends Component {
       isShiftStillPressed: false
     };
 
-    // These events will be improved in future releases with faster and more elegant solution
-    // P.S (Keep in mind that the main focus for this project is the backend(the actual algo's implementation), not the front end)
     this.handleKeyPress = this.handleKeyPress.bind(this);
     this.handleKeyUp = this.handleKeyUp.bind(this);
   }
@@ -45,7 +43,7 @@ export class Grid extends Component {
   componentDidMount() {
     document.addEventListener(KeyDownEvent, this.handleKeyPress);
     document.addEventListener(KeyUpEvent, this.handleKeyUp);
-    this.props.setGrid(getInitialGrid());
+    this.props.initializeGrid();
   }
 
   componentWillUnmount() {
@@ -58,43 +56,33 @@ export class Grid extends Component {
   }
 
   handleOnClick(event, row, col) {
-    let newGrid;
     if (event) {
       if (event.ctrlKey) {
-        newGrid = setStartNode(this.props.grid, row, col);
+        this.props.setStartNode(this.props.grid, row, col);
       }
       if (event.altKey) {
-        newGrid = setEndNode(this.props.grid, row, col);
+        this.props.setEndNode(this.props.grid, row, col);
       }
       if (this.props.isWeightNodeAllowed && event.shiftKey) {
-        newGrid = setWeightNode(this.props.grid, row, col);
+        this.props.setWeightNode(this.props.grid, row, col);
       }
     }
     if (!event.shiftKey && !event.ctrlKey && !event.altKey) {
-      newGrid = setWallNode(this.props.grid, row, col);
-    }
-
-    if (newGrid) {
-      this.props.setGrid(newGrid);
+      this.props.setWallNode(this.props.grid, row, col);
     }
   }
 
   handleMouseOver(event, row, col) {
     if (!this.state.isMouseStillClicked) return;
 
-    let newGrid;
     if (
       event &&
       this.props.isWeightNodeAllowed &&
       this.state.isShiftStillPressed
     ) {
-      newGrid = setWeightNode(this.props.grid, row, col);
+      this.props.setWeightNode(this.props.grid, row, col);
     } else {
-      newGrid = setWallNode(this.props.grid, row, col);
-    }
-
-    if (newGrid) {
-      this.props.setGrid(newGrid);
+      this.props.setWallNode(this.props.grid, row, col);
     }
   }
 
@@ -161,8 +149,20 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    setGrid: grid => {
-      dispatch(setGrid(grid));
+    initializeGrid: () => {
+      dispatch(initializeGrid());
+    },
+    setStartNode: (grid, row, col) => {
+      dispatch(setStartNode(grid, row, col));
+    },
+    setEndNode: (grid, row, col) => {
+      dispatch(setEndNode(grid, row, col));
+    },
+    setWeightNode: (grid, row, col) => {
+      dispatch(setWeightNode(grid, row, col));
+    },
+    setWallNode: (grid, row, col) => {
+      dispatch(setWallNode(grid, row, col));
     },
     removeWeightNodes: () => {
       dispatch(removeWeightNodes());

@@ -1,15 +1,46 @@
 import {
-  SET_GRID,
+  INITIALIZE_GRID,
+  SET_START_NODE,
+  SET_END_NODE,
+  SET_WEIGHT_NODE,
+  SET_WALL_NODE,
   SET_ALGORITHM,
   SET_ALGORITHM_DESCRIPTION,
   CLEAR_STATE,
   REMOVE_WEIGHT_NODES
 } from '../constants/gridConstants';
 
-export const setGrid = grid => {
+export const initializeGrid = () => {
   return {
-    type: SET_GRID,
-    payload: grid
+    type: INITIALIZE_GRID
+  };
+};
+
+export const setStartNode = (grid, row, col) => {
+  return {
+    type: SET_START_NODE,
+    payload: { grid, row, col }
+  };
+};
+
+export const setEndNode = (grid, row, col) => {
+  return {
+    type: SET_END_NODE,
+    payload: { grid, row, col }
+  };
+};
+
+export const setWeightNode = (grid, row, col) => {
+  return {
+    type: SET_WEIGHT_NODE,
+    payload: { grid, row, col }
+  };
+};
+
+export const setWallNode = (grid, row, col) => {
+  return {
+    type: SET_WALL_NODE,
+    payload: { grid, row, col }
   };
 };
 
