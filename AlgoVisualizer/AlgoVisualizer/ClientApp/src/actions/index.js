@@ -2,6 +2,7 @@ import {
   SET_GRID,
   SET_START_NODE,
   SET_END_NODE,
+  SET_WEIGHT_NODE,
   SET_ALGORITHM,
   SET_ALGORITHM_DESCRIPTION,
   CLEAR_STATE,
@@ -25,6 +26,13 @@ export const setStartNode = (grid, row, col) => {
 export const setEndNode = (grid, row, col) => {
   return {
     type: SET_END_NODE,
+    payload: { grid, row, col }
+  };
+};
+
+export const setWeightNode = (grid, row, col) => {
+  return {
+    type: SET_WEIGHT_NODE,
     payload: { grid, row, col }
   };
 };

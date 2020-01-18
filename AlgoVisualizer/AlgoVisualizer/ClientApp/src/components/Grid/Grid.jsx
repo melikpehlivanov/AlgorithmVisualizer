@@ -5,13 +5,10 @@ import {
   setGrid,
   setStartNode,
   setEndNode,
+  setWeightNode,
   removeWeightNodes
 } from '../../actions';
-import {
-  getInitialGrid,
-  setWallNode,
-  setWeightNode
-} from '../../helpers/gridHelper';
+import { getInitialGrid, setWallNode } from '../../helpers/gridHelper';
 
 import './Grid.css';
 
@@ -70,7 +67,7 @@ export class Grid extends Component {
         this.props.setEndNode(this.props.grid, row, col);
       }
       if (this.props.isWeightNodeAllowed && event.shiftKey) {
-        newGrid = setWeightNode(this.props.grid, row, col);
+        this.props.setWeightNode(this.props.grid, row, col);
       }
     }
     if (!event.shiftKey && !event.ctrlKey && !event.altKey) {
@@ -172,6 +169,9 @@ const mapDispatchToProps = dispatch => {
     },
     setEndNode: (grid, row, col) => {
       dispatch(setEndNode(grid, row, col));
+    },
+    setWeightNode: (grid, row, col) => {
+      dispatch(setWeightNode(grid, row, col));
     },
     removeWeightNodes: () => {
       dispatch(removeWeightNodes());
