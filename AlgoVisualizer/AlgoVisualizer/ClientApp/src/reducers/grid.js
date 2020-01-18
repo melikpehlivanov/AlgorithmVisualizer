@@ -1,5 +1,5 @@
 import {
-  SET_GRID,
+  INITIALIZE_GRID,
   SET_START_NODE,
   SET_END_NODE,
   SET_WEIGHT_NODE,
@@ -32,8 +32,8 @@ const initialState = {
 
 const gridReducer = (state = initialState, action) => {
   switch (action.type) {
-    case SET_GRID:
-      return { ...state, data: action.payload, isLoading: false };
+    case INITIALIZE_GRID:
+      return { ...state, data: getInitialGrid(), isLoading: false };
     case SET_START_NODE:
       return {
         ...state,
