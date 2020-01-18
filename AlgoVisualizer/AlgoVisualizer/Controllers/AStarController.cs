@@ -1,14 +1,20 @@
 ﻿namespace AlgoVisualizer.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
+    using ViewModels;
 
-    [Microsoft.AspNetCore.Components.Route("[controller]")]
     public class AStarController : BaseController
     {
-        [HttpPost]
+        [HttpGet]
         public IActionResult Get()
         {
-            return this.Ok("test value");
+            return this.Ok();
+        }
+
+        [HttpPost]
+        public IActionResult Post(AStarRequestModel data)
+        {
+            return this.Ok();
         }
     }
 }
