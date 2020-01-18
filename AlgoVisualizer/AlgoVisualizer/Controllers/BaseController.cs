@@ -4,7 +4,7 @@
 
 
     [ApiController]
-    [Route("/api/pathfinding")]
+    [Route("/api/pathfinding/[controller]")]
     public class BaseController : ControllerBase
     {
     }
