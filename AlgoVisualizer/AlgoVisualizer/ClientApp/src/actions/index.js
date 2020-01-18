@@ -1,5 +1,5 @@
 import {
-  SET_GRID,
+  INITIALIZE_GRID,
   SET_START_NODE,
   SET_END_NODE,
   SET_WEIGHT_NODE,
@@ -10,10 +10,9 @@ import {
   REMOVE_WEIGHT_NODES
 } from '../constants/gridConstants';
 
-export const setGrid = grid => {
+export const initializeGrid = () => {
   return {
-    type: SET_GRID,
-    payload: grid
+    type: INITIALIZE_GRID
   };
 };
 

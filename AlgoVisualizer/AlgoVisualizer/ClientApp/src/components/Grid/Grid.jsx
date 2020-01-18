@@ -2,14 +2,13 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import Node from './Node/Node';
 import {
-  setGrid,
+  initializeGrid,
   setStartNode,
   setEndNode,
   setWeightNode,
   setWallNode,
   removeWeightNodes
 } from '../../actions';
-import { getInitialGrid } from '../../helpers/gridHelper';
 
 import './Grid.css';
 
@@ -25,8 +24,6 @@ export class Grid extends Component {
       isShiftStillPressed: false
     };
 
-    // These events will be improved in future releases with faster and more elegant solution
-    // P.S (Keep in mind that the main focus for this project is the backend(the actual algo's implementation), not the front end)
     this.handleKeyPress = this.handleKeyPress.bind(this);
     this.handleKeyUp = this.handleKeyUp.bind(this);
   }
@@ -46,7 +43,7 @@ export class Grid extends Component {
   componentDidMount() {
     document.addEventListener(KeyDownEvent, this.handleKeyPress);
     document.addEventListener(KeyUpEvent, this.handleKeyUp);
-    this.props.setGrid(getInitialGrid());
+    this.props.initializeGrid();
   }
 
   componentWillUnmount() {
@@ -59,7 +56,6 @@ export class Grid extends Component {
   }
 
   handleOnClick(event, row, col) {
-    let newGrid;
     if (event) {
       if (event.ctrlKey) {
         this.props.setStartNode(this.props.grid, row, col);
@@ -74,16 +70,11 @@ export class Grid extends Component {
     if (!event.shiftKey && !event.ctrlKey && !event.altKey) {
       this.props.setWallNode(this.props.grid, row, col);
     }
-
-    if (newGrid) {
-      this.props.setGrid(newGrid);
-    }
   }
 
   handleMouseOver(event, row, col) {
     if (!this.state.isMouseStillClicked) return;
 
-    let newGrid;
     if (
       event &&
       this.props.isWeightNodeAllowed &&
@@ -92,10 +83,6 @@ export class Grid extends Component {
       this.props.setWeightNode(this.props.grid, row, col);
     } else {
       this.props.setWallNode(this.props.grid, row, col);
-    }
-
-    if (newGrid) {
-      this.props.setGrid(newGrid);
     }
   }
 
@@ -162,8 +149,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    setGrid: grid => {
-      dispatch(setGrid(grid));
+    initializeGrid: () => {
+      dispatch(initializeGrid());
     },
     setStartNode: (grid, row, col) => {
       dispatch(setStartNode(grid, row, col));

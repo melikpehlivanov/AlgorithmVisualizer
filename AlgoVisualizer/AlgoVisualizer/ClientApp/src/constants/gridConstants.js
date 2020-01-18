@@ -6,7 +6,7 @@ export const START_NODE_COL = 15;
 export const END_NODE_ROW = 10;
 export const END_NODE_COL = 35;
 
-export const SET_GRID = 'SET_GRID';
+export const INITIALIZE_GRID = 'INITIALIZE_GRID';
 export const SET_START_NODE = 'SET_START_NODE';
 export const SET_END_NODE = 'SET_END_NODE';
 
