@@ -1,5 +1,6 @@
 import {
   SET_GRID,
+  SET_START_NODE,
   SET_ALGORITHM,
   SET_ALGORITHM_DESCRIPTION,
   CLEAR_STATE,
@@ -10,6 +11,13 @@ export const setGrid = grid => {
   return {
     type: SET_GRID,
     payload: grid
+  };
+};
+
+export const setStartNode = (grid, row, col) => {
+  return {
+    type: SET_START_NODE,
+    payload: { grid, row, col }
   };
 };
 

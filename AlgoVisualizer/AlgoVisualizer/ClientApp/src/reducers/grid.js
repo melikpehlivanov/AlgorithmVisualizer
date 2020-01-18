@@ -1,12 +1,17 @@
 import {
   SET_GRID,
+  SET_START_NODE,
   SET_ALGORITHM,
   SET_ALGORITHM_DESCRIPTION,
   CLEAR_STATE,
   REMOVE_WEIGHT_NODES
 } from '../constants/gridConstants';
 
-import { getInitialGrid, removeAllWeightNodes } from '../helpers/gridHelper';
+import {
+  getInitialGrid,
+  removeAllWeightNodes,
+  setStartNode
+} from '../helpers/gridHelper';
 
 const availableAlgorithms = [
   {
@@ -51,6 +56,15 @@ const gridReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_GRID:
       return { ...state, data: action.payload, isLoading: false };
+    case SET_START_NODE:
+      return {
+        ...state,
+        data: setStartNode(
+          action.payload.grid,
+          action.payload.row,
+          action.payload.col
+        )
+      };
     case SET_ALGORITHM:
       let algorithm = state.algorithms.find(el => el.value === action.payload);
       if (algorithm) {
