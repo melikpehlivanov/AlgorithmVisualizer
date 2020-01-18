@@ -1,6 +1,7 @@
 import {
   SET_GRID,
   SET_START_NODE,
+  SET_END_NODE,
   SET_ALGORITHM,
   SET_ALGORITHM_DESCRIPTION,
   CLEAR_STATE,
@@ -10,7 +11,8 @@ import {
 import {
   getInitialGrid,
   removeAllWeightNodes,
-  setStartNode
+  setStartNode,
+  setEndNode
 } from '../helpers/gridHelper';
 
 const availableAlgorithms = [
@@ -60,6 +62,15 @@ const gridReducer = (state = initialState, action) => {
       return {
         ...state,
         data: setStartNode(
+          action.payload.grid,
+          action.payload.row,
+          action.payload.col
+        )
+      };
+    case SET_END_NODE:
+      return {
+        ...state,
+        data: setEndNode(
           action.payload.grid,
           action.payload.row,
           action.payload.col

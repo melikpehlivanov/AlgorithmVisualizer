@@ -1,12 +1,16 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import Node from './Node/Node';
-import { setGrid, setStartNode, removeWeightNodes } from '../../actions';
+import {
+  setGrid,
+  setStartNode,
+  setEndNode,
+  removeWeightNodes
+} from '../../actions';
 import {
   getInitialGrid,
   setWallNode,
-  setWeightNode,
-  setEndNode
+  setWeightNode
 } from '../../helpers/gridHelper';
 
 import './Grid.css';
@@ -63,7 +67,7 @@ export class Grid extends Component {
         this.props.setStartNode(this.props.grid, row, col);
       }
       if (event.altKey) {
-        newGrid = setEndNode(this.props.grid, row, col);
+        this.props.setEndNode(this.props.grid, row, col);
       }
       if (this.props.isWeightNodeAllowed && event.shiftKey) {
         newGrid = setWeightNode(this.props.grid, row, col);
@@ -165,6 +169,9 @@ const mapDispatchToProps = dispatch => {
     },
     setStartNode: (grid, row, col) => {
       dispatch(setStartNode(grid, row, col));
+    },
+    setEndNode: (grid, row, col) => {
+      dispatch(setEndNode(grid, row, col));
     },
     removeWeightNodes: () => {
       dispatch(removeWeightNodes());
