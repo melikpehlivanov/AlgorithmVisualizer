@@ -3,6 +3,7 @@ import {
   SET_START_NODE,
   SET_END_NODE,
   SET_WEIGHT_NODE,
+  SET_WALL_NODE,
   SET_ALGORITHM,
   SET_ALGORITHM_DESCRIPTION,
   CLEAR_STATE,
@@ -33,6 +34,13 @@ export const setEndNode = (grid, row, col) => {
 export const setWeightNode = (grid, row, col) => {
   return {
     type: SET_WEIGHT_NODE,
+    payload: { grid, row, col }
+  };
+};
+
+export const setWallNode = (grid, row, col) => {
+  return {
+    type: SET_WALL_NODE,
     payload: { grid, row, col }
   };
 };
