@@ -8,6 +8,8 @@ using Microsoft.Extensions.Hosting;
 
 namespace AlgoVisualizer
 {
+    using Microsoft.Net.Http.Headers;
+
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -20,14 +22,19 @@ namespace AlgoVisualizer
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
-            services.AddControllersWithViews();
-
-            // In production, the React files will be served from this directory
-            services.AddSpaStaticFiles(configuration =>
+            services
+                .AddControllers();
+            //.AddJsonOptions(configure => configure.JsonSerializerOptions.PropertyNameCaseInsensitive = true);
+            services.AddCors(c=> c.AddDefaultPolicy(p =>
             {
-                configuration.RootPath = "ClientApp/build";
-            });
+                p.WithOrigins("http://localhost:3000");
+                p.WithHeaders(HeaderNames.ContentType, HeaderNames.Accept);
+            }));
+            //In production, the React files will be served from this directory
+            //services.AddSpaStaticFiles(configuration =>
+            //{
+            //    configuration.RootPath = "ClientApp/build";
+            //});
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -46,10 +53,10 @@ namespace AlgoVisualizer
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            app.UseSpaStaticFiles();
+            //app.UseSpaStaticFiles();
 
             app.UseRouting();
-
+            app.UseCors();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
@@ -57,15 +64,15 @@ namespace AlgoVisualizer
                     pattern: "{controller}/{action=Index}/{id?}");
             });
 
-            app.UseSpa(spa =>
-            {
-                spa.Options.SourcePath = "ClientApp";
+            //app.UseSpa(spa =>
+            //{
+            //    spa.Options.SourcePath = "ClientApp";
 
-                if (env.IsDevelopment())
-                {
-                    spa.UseReactDevelopmentServer(npmScript: "start");
-                }
-            });
+            //    if (env.IsDevelopment())
+            //    {
+            //        spa.UseReactDevelopmentServer(npmScript: "start");
+            //    }
+            //});
         }
     }
 }
