@@ -1,4 +1,8 @@
 import {
+  START_NODE_ROW,
+  START_NODE_COL,
+  END_NODE_ROW,
+  END_NODE_COL,
   INITIALIZE_GRID,
   SET_START_NODE,
   SET_END_NODE,
@@ -23,36 +27,48 @@ import { availableAlgorithms } from '../constants/algorithmConstants';
 
 const initialState = {
   isLoading: true,
-  data: getInitialGrid,
+  data: [],
   algorithms: availableAlgorithms,
   algorithm: '',
   algorithmDescription: '',
-  isWeightNodeAllowed: true
+  isWeightNodeAllowed: true,
+  startNode: { row: START_NODE_ROW, col: START_NODE_COL },
+  endNode: { row: END_NODE_ROW, col: END_NODE_COL }
 };
+
+let isGridChanged = false;
 
 const gridReducer = (state = initialState, action) => {
   switch (action.type) {
     case INITIALIZE_GRID:
       return { ...state, data: getInitialGrid(), isLoading: false };
     case SET_START_NODE:
+      MarkGridAsChanged();
+
       return {
         ...state,
         data: setStartNode(
           action.payload.grid,
           action.payload.row,
           action.payload.col
-        )
+        ),
+        startNode: { row: action.payload.row, col: action.payload.col }
       };
     case SET_END_NODE:
+      MarkGridAsChanged();
+
       return {
         ...state,
         data: setEndNode(
           action.payload.grid,
           action.payload.row,
           action.payload.col
-        )
+        ),
+        endNode: { row: action.payload.row, col: action.payload.col }
       };
     case SET_WEIGHT_NODE:
+      MarkGridAsChanged();
+
       return {
         ...state,
         data: setWeightNode(
@@ -62,6 +78,8 @@ const gridReducer = (state = initialState, action) => {
         )
       };
     case SET_WALL_NODE:
+      MarkGridAsChanged();
+
       return {
         ...state,
         data: setWallNode(
@@ -71,7 +89,9 @@ const gridReducer = (state = initialState, action) => {
         )
       };
     case SET_ALGORITHM:
-      let algorithm = state.algorithms.find(el => el.value === action.payload);
+      const algorithm = state.algorithms.find(
+        el => el.value === action.payload
+      );
       if (algorithm) {
         return {
           ...state,
@@ -86,7 +106,10 @@ const gridReducer = (state = initialState, action) => {
       }
       break;
     case CLEAR_STATE:
+      if (!isGridChanged) return state;
+
       state = initialState;
+      isGridChanged = false;
 
       return {
         ...state,
@@ -101,6 +124,12 @@ const gridReducer = (state = initialState, action) => {
       };
     default:
       return state;
+  }
+
+  function MarkGridAsChanged() {
+    if (!isGridChanged) {
+      isGridChanged = true;
+    }
   }
 };
 

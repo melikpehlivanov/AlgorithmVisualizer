@@ -8,10 +8,10 @@ import {
 } from '../constants/gridConstants';
 
 // Modifiable
-let StartNodeRow = START_NODE_ROW;
-let StartNodeCol = START_NODE_COL;
-let EndNodeRow = END_NODE_ROW;
-let EndNodeCol = END_NODE_COL;
+let StartNodeRow;
+let StartNodeCol;
+let EndNodeRow;
+let EndNodeCol;
 
 export function getInitialGrid() {
   const grid = [];
@@ -22,6 +22,11 @@ export function getInitialGrid() {
     }
     grid.push(currentRow);
   }
+
+  StartNodeRow = START_NODE_ROW;
+  StartNodeCol = START_NODE_COL;
+  EndNodeRow = END_NODE_ROW;
+  EndNodeCol = END_NODE_COL;
 
   return grid;
 }
