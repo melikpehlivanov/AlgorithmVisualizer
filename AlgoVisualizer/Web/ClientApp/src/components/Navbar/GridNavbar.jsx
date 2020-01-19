@@ -3,12 +3,13 @@ import { connect } from 'react-redux';
 import { Navbar, NavDropdown, Nav, NavItem, Button } from 'react-bootstrap';
 import { NavLink } from 'reactstrap';
 import { Link } from 'react-router-dom';
-
 import {
   setAlgorithm,
   setAlgorithmDescription,
   clearState
 } from '../../actions';
+
+const PATHFINDING_API_URL = 'https://localhost:44370/api/pathfinding';
 
 export class GridNavbar extends Component {
   handleOnClick(algorithm, algorithmDescription) {
@@ -16,11 +17,29 @@ export class GridNavbar extends Component {
     this.props.setAlgorithmDescription(algorithmDescription);
   }
 
+  async getDataFetch(grid) {
+    const response = await fetch(
+      `${PATHFINDING_API_URL}/${this.props.algorithm}`,
+      {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json'
+        },
+        body: JSON.stringify({
+          startNode: this.props.startNode,
+          endNode: this.props.endNode,
+          grid: grid
+        })
+      }
+    );
+    console.log(await response.json());
+  }
+
   render() {
     const { algorithm, algorithms } = this.props;
     return (
       <Navbar
-        className="navbar-expand-sm navbar-toggleable-sm ng-white border-bottom box-shadow mb-3"
+        className="navbar-expand-sm navbar-toggleable-sm ng-white justify-content-between border-bottom box-shadow mb-3"
         bg="dark"
         expand="lg"
       >
@@ -31,7 +50,7 @@ export class GridNavbar extends Component {
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="mr-auto">
+          <Nav className="w-50">
             <NavItem>
               <NavLink tag={Link} className="text-white" to="/">
                 Home
@@ -57,18 +76,27 @@ export class GridNavbar extends Component {
                 );
               })}
             </NavDropdown>
-            <NavItem>
-              {algorithm !== '' ? (
-                <Button className="ml-3 mr-3" variant="success">
-                  Visualize {algorithm}
-                </Button>
-              ) : (
-                ''
-              )}
-              <Button variant="danger" onClick={this.props.clearState}>
-                Clear board
+          </Nav>
+          <NavItem className="w-25 mb-2">
+            {algorithm !== '' ? (
+              <Button
+                variant="success"
+                onClick={() => this.getDataFetch(this.props.grid)}
+              >
+                Visualize {algorithm}
               </Button>
-            </NavItem>
+            ) : (
+              ''
+            )}
+          </NavItem>
+          <Nav className="w-50">
+            <div className="ml-sm-auto">
+              <NavItem>
+                <Button variant="danger" onClick={this.props.clearState}>
+                  Clear board
+                </Button>
+              </NavItem>
+            </div>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
@@ -78,6 +106,9 @@ export class GridNavbar extends Component {
 
 const mapStateToProps = state => {
   return {
+    startNode: state.grid.startNode,
+    endNode: state.grid.endNode,
+    grid: state.grid.data,
     algorithms: state.grid.algorithms,
     algorithm: state.grid.algorithm
   };

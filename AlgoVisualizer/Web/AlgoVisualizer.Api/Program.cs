@@ -1,4 +1,4 @@
-namespace AlgoVisualizer
+namespace AlgoVisualizer.Api
 {
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.Extensions.Hosting;

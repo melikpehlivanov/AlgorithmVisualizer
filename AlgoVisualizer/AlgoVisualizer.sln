@@ -3,7 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29609.76
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlgoVisualizer", "AlgoVisualizer\AlgoVisualizer.csproj", "{AD438446-93F0-4354-B4E2-6E11B6E54360}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{4F5557FA-8B6F-490E-91FB-45CB3A93D896}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{5E45A0B3-5B3C-4362-A4B0-5A405413BBC6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{4F2B08AE-4866-499D-A361-EB3D378BD93B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlgoVisualizer.Api", "Web\AlgoVisualizer.Api\AlgoVisualizer.Api.csproj", "{F3A7AE41-A974-495A-A884-B6260305264E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlgoVisualizer.Services", "Services\AlgoVisualizer.Services\AlgoVisualizer.Services.csproj", "{C0142771-8181-4EF5-A2A0-14800614D249}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlgoVisualizer.Models", "Services\AlgoVisualizer.Models\AlgoVisualizer.Models.csproj", "{97BC9DF5-DA20-42FF-A79A-70E0A373959D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlgoVisualizer.Common", "Common\AlgoVisualizer.Common\AlgoVisualizer.Common.csproj", "{3B261A51-12A2-4D90-8A80-C265E695D3D7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,13 +23,31 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{AD438446-93F0-4354-B4E2-6E11B6E54360}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AD438446-93F0-4354-B4E2-6E11B6E54360}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AD438446-93F0-4354-B4E2-6E11B6E54360}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AD438446-93F0-4354-B4E2-6E11B6E54360}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3A7AE41-A974-495A-A884-B6260305264E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3A7AE41-A974-495A-A884-B6260305264E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3A7AE41-A974-495A-A884-B6260305264E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3A7AE41-A974-495A-A884-B6260305264E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0142771-8181-4EF5-A2A0-14800614D249}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0142771-8181-4EF5-A2A0-14800614D249}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0142771-8181-4EF5-A2A0-14800614D249}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0142771-8181-4EF5-A2A0-14800614D249}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97BC9DF5-DA20-42FF-A79A-70E0A373959D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97BC9DF5-DA20-42FF-A79A-70E0A373959D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97BC9DF5-DA20-42FF-A79A-70E0A373959D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97BC9DF5-DA20-42FF-A79A-70E0A373959D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B261A51-12A2-4D90-8A80-C265E695D3D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B261A51-12A2-4D90-8A80-C265E695D3D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B261A51-12A2-4D90-8A80-C265E695D3D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B261A51-12A2-4D90-8A80-C265E695D3D7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F3A7AE41-A974-495A-A884-B6260305264E} = {4F2B08AE-4866-499D-A361-EB3D378BD93B}
+		{C0142771-8181-4EF5-A2A0-14800614D249} = {4F5557FA-8B6F-490E-91FB-45CB3A93D896}
+		{97BC9DF5-DA20-42FF-A79A-70E0A373959D} = {4F5557FA-8B6F-490E-91FB-45CB3A93D896}
+		{3B261A51-12A2-4D90-8A80-C265E695D3D7} = {5E45A0B3-5B3C-4362-A4B0-5A405413BBC6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AC8E2AC8-BD30-429B-9BCB-380632449EE8}
