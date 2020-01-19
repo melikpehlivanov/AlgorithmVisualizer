@@ -92,19 +92,16 @@ const gridReducer = (state = initialState, action) => {
       const algorithm = state.algorithms.find(
         el => el.value === action.payload
       );
-      if (algorithm) {
-        return {
-          ...state,
-          algorithm: action.payload,
-          isWeightNodeAllowed: algorithm.isWeight
-        };
-      }
-      break;
+      if (!algorithm || state.algorithm === action.payload) return state;
+
+      return {
+        ...state,
+        algorithm: action.payload,
+        isWeightNodeAllowed: algorithm.isWeight
+      };
     case SET_ALGORITHM_DESCRIPTION:
-      if (action.payload) {
-        return { ...state, algorithmDescription: action.payload };
-      }
-      break;
+      if (!action.payload || state.algorithm === action.payload) return state;
+      return { ...state, algorithmDescription: action.payload };
     case CLEAR_STATE:
       if (!isGridChanged) return state;
 
