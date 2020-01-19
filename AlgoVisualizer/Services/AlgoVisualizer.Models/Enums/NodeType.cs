@@ -1,4 +1,4 @@
-﻿namespace AlgoVisualizer.Services.Models
+﻿namespace AlgoVisualizer.Models.Enums
 {
     public enum NodeType
     {

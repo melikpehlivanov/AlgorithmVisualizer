@@ -1,5 +1,7 @@
-﻿namespace AlgoVisualizer.Services.Models
+﻿namespace AlgoVisualizer.Models
 {
+    using Enums;
+
     public class Node : INode
     {
         public Node(int row, int col, INode previousNode = null, double distance = double.PositiveInfinity)

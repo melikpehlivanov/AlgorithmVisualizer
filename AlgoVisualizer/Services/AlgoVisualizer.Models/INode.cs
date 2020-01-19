@@ -1,6 +1,7 @@
-﻿namespace AlgoVisualizer.Services.Models
+﻿namespace AlgoVisualizer.Models
 {
     using System;
+    using Enums;
 
     public interface INode : IComparable
     {

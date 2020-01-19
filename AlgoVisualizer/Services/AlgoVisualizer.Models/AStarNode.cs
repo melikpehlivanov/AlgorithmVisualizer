@@ -1,10 +1,11 @@
-﻿namespace AlgoVisualizer.Services.Models
+﻿namespace AlgoVisualizer.Models
 {
     using System;
+    using Enums;
 
-    public class AstarNode : Node
+    public class AStarNode : Node
     {
-        public AstarNode(int row, int col, INode previousNode = null, double distance = double.PositiveInfinity)
+        public AStarNode(int row, int col, INode previousNode = null, double distance = double.PositiveInfinity)
             : base(row, col, previousNode, distance)
         {
             this.PreviousNode = previousNode;
@@ -18,7 +19,7 @@
 
         public override int CompareTo(object obj)
         {
-            var otherNode = obj as AstarNode;
+            var otherNode = obj as AStarNode;
             if (otherNode != null && Math.Abs(this.FScore - otherNode.FScore) < 1)
             {
                 if (this.H > otherNode.H)
