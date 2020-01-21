@@ -1,5 +1,9 @@
 namespace AlgoVisualizer.Api
 {
+    using System.Reflection;
+    using AutoMapper;
+    using Common.AutoMapping.Profiles;
+    using Infrastructure;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.Extensions.Configuration;
@@ -23,6 +27,11 @@ namespace AlgoVisualizer.Api
         {
             services
                 .AddControllers();
+
+            services
+                .AddApplicationServices()
+                .AddDomainServices()
+                .AddAutoMapper(Assembly.GetAssembly(typeof(DefaultProfile)));
 
             services.AddCors(c => c.AddDefaultPolicy(options =>
             {
