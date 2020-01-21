@@ -14,13 +14,12 @@ let EndNodeRow;
 let EndNodeCol;
 
 export function getInitialGrid() {
-  const grid = [];
+  const grid = [[], []];
   for (let row = 0; row < ROWS; row++) {
-    const currentRow = [];
+    grid[row] = [];
     for (let col = 0; col < COLS; col++) {
-      currentRow.push(createNode(row, col));
+      grid[row][col] = createNode(row, col);
     }
-    grid.push(currentRow);
   }
 
   StartNodeRow = START_NODE_ROW;

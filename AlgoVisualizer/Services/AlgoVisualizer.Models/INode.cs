@@ -5,17 +5,11 @@
 
     public interface INode : IComparable
     {
-        int Row { get; set; }
+        int Row { get; }
 
-        int Col { get; set; }
+        int Col { get; }
 
         bool IsVisited { get; set; }
-
-        double Distance { get; set; }
-
-        int Weight { get; set; }
-
-        NodeType? NodeType { get; set; }
 
         INode PreviousNode { get; set; }
     }
