@@ -32,8 +32,8 @@ const initialState = {
   algorithm: '',
   algorithmDescription: '',
   isWeightNodeAllowed: true,
-  startNode: { row: START_NODE_ROW, col: START_NODE_COL },
-  endNode: { row: END_NODE_ROW, col: END_NODE_COL }
+  startNode: { row: START_NODE_ROW, col: START_NODE_COL, isStart: true },
+  endNode: { row: END_NODE_ROW, col: END_NODE_COL, isEnd: true }
 };
 
 let isGridChanged = false;
@@ -52,7 +52,11 @@ const gridReducer = (state = initialState, action) => {
           action.payload.row,
           action.payload.col
         ),
-        startNode: { row: action.payload.row, col: action.payload.col }
+        startNode: {
+          row: action.payload.row,
+          col: action.payload.col,
+          isStart: true
+        }
       };
     case SET_END_NODE:
       MarkGridAsChanged();
@@ -64,7 +68,11 @@ const gridReducer = (state = initialState, action) => {
           action.payload.row,
           action.payload.col
         ),
-        endNode: { row: action.payload.row, col: action.payload.col }
+        endNode: {
+          row: action.payload.row,
+          col: action.payload.col,
+          isEnd: false
+        }
       };
     case SET_WEIGHT_NODE:
       MarkGridAsChanged();
