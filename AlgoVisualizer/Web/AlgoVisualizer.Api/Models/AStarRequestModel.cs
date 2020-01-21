@@ -1,8 +1,10 @@
 ﻿namespace AlgoVisualizer.Api.Models
 {
     using System.ComponentModel.DataAnnotations;
+    using AlgoVisualizer.Models.AStar;
+    using Common.AutoMapping.Interfaces;
 
-    public class AStarRequestModel
+    public class AStarRequestModel : IMapWith<AStarServiceModel>
     {
         [Required]
         public NodeDto StartNode { get; set; }
@@ -11,6 +13,6 @@
         public NodeDto EndNode { get; set; }
 
         [Required]
-        public NodeDto[][] Grid { get; set; }
+        public NodeDto[,] Grid { get; set; }
     }
 }
