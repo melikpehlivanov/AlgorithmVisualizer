@@ -8,8 +8,7 @@ import {
   setAlgorithmDescription,
   clearState
 } from '../../actions';
-
-const PATHFINDING_API_URL = 'https://localhost:44370/api/pathfinding';
+import { PATHFINDING_ALGORITHMS_API_URL } from '../../constants/algorithmConstants';
 
 export class GridNavbar extends Component {
   handleOnClick(algorithm, algorithmDescription) {
@@ -19,7 +18,7 @@ export class GridNavbar extends Component {
 
   async getDataFetch(grid) {
     const response = await fetch(
-      `${PATHFINDING_API_URL}/${this.props.algorithm}`,
+      `${PATHFINDING_ALGORITHMS_API_URL}/${this.props.algorithm}`,
       {
         method: 'POST',
         headers: {

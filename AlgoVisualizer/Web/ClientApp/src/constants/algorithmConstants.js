@@ -27,3 +27,6 @@ export const availableAlgorithms = [
     isWeight: false
   }
 ];
+
+export const PATHFINDING_ALGORITHMS_API_URL =
+  'https://localhost:44370/api/pathfinding';
