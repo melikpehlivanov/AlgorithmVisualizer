@@ -3,6 +3,7 @@
     using Microsoft.AspNetCore.Mvc;
 
     [ApiController]
+    [Produces("application/json")]
     [Route("api/pathfinding/[controller]")]
     public class BaseController : ControllerBase
     {
