@@ -23,7 +23,7 @@
             {
                 result.Push(node.PreviousNode);
                 node = node.PreviousNode;
-            } while (node.PreviousNode != null);
+            } while (node.PreviousNode.PreviousNode != null);
 
             return result;
         }
