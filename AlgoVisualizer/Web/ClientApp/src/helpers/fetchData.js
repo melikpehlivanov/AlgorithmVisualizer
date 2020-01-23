@@ -1,3 +1,8 @@
+import {
+  SHORTEST_PATH_CLASSNAME,
+  VISITED_NODE_CLASSNAME
+} from '../constants/gridConstants';
+
 export const makeApiCallAsync = async (url, startNode, endNode, grid) => {
   const response = await fetch(url, {
     method: 'POST',
@@ -32,8 +37,9 @@ const animateResult = (allVisitedNodesInOrder, allNodesInShortestPathOrder) => {
     }
     setTimeout(() => {
       const node = allVisitedNodesInOrder[i];
-      document.getElementById(`node-${node.row}-${node.col}`).className =
-        'node node-visited';
+      document.getElementById(
+        `node-${node.row}-${node.col}`
+      ).className = VISITED_NODE_CLASSNAME;
     }, 30 * i);
   }
 };
@@ -42,8 +48,9 @@ const animateShortestPath = nodes => {
   for (let i = 0; i < nodes.length; i++) {
     setTimeout(() => {
       const node = nodes[i];
-      document.getElementById(`node-${node.row}-${node.col}`).className =
-        'node node-shortest-path';
+      document.getElementById(
+        `node-${node.row}-${node.col}`
+      ).className = SHORTEST_PATH_CLASSNAME;
     }, 50 * i);
   }
 };

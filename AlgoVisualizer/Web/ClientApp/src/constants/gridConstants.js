@@ -20,3 +20,6 @@ export const REMOVE_WEIGHT_NODES = 'REMOVE_WEIGHT_NODES';
 
 export const CLEAR_STATE = 'CLEAR_STATE';
 export const CLEAR_GRID = 'CLEAR_GRID';
+
+export const SHORTEST_PATH_CLASSNAME = 'node node-shortest-path';
+export const VISITED_NODE_CLASSNAME = 'node node-visited';
