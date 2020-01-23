@@ -6,8 +6,10 @@ import { Link } from 'react-router-dom';
 import {
   setAlgorithm,
   setAlgorithmDescription,
-  clearState
+  clearState,
+  clearGrid
 } from '../../actions';
+import { makeApiCallAsync, visualizeResult } from '../../helpers/fetchData';
 import { PATHFINDING_ALGORITHMS_API_URL } from '../../constants/algorithmConstants';
 
 export class GridNavbar extends Component {
@@ -16,22 +18,14 @@ export class GridNavbar extends Component {
     this.props.setAlgorithmDescription(algorithmDescription);
   }
 
-  async getDataFetch(grid) {
-    const response = await fetch(
-      `${PATHFINDING_ALGORITHMS_API_URL}/${this.props.algorithm}`,
-      {
-        method: 'POST',
-        headers: {
-          'content-type': 'application/json'
-        },
-        body: JSON.stringify({
-          startNode: this.props.startNode,
-          endNode: this.props.endNode,
-          grid: grid
-        })
-      }
-    );
-    console.log(await response.json());
+  async fetchData(algorithm, startNode, endNode, grid) {
+    this.props.clearGrid();
+
+    const url = `${PATHFINDING_ALGORITHMS_API_URL}/${algorithm}`;
+    const result = await makeApiCallAsync(url, startNode, endNode, grid);
+    const allVisitedNodesInOrder = result.allVisitedNodesInOrder;
+    const allNodesInShortestPathOrder = result.allNodesInShortestPathOrder;
+    visualizeResult(allVisitedNodesInOrder, allNodesInShortestPathOrder);
   }
 
   render() {
@@ -80,7 +74,14 @@ export class GridNavbar extends Component {
             {algorithm !== '' ? (
               <Button
                 variant="success"
-                onClick={() => this.getDataFetch(this.props.grid)}
+                onClick={e =>
+                  this.fetchData(
+                    this.props.algorithm,
+                    this.props.startNode,
+                    this.props.endNode,
+                    this.props.grid
+                  )
+                }
               >
                 Visualize {algorithm}
               </Button>
@@ -120,6 +121,9 @@ const mapDispatchToProps = dispatch => {
     },
     setAlgorithmDescription: description => {
       dispatch(setAlgorithmDescription(description));
+    },
+    clearGrid: () => {
+      dispatch(clearGrid());
     },
     clearState: () => {
       dispatch(clearState());

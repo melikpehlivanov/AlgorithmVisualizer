@@ -26,7 +26,7 @@
             var result = this.aStarService.FindPath(serviceModel);
             if (result?.AllNodesInShortestPathOrder == null)
             {
-                return this.NotFound(PathNotFound);
+                return this.BadRequest(PathNotFound);
             }
 
             return this.Ok(result);

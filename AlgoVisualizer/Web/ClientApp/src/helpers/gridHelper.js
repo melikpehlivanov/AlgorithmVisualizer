@@ -41,6 +41,20 @@ export const removeAllWeightNodes = grid => {
   return grid;
 };
 
+export const clearGrid = () => {
+  for (let row = 0; row < ROWS; row++) {
+    for (let col = 0; col < COLS; col++) {
+      const element = document.getElementById(`node-${row}-${col}`);
+      if (
+        element.className === 'node node-shortest-path' ||
+        element.className === 'node node-visited'
+      ) {
+        element.className = 'node';
+      }
+    }
+  }
+};
+
 const createNode = (row, col) => {
   return {
     row,

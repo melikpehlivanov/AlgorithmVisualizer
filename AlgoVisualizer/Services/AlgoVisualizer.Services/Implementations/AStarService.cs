@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using Common.DataStructures;
     using Interfaces;
     using Models;
@@ -37,12 +38,14 @@
                 if (currentNode.NodeType == NodeType.Wall)
                     continue;
 
-                allSteps.Add(currentNode);
-
                 if (currentNode.Equals(endNode))
                 {
+                    // Remove StartNode
+                    allSteps.Remove(allSteps.ElementAt(0));
                     return new Result(allSteps, this.GetAllNodesInShortestPathOrder(currentNode));
                 }
+
+                allSteps.Add(currentNode);
 
                 var rowDirection = new[] { -1, +1, 0, 0 };
                 var columnDirection = new[] { 0, 0, +1, -1 };
