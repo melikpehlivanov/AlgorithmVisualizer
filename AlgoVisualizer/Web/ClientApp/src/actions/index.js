@@ -7,7 +7,8 @@ import {
   SET_ALGORITHM,
   SET_ALGORITHM_DESCRIPTION,
   CLEAR_STATE,
-  REMOVE_WEIGHT_NODES
+  REMOVE_WEIGHT_NODES,
+  CLEAR_GRID
 } from '../constants/gridConstants';
 
 export const initializeGrid = () => {
@@ -61,6 +62,12 @@ export const setAlgorithmDescription = description => {
 export const clearState = () => {
   return {
     type: CLEAR_STATE
+  };
+};
+
+export const clearGrid = () => {
+  return {
+    type: CLEAR_GRID
   };
 };
 

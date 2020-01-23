@@ -11,6 +11,7 @@ import {
   SET_ALGORITHM,
   SET_ALGORITHM_DESCRIPTION,
   CLEAR_STATE,
+  CLEAR_GRID,
   REMOVE_WEIGHT_NODES
 } from '../constants/gridConstants';
 
@@ -20,7 +21,8 @@ import {
   setEndNode,
   setWeightNode,
   setWallNode,
-  removeAllWeightNodes
+  removeAllWeightNodes,
+  clearGrid
 } from '../helpers/gridHelper';
 
 import { availableAlgorithms } from '../constants/algorithmConstants';
@@ -115,12 +117,17 @@ const gridReducer = (state = initialState, action) => {
 
       state = initialState;
       isGridChanged = false;
+      clearGrid();
 
       return {
         ...state,
         data: getInitialGrid(),
         isLoading: false
       };
+    case CLEAR_GRID:
+      MarkGridAsChanged();
+      clearGrid();
+      return state;
     case REMOVE_WEIGHT_NODES:
       let newGrid = removeAllWeightNodes(state.data);
       return {

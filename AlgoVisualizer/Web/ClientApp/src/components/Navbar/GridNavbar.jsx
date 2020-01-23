@@ -6,7 +6,8 @@ import { Link } from 'react-router-dom';
 import {
   setAlgorithm,
   setAlgorithmDescription,
-  clearState
+  clearState,
+  clearGrid
 } from '../../actions';
 import { makeApiCallAsync, visualizeResult } from '../../helpers/fetchData';
 import { PATHFINDING_ALGORITHMS_API_URL } from '../../constants/algorithmConstants';
@@ -18,6 +19,8 @@ export class GridNavbar extends Component {
   }
 
   async fetchData(algorithm, startNode, endNode, grid) {
+    this.props.clearGrid();
+
     const url = `${PATHFINDING_ALGORITHMS_API_URL}/${algorithm}`;
     const result = await makeApiCallAsync(url, startNode, endNode, grid);
     const allVisitedNodesInOrder = result.allVisitedNodesInOrder;
@@ -71,7 +74,7 @@ export class GridNavbar extends Component {
             {algorithm !== '' ? (
               <Button
                 variant="success"
-                onClick={() =>
+                onClick={e =>
                   this.fetchData(
                     this.props.algorithm,
                     this.props.startNode,
@@ -118,6 +121,9 @@ const mapDispatchToProps = dispatch => {
     },
     setAlgorithmDescription: description => {
       dispatch(setAlgorithmDescription(description));
+    },
+    clearGrid: () => {
+      dispatch(clearGrid());
     },
     clearState: () => {
       dispatch(clearState());
