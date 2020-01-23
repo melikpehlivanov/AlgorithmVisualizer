@@ -4,7 +4,9 @@ import {
   START_NODE_ROW,
   START_NODE_COL,
   END_NODE_ROW,
-  END_NODE_COL
+  END_NODE_COL,
+  SHORTEST_PATH_CLASSNAME,
+  VISITED_NODE_CLASSNAME
 } from '../constants/gridConstants';
 
 // Modifiable
@@ -42,14 +44,15 @@ export const removeAllWeightNodes = grid => {
 };
 
 export const clearGrid = () => {
+  const nodeClassName = 'node';
   for (let row = 0; row < ROWS; row++) {
     for (let col = 0; col < COLS; col++) {
-      const element = document.getElementById(`node-${row}-${col}`);
+      const element = document.getElementById(`${nodeClassName}-${row}-${col}`);
       if (
-        element.className === 'node node-shortest-path' ||
-        element.className === 'node node-visited'
+        element.className === SHORTEST_PATH_CLASSNAME ||
+        element.className === VISITED_NODE_CLASSNAME
       ) {
-        element.className = 'node';
+        element.className = nodeClassName;
       }
     }
   }
