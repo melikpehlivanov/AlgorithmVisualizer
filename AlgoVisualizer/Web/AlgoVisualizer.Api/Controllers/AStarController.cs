@@ -8,8 +8,6 @@
 
     public class AStarController : BaseController
     {
-        private const string PathNotFound = "There is no possible path!";
-
         private readonly IMapper mapper;
         private readonly IAStarService aStarService;
 
@@ -20,13 +18,13 @@
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] AStarRequestModel data)
+        public IActionResult Post([FromBody] PathFindingAlgorithmsRequestModel data)
         {
             var serviceModel = this.mapper.Map<AStarServiceModel>(data);
             var result = this.aStarService.FindPath(serviceModel);
             if (result?.AllNodesInShortestPathOrder == null)
             {
-                return this.BadRequest(new ErrorModel(PathNotFound));
+                return this.BadRequest(new ErrorModel(WebConstants.PathNotFound));
             }
 
             return this.Ok(result);

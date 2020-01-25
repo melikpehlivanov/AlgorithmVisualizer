@@ -2,9 +2,10 @@
 {
     using System.ComponentModel.DataAnnotations;
     using AlgoVisualizer.Models.AStar;
+    using AlgoVisualizer.Models.Dijkstra;
     using Common.AutoMapping.Interfaces;
 
-    public class AStarRequestModel : IMapWith<AStarServiceModel>
+    public class PathFindingAlgorithmsRequestModel : IMapWith<AStarServiceModel>, IMapWith<DijkstraServiceModel>
     {
         [Required]
         public NodeDto StartNode { get; set; }
