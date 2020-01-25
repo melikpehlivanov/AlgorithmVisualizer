@@ -2,10 +2,11 @@
 {
     using System.ComponentModel.DataAnnotations;
     using AlgoVisualizer.Models.AStar;
+    using AlgoVisualizer.Models.Dijkstra;
     using Common;
     using Common.AutoMapping.Interfaces;
 
-    public class NodeDto : IMapWith<AStarNode>
+    public class NodeDto : IMapWith<AStarNode>, IMapWith<DijkstraNode>
     {
         [Required]
         public int Row { get; set; }

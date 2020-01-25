@@ -4,6 +4,7 @@ import {
 } from '../constants/gridConstants';
 
 const nodeName = 'node';
+const msTimeout = 20;
 
 export const makeApiCallAsync = async (url, startNode, endNode, grid) => {
   const response = await fetch(url, {
@@ -34,7 +35,7 @@ const animateResult = (allVisitedNodesInOrder, allNodesInShortestPathOrder) => {
     if (i === allVisitedNodesInOrder.length) {
       setTimeout(() => {
         animateShortestPath(allNodesInShortestPathOrder);
-      }, 10 * i);
+      }, msTimeout * i);
       return;
     }
 
@@ -43,7 +44,7 @@ const animateResult = (allVisitedNodesInOrder, allNodesInShortestPathOrder) => {
       document.getElementById(
         `${nodeName}-${node.row}-${node.col}`
       ).className = VISITED_NODE_CLASSNAME;
-    }, 30 * i);
+    }, msTimeout * i);
   }
 };
 
