@@ -8,9 +8,10 @@ import {
   setAlgorithmDescription,
   clearState,
   clearGrid
-} from '../../actions';
+} from '../../actions/grid';
 import { makeApiCallAsync, visualizeResult } from '../../helpers/fetchData';
 import { PATHFINDING_ALGORITHMS_API_URL } from '../../constants/algorithmConstants';
+import { showError, clearErrors } from '../../actions/error';
 
 export class GridNavbar extends Component {
   handleOnClick(algorithm, algorithmDescription) {
@@ -20,9 +21,14 @@ export class GridNavbar extends Component {
 
   async fetchData(algorithm, startNode, endNode, grid) {
     this.props.clearGrid();
+    this.props.clearAllErrorMessages();
 
     const url = `${PATHFINDING_ALGORITHMS_API_URL}/${algorithm}`;
     const result = await makeApiCallAsync(url, startNode, endNode, grid);
+    if (result.isSuccess !== undefined && !result.isSuccess) {
+      this.props.showError(result.messages);
+      return;
+    }
     const allVisitedNodesInOrder = result.allVisitedNodesInOrder;
     const allNodesInShortestPathOrder = result.allNodesInShortestPathOrder;
     visualizeResult(allVisitedNodesInOrder, allNodesInShortestPathOrder);
@@ -121,6 +127,12 @@ const mapDispatchToProps = dispatch => {
     },
     setAlgorithmDescription: description => {
       dispatch(setAlgorithmDescription(description));
+    },
+    showError: message => {
+      dispatch(showError(true, message));
+    },
+    clearAllErrorMessages: () => {
+      dispatch(clearErrors());
     },
     clearGrid: () => {
       dispatch(clearGrid());

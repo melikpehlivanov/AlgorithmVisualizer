@@ -8,7 +8,7 @@ import {
   setWeightNode,
   setWallNode,
   removeWeightNodes
-} from '../../actions';
+} from '../../actions/grid';
 
 import './Grid.css';
 
