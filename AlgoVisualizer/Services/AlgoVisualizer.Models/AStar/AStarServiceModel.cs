@@ -1,16 +1,6 @@
 ﻿namespace AlgoVisualizer.Models.AStar
 {
-    using System.ComponentModel.DataAnnotations;
-
-    public class AStarServiceModel
+    public class AStarServiceModel : BaseServiceModel<AStarNode>
     {
-        [Required]
-        public AStarNode StartNode { get; set; }
-
-        [Required]
-        public AStarNode EndNode { get; set; }
-
-        [Required]
-        public AStarNode[,] Grid { get; set; }
     }
 }
