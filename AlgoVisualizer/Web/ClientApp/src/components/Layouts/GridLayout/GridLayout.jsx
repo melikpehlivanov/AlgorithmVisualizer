@@ -1,12 +1,14 @@
-import React, { Component, Fragment } from "react";
-import "./GridLayout.css";
-import GridNavbar from "../../Navbar/GridNavbar";
+import React, { Component, Fragment } from 'react';
+import './GridLayout.css';
+import GridNavbar from '../../Navbar/GridNavbar';
+import Error from '../../Error';
 
 export class GridLayout extends Component {
   render() {
     return (
       <Fragment>
         <GridNavbar />
+        <Error />
         <div id="algo-legend">
           <ul>
             <li>
