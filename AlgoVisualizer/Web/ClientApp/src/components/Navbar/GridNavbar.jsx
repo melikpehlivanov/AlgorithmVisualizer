@@ -8,7 +8,7 @@ import {
   setAlgorithmDescription,
   clearState,
   clearGrid
-} from '../../actions';
+} from '../../actions/grid';
 import { makeApiCallAsync, visualizeResult } from '../../helpers/fetchData';
 import { PATHFINDING_ALGORITHMS_API_URL } from '../../constants/algorithmConstants';
 
