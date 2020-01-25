@@ -2,9 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 
 export class Home extends Component {
-  static displayName = Home.name;
-
-  render () {
+  render() {
     return (
       <Fragment>
         <div>
@@ -12,10 +10,10 @@ export class Home extends Component {
           <p>Please choose one of the following algorithms</p>
           <li>
             <ul>
-              <Link to='/pathfindingAlgorithms'>Pathfinding algorithms</Link>
+              <Link to="/pathfindingAlgorithms">Pathfinding algorithms</Link>
             </ul>
             <ul>
-              <Link to='/sortingAlgorithms'>Sorting algorithms</Link>
+              <p>Sorting algorithms - Currently being developed...</p>
             </ul>
           </li>
         </div>

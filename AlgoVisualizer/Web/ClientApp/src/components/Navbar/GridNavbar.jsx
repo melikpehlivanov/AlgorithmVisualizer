@@ -47,7 +47,7 @@ export class GridNavbar extends Component {
             AlgoVisualizer
           </NavLink>
         </Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Toggle className="bg-white" aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="w-50">
             <NavItem>

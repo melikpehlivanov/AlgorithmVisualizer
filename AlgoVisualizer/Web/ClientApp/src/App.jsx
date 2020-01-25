@@ -14,17 +14,15 @@ export default class App extends Component {
     return (
       <Switch>
         <AppRoute exact path="/" component={Home} />
-        <AppRoute path="/counter" component={Counter} />
         <AppRoute
           path="/pathfindingAlgorithms"
           component={Grid}
           layout={GridLayout}
         />
-        <AppRoute path="/fetch-data" component={FetchData} />
         <AppRoute
           path="/404"
           component={NotFound}
-          layout='non-existing-layout'
+          layout="non-existing-layout"
         />
         <Redirect to="/404" />
       </Switch>
