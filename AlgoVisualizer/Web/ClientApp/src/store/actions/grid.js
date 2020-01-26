@@ -9,7 +9,7 @@ import {
   CLEAR_STATE,
   REMOVE_WEIGHT_NODES,
   CLEAR_GRID
-} from '../constants/gridConstants';
+} from '../../constants/gridConstants';
 
 export const initializeGrid = () => {
   return {

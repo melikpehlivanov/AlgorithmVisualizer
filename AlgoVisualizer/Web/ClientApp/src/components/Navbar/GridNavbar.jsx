@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useContext } from 'react';
 import { Navbar, NavDropdown, Nav, NavItem, Button } from 'react-bootstrap';
 import { NavLink } from 'reactstrap';
 import { Link } from 'react-router-dom';
@@ -12,9 +12,11 @@ import { makePostApiCallAsync, visualizeResult } from '../../helpers/fetchData';
 import { PATHFINDING_ALGORITHMS_API_URL } from '../../constants/algorithmConstants';
 import { showError, clearErrors } from '../../store/actions/error';
 import gridReducer, { initialState } from '../../store/reducers/grid';
+import { ErrorContext } from '../../store/context/errorContext';
 
 const GridNavbar = () => {
   const [grid, dispatch] = useReducer(gridReducer, initialState);
+  const { dispatchError } = useContext(ErrorContext);
 
   const handleOnClick = (algorithm, algorithmDescription) => {
     dispatch(setAlgorithm(algorithm));
@@ -27,9 +29,10 @@ const GridNavbar = () => {
 
     const url = `${PATHFINDING_ALGORITHMS_API_URL}/${algorithm}`;
     const result = await makePostApiCallAsync(url, startNode, endNode, grid);
+
     if (result) {
       if (result.isSuccess !== undefined && !result.isSuccess) {
-        dispatch(showError(true, result.messages));
+        dispatchError(showError(true, result.messages));
         return;
       }
       const allVisitedNodesInOrder = result.allVisitedNodesInOrder;
