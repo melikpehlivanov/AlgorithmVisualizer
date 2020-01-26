@@ -49,8 +49,9 @@ export const clearGrid = () => {
     for (let col = 0; col < COLS; col++) {
       const element = document.getElementById(`${nodeClassName}-${row}-${col}`);
       if (
-        element.className === SHORTEST_PATH_CLASSNAME ||
-        element.className === VISITED_NODE_CLASSNAME
+        element &&
+        (element.className === SHORTEST_PATH_CLASSNAME ||
+          element.className === VISITED_NODE_CLASSNAME)
       ) {
         element.className = nodeClassName;
       }
