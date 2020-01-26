@@ -44,6 +44,7 @@ export class Grid extends Component {
     document.addEventListener(KeyDownEvent, this.handleKeyPress);
     document.addEventListener(KeyUpEvent, this.handleKeyUp);
     this.props.initializeGrid();
+    console.log(this.props.grid);
   }
 
   componentWillUnmount() {
@@ -141,7 +142,7 @@ export class Grid extends Component {
 const mapStateToProps = state => {
   return {
     isLoading: state.grid.isLoading,
-    grid: state.grid.data,
+    grid: state.grid.grid,
     algorithmDescription: state.grid.algorithmDescription,
     isWeightNodeAllowed: state.grid.isWeightNodeAllowed
   };

@@ -1,9 +1,5 @@
 import {
   INITIALIZE_GRID,
-  START_NODE_ROW,
-  START_NODE_COL,
-  END_NODE_ROW,
-  END_NODE_COL,
   SET_START_NODE,
   SET_END_NODE,
   SET_WEIGHT_NODE,
@@ -24,25 +20,15 @@ import {
   removeAllWeightNodes,
   clearGrid
 } from '../../helpers/gridHelper';
-import { availableAlgorithms } from '../../constants/algorithmConstants';
+import { initialState } from '../context/gridContext';
 
 let isGridChanged = false;
-
-export const initialState = {
-  isLoading: true,
-  data: [],
-  algorithms: availableAlgorithms,
-  algorithm: '',
-  algorithmDescription: '',
-  isWeightNodeAllowed: true,
-  startNode: { row: START_NODE_ROW, col: START_NODE_COL, isStart: true },
-  endNode: { row: END_NODE_ROW, col: END_NODE_COL, isEnd: true }
-};
 
 const gridReducer = (state = initialState, action) => {
   switch (action.type) {
     case INITIALIZE_GRID:
-      return { ...state, data: getInitialGrid(), isLoading: false };
+      console.log('test');
+      return { ...state, grid: getInitialGrid(), isLoading: false };
     case SET_START_NODE:
       MarkGridAsChanged();
 
@@ -124,7 +110,7 @@ const gridReducer = (state = initialState, action) => {
         isLoading: false
       };
     case CLEAR_GRID:
-      if (state.data.length === 0) return state;
+      if (state.grid.length === 0) return state;
       MarkGridAsChanged();
       clearGrid();
       return state;
