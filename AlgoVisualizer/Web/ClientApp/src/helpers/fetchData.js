@@ -20,7 +20,7 @@ export const makePostApiCallAsync = async (url, startNode, endNode, grid) => {
   });
 
   const result = response.json();
-  if (result.status <= 400) {
+  if (response.status <= 400) {
     return result;
   } else {
     // TODO: dispatch error
