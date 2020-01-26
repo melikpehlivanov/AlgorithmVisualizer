@@ -1,7 +1,7 @@
 import {
   SHOW_ERROR_WITH_MESSAGE,
   CLEAR_ERRORS
-} from '../constants/errorConstants';
+} from '../../constants/errorConstants';
 
 const initialState = {
   messages: '',

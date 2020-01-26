@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Alert } from 'react-bootstrap';
-import { showError } from '../../actions/error';
+import { showError } from '../../store/actions/error';
 
 export class Error extends Component {
   render() {
