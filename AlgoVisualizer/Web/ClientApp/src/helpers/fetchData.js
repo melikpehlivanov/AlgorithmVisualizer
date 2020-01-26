@@ -62,6 +62,6 @@ const animateShortestPath = nodes => {
       document.getElementById(
         `${nodeName}-${node.row}-${node.col}`
       ).className = SHORTEST_PATH_CLASSNAME;
-    }, 50 * i);
+    }, 50 * i * 2);
   }
 };
