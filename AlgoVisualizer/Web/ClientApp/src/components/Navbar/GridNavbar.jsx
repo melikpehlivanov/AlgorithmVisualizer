@@ -11,11 +11,11 @@ import {
 import { makePostApiCallAsync, visualizeResult } from '../../helpers/fetchData';
 import { PATHFINDING_ALGORITHMS_API_URL } from '../../constants/algorithmConstants';
 import { showError, clearErrors } from '../../store/actions/error';
-import gridReducer, { initialState } from '../../store/reducers/grid';
 import { ErrorContext } from '../../store/context/errorContext';
+import { GridContext } from '../../store/context/gridContext';
 
 const GridNavbar = () => {
-  const [grid, dispatch] = useReducer(gridReducer, initialState);
+  const { state, dispatch } = useContext(GridContext);
   const { dispatchError } = useContext(ErrorContext);
 
   const handleOnClick = (algorithm, algorithmDescription) => {
@@ -64,7 +64,7 @@ const GridNavbar = () => {
             title={<span className="text-white">Algorithms</span>}
             id="basic-nav-dropdown"
           >
-            {grid.algorithms.map((currentElement, index) => {
+            {state.algorithms.map((currentElement, index) => {
               return (
                 <NavDropdown.Item
                   key={index}
@@ -82,19 +82,19 @@ const GridNavbar = () => {
           </NavDropdown>
         </Nav>
         <NavItem className="w-25 mb-2">
-          {grid.algorithm !== '' ? (
+          {state.algorithm !== '' ? (
             <Button
               variant="success"
               onClick={() =>
                 fetchData(
-                  grid.algorithm,
-                  grid.startNode,
-                  grid.endNode,
-                  grid.data
+                  state.algorithm,
+                  state.startNode,
+                  state.endNode,
+                  state.grid
                 )
               }
             >
-              Visualize {grid.algorithm}
+              Visualize {state.algorithm}
             </Button>
           ) : (
             ''

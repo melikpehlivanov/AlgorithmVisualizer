@@ -1,9 +1,5 @@
 import {
   INITIALIZE_GRID,
-  START_NODE_ROW,
-  START_NODE_COL,
-  END_NODE_ROW,
-  END_NODE_COL,
   SET_START_NODE,
   SET_END_NODE,
   SET_WEIGHT_NODE,
@@ -24,31 +20,21 @@ import {
   removeAllWeightNodes,
   clearGrid
 } from '../../helpers/gridHelper';
-import { availableAlgorithms } from '../../constants/algorithmConstants';
+import { initialState } from '../context/gridContext';
 
 let isGridChanged = false;
-
-export const initialState = {
-  isLoading: true,
-  data: [],
-  algorithms: availableAlgorithms,
-  algorithm: '',
-  algorithmDescription: '',
-  isWeightNodeAllowed: true,
-  startNode: { row: START_NODE_ROW, col: START_NODE_COL, isStart: true },
-  endNode: { row: END_NODE_ROW, col: END_NODE_COL, isEnd: true }
-};
 
 const gridReducer = (state = initialState, action) => {
   switch (action.type) {
     case INITIALIZE_GRID:
-      return { ...state, data: getInitialGrid(), isLoading: false };
+      console.log('test');
+      return { ...state, grid: getInitialGrid(), isLoading: false };
     case SET_START_NODE:
       MarkGridAsChanged();
 
       return {
         ...state,
-        data: setStartNode(
+        grid: setStartNode(
           action.payload.grid,
           action.payload.row,
           action.payload.col
@@ -64,7 +50,7 @@ const gridReducer = (state = initialState, action) => {
 
       return {
         ...state,
-        data: setEndNode(
+        grid: setEndNode(
           action.payload.grid,
           action.payload.row,
           action.payload.col
@@ -80,7 +66,7 @@ const gridReducer = (state = initialState, action) => {
 
       return {
         ...state,
-        data: setWeightNode(
+        grid: setWeightNode(
           action.payload.grid,
           action.payload.row,
           action.payload.col
@@ -91,7 +77,7 @@ const gridReducer = (state = initialState, action) => {
 
       return {
         ...state,
-        data: setWallNode(
+        grid: setWallNode(
           action.payload.grid,
           action.payload.row,
           action.payload.col
@@ -120,11 +106,11 @@ const gridReducer = (state = initialState, action) => {
 
       return {
         ...state,
-        data: getInitialGrid(),
+        grid: getInitialGrid(),
         isLoading: false
       };
     case CLEAR_GRID:
-      if (state.data.length === 0) return state;
+      if (state.grid.length === 0) return state;
       MarkGridAsChanged();
       clearGrid();
       return state;
@@ -132,7 +118,7 @@ const gridReducer = (state = initialState, action) => {
       let newGrid = removeAllWeightNodes(state.data);
       return {
         ...state,
-        data: newGrid
+        grid: newGrid
       };
     default:
       return state;
