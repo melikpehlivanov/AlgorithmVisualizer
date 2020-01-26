@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { Switch, Redirect } from 'react-router';
 import { Home } from './components/Home';
-import { FetchData } from './components/FetchData';
-import { Counter } from './components/Counter';
 import Grid from './components/Grid/Grid';
 import { GridLayout } from './components/Layouts/GridLayout/GridLayout';
 
