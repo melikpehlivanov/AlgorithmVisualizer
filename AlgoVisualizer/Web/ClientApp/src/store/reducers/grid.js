@@ -27,7 +27,6 @@ let isGridChanged = false;
 const gridReducer = (state = initialState, action) => {
   switch (action.type) {
     case INITIALIZE_GRID:
-      console.log('test');
       return { ...state, grid: getInitialGrid(), isLoading: false };
     case SET_START_NODE:
       MarkGridAsChanged();
