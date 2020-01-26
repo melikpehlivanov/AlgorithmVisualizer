@@ -6,7 +6,7 @@ import {
 const nodeName = 'node';
 const msTimeout = 20;
 
-export const makeApiCallAsync = async (url, startNode, endNode, grid) => {
+export const makePostApiCallAsync = async (url, startNode, endNode, grid) => {
   const response = await fetch(url, {
     method: 'POST',
     headers: {
@@ -18,7 +18,14 @@ export const makeApiCallAsync = async (url, startNode, endNode, grid) => {
       grid: grid
     })
   });
-  return response.json();
+
+  const result = response.json();
+  if (result.status <= 400) {
+    return result;
+  } else {
+    // TODO: dispatch error
+    return null;
+  }
 };
 
 export const visualizeResult = (
