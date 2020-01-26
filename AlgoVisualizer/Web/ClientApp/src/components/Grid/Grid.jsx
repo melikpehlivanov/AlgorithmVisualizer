@@ -1,5 +1,4 @@
 import React, { Fragment, useState, useContext } from 'react';
-import { connect } from 'react-redux';
 import Node from './Node/Node';
 import {
   initializeGrid,
