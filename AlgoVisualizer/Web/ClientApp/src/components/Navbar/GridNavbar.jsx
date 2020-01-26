@@ -11,7 +11,6 @@ import {
 import { makePostApiCallAsync, visualizeResult } from '../../helpers/fetchData';
 import { PATHFINDING_ALGORITHMS_API_URL } from '../../constants/algorithmConstants';
 import { showError, clearErrors } from '../../store/actions/error';
-import gridReducer, { initialState } from '../../store/reducers/grid';
 import { ErrorContext } from '../../store/context/errorContext';
 import { GridContext } from '../../store/context/gridContext';
 
@@ -19,7 +18,6 @@ const GridNavbar = () => {
   const { state, dispatch } = useContext(GridContext);
   const { dispatchError } = useContext(ErrorContext);
 
-  console.log(state);
   const handleOnClick = (algorithm, algorithmDescription) => {
     dispatch(setAlgorithm(algorithm));
     dispatch(setAlgorithmDescription(algorithmDescription));
@@ -92,7 +90,7 @@ const GridNavbar = () => {
                   state.algorithm,
                   state.startNode,
                   state.endNode,
-                  state.data
+                  state.grid
                 )
               }
             >

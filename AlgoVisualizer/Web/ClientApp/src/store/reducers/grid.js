@@ -34,7 +34,7 @@ const gridReducer = (state = initialState, action) => {
 
       return {
         ...state,
-        data: setStartNode(
+        grid: setStartNode(
           action.payload.grid,
           action.payload.row,
           action.payload.col
@@ -50,7 +50,7 @@ const gridReducer = (state = initialState, action) => {
 
       return {
         ...state,
-        data: setEndNode(
+        grid: setEndNode(
           action.payload.grid,
           action.payload.row,
           action.payload.col
@@ -66,7 +66,7 @@ const gridReducer = (state = initialState, action) => {
 
       return {
         ...state,
-        data: setWeightNode(
+        grid: setWeightNode(
           action.payload.grid,
           action.payload.row,
           action.payload.col
@@ -77,7 +77,7 @@ const gridReducer = (state = initialState, action) => {
 
       return {
         ...state,
-        data: setWallNode(
+        grid: setWallNode(
           action.payload.grid,
           action.payload.row,
           action.payload.col
@@ -106,7 +106,7 @@ const gridReducer = (state = initialState, action) => {
 
       return {
         ...state,
-        data: getInitialGrid(),
+        grid: getInitialGrid(),
         isLoading: false
       };
     case CLEAR_GRID:
@@ -118,7 +118,7 @@ const gridReducer = (state = initialState, action) => {
       let newGrid = removeAllWeightNodes(state.data);
       return {
         ...state,
-        data: newGrid
+        grid: newGrid
       };
     default:
       return state;

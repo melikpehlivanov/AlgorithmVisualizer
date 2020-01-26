@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Fragment, useState, useContext } from 'react';
 import { connect } from 'react-redux';
 import Node from './Node/Node';
 import {
@@ -11,164 +11,171 @@ import {
 } from '../../store/actions/grid';
 
 import './Grid.css';
+import { GridContext } from '../../store/context/gridContext';
+import { useEffect } from 'react';
 
 const ShiftKeyCode = 16;
 const KeyDownEvent = 'keydown';
 const KeyUpEvent = 'keyup';
 
-export class Grid extends Component {
-  constructor() {
-    super();
-    this.state = {
-      isMouseStillClicked: false,
-      isShiftStillPressed: false
+const Grid = () => {
+  const { state, dispatch } = useContext(GridContext);
+  const [isMouseStillClicked, setIsMouseStillClicked] = useState(false);
+  const [isShiftStillPressed, setIsShiftStillPressed] = useState(false);
+
+  useEffect(() => {
+    document.addEventListener(KeyDownEvent, handleKeyPress);
+    document.addEventListener(KeyUpEvent, handleKeyUp);
+    dispatch(initializeGrid());
+
+    return () => {
+      document.removeEventListener(KeyDownEvent, handleKeyPress);
+      document.removeEventListener(KeyUpEvent, handleKeyUp);
     };
+  }, []);
 
-    this.handleKeyPress = this.handleKeyPress.bind(this);
-    this.handleKeyUp = this.handleKeyUp.bind(this);
-  }
+  const { grid, algorithmDescription, isLoading, isWeightNodeAllowed } = state;
+  // constructor() {
+  //   super();
+  //   this.state = {
+  //     isMouseStillClicked: false,
+  //     isShiftStillPressed: false
+  //   };
 
-  handleKeyPress(e) {
+  //   this.handleKeyPress = this.handleKeyPress.bind(this);
+  //   this.handleKeyUp = this.handleKeyUp.bind(this);
+  // }
+
+  const handleKeyPress = e => {
     if (e.keyCode === ShiftKeyCode) {
-      this.setState({ isShiftStillPressed: true });
+      setIsShiftStillPressed(true);
     }
-  }
+  };
 
-  handleKeyUp(e) {
+  const handleKeyUp = e => {
     if (e.keyCode === ShiftKeyCode) {
-      this.setState({ isShiftStillPressed: false });
+      setIsShiftStillPressed(false);
     }
-  }
+  };
 
-  componentDidMount() {
-    document.addEventListener(KeyDownEvent, this.handleKeyPress);
-    document.addEventListener(KeyUpEvent, this.handleKeyUp);
-    this.props.initializeGrid();
-    console.log(this.props.grid);
-  }
+  // componentDidMount() {
+  // document.addEventListener(KeyDownEvent, this.handleKeyPress);
+  // document.addEventListener(KeyUpEvent, this.handleKeyUp);
+  // this.props.initializeGrid();
+  //   console.log(this.props.grid);
+  // }
 
-  componentWillUnmount() {
-    document.removeEventListener(KeyDownEvent, this.handleKeyPress);
-    document.removeEventListener(KeyUpEvent, this.handleKeyUp);
-  }
+  // componentWillUnmount() {
+  //   document.removeEventListener(KeyDownEvent, this.handleKeyPress);
+  //   document.removeEventListener(KeyUpEvent, this.handleKeyUp);
+  // }
 
-  handleMouseDown() {
-    this.setState({ isMouseStillClicked: true });
-  }
+  const handleMouseDown = () => {
+    setIsMouseStillClicked(true);
+  };
 
-  handleOnClick(event, row, col) {
+  const handleMouseUp = () => {
+    setIsMouseStillClicked(false);
+  };
+
+  const handleOnClick = (event, row, col) => {
     if (event) {
       if (event.ctrlKey) {
-        this.props.setStartNode(this.props.grid, row, col);
+        dispatch(setStartNode(grid, row, col));
       }
       if (event.altKey) {
-        this.props.setEndNode(this.props.grid, row, col);
+        dispatch(setEndNode(grid, row, col));
       }
-      if (this.props.isWeightNodeAllowed && event.shiftKey) {
-        this.props.setWeightNode(this.props.grid, row, col);
+      if (isWeightNodeAllowed && event.shiftKey) {
+        dispatch(setWeightNode(grid, row, col));
       }
     }
     if (!event.shiftKey && !event.ctrlKey && !event.altKey) {
-      this.props.setWallNode(this.props.grid, row, col);
-    }
-  }
-
-  handleMouseOver(event, row, col) {
-    if (!this.state.isMouseStillClicked) return;
-
-    if (
-      event &&
-      this.props.isWeightNodeAllowed &&
-      this.state.isShiftStillPressed
-    ) {
-      this.props.setWeightNode(this.props.grid, row, col);
-    } else {
-      this.props.setWallNode(this.props.grid, row, col);
-    }
-  }
-
-  handleMouseUp() {
-    this.setState({ isMouseStillClicked: false });
-  }
-
-  render() {
-    const {
-      grid,
-      algorithmDescription,
-      isLoading,
-      isWeightNodeAllowed
-    } = this.props;
-
-    if (!isWeightNodeAllowed) {
-      this.props.removeWeightNodes();
-    }
-
-    return (
-      <Fragment>
-        <p className="text-center">{algorithmDescription}</p>
-        {isLoading ? (
-          <p>Loading...</p>
-        ) : (
-          <div className="grid">
-            {grid.map((row, rowIndex) => {
-              return (
-                <div id={`row-${rowIndex}`} key={rowIndex}>
-                  {row.map((node, nodeIndex) => {
-                    return (
-                      <Node
-                        key={nodeIndex}
-                        node={node}
-                        onClick={(event, row, col) =>
-                          this.handleOnClick(event, row, col)
-                        }
-                        onMouseOver={(event, row, col) =>
-                          this.handleMouseOver(event, row, col)
-                        }
-                        onMouseDown={() => this.handleMouseDown()}
-                        onMouseUp={() => this.handleMouseUp()}
-                      ></Node>
-                    );
-                  })}
-                </div>
-              );
-            })}
-          </div>
-        )}
-      </Fragment>
-    );
-  }
-}
-
-const mapStateToProps = state => {
-  return {
-    isLoading: state.grid.isLoading,
-    grid: state.grid.grid,
-    algorithmDescription: state.grid.algorithmDescription,
-    isWeightNodeAllowed: state.grid.isWeightNodeAllowed
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    initializeGrid: () => {
-      dispatch(initializeGrid());
-    },
-    setStartNode: (grid, row, col) => {
-      dispatch(setStartNode(grid, row, col));
-    },
-    setEndNode: (grid, row, col) => {
-      dispatch(setEndNode(grid, row, col));
-    },
-    setWeightNode: (grid, row, col) => {
-      dispatch(setWeightNode(grid, row, col));
-    },
-    setWallNode: (grid, row, col) => {
       dispatch(setWallNode(grid, row, col));
-    },
-    removeWeightNodes: () => {
-      dispatch(removeWeightNodes());
     }
   };
+
+  const handleMouseOver = (event, row, col) => {
+    if (!isMouseStillClicked) return;
+
+    if (event && isWeightNodeAllowed && isShiftStillPressed) {
+      dispatch(setWeightNode(grid, row, col));
+    } else {
+      dispatch(setWallNode(grid, row, col));
+    }
+  };
+
+  if (!isWeightNodeAllowed) {
+    dispatch(removeWeightNodes());
+  }
+
+  return (
+    <Fragment>
+      <p className="text-center">{algorithmDescription}</p>
+      {isLoading ? (
+        <p>Loading...</p>
+      ) : (
+        <div className="grid">
+          {grid.map((row, rowIndex) => {
+            return (
+              <div id={`row-${rowIndex}`} key={rowIndex}>
+                {row.map((node, nodeIndex) => {
+                  return (
+                    <Node
+                      key={nodeIndex}
+                      node={node}
+                      onClick={(event, row, col) =>
+                        handleOnClick(event, row, col)
+                      }
+                      onMouseOver={(event, row, col) =>
+                        handleMouseOver(event, row, col)
+                      }
+                      onMouseDown={() => handleMouseDown()}
+                      onMouseUp={() => handleMouseUp()}
+                    ></Node>
+                  );
+                })}
+              </div>
+            );
+          })}
+        </div>
+      )}
+    </Fragment>
+  );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Grid);
+export default Grid;
+
+// const mapStateToProps = state => {
+//   return {
+//     isLoading: state.grid.isLoading,
+//     grid: state.grid.grid,
+//     algorithmDescription: state.grid.algorithmDescription,
+//     isWeightNodeAllowed: state.grid.isWeightNodeAllowed
+//   };
+// };
+
+// const mapDispatchToProps = dispatch => {
+//   return {
+//     initializeGrid: () => {
+//       dispatch(initializeGrid());
+//     },
+//     setStartNode: (grid, row, col) => {
+//       dispatch(setStartNode(grid, row, col));
+//     },
+//     setEndNode: (grid, row, col) => {
+//       dispatch(setEndNode(grid, row, col));
+//     },
+//     setWeightNode: (grid, row, col) => {
+//       dispatch(setWeightNode(grid, row, col));
+//     },
+//     setWallNode: (grid, row, col) => {
+//       dispatch(setWallNode(grid, row, col));
+//     },
+//     removeWeightNodes: () => {
+//       dispatch(removeWeightNodes());
+//     }
+//   };
+// };
+
+// export default connect(mapStateToProps, mapDispatchToProps)(Grid);
