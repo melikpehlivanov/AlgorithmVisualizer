@@ -10,6 +10,7 @@ import { availableAlgorithms } from '../../constants/algorithmConstants';
 
 export const initialState = {
   isLoading: true,
+  isNavbarClickable: true,
   grid: [],
   algorithms: availableAlgorithms,
   algorithm: '',
