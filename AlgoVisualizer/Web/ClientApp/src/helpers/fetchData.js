@@ -48,7 +48,7 @@ const animateResult = (
   for (let i = 0; i <= allVisitedNodesInOrder.length; i++) {
     if (i === allVisitedNodesInOrder.length) {
       setTimeout(() => {
-        animateShortestPath(dispatch, allNodesInShortestPathOrder);
+        animateShortestPath(allNodesInShortestPathOrder);
         dispatch(setIsNavbarClickable(true));
       }, msTimeout * i);
       return;
