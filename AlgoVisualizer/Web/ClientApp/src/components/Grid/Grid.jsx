@@ -31,7 +31,7 @@ const Grid = () => {
       document.removeEventListener(KeyDownEvent, handleKeyPress);
       document.removeEventListener(KeyUpEvent, handleKeyUp);
     };
-  }, []);
+  }, [dispatch]);
 
   const { grid, algorithmDescription, isLoading, isWeightNodeAllowed } = state;
   // constructor() {

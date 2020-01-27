@@ -1,4 +1,4 @@
-import React, { useReducer, useContext } from 'react';
+import React, { useContext } from 'react';
 import { Navbar, NavDropdown, Nav, NavItem, Button } from 'react-bootstrap';
 import { NavLink } from 'reactstrap';
 import { Link } from 'react-router-dom';
