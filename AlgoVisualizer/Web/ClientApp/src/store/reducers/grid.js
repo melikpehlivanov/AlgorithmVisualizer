@@ -8,7 +8,8 @@ import {
   SET_ALGORITHM_DESCRIPTION,
   CLEAR_STATE,
   CLEAR_GRID,
-  REMOVE_WEIGHT_NODES
+  REMOVE_WEIGHT_NODES,
+  SET_IS_NAVBAR_CLICKABLE
 } from '../../constants/gridConstants';
 
 import {
@@ -28,6 +29,8 @@ const gridReducer = (state = initialState, action) => {
   switch (action.type) {
     case INITIALIZE_GRID:
       return { ...state, grid: getInitialGrid(), isLoading: false };
+    case SET_IS_NAVBAR_CLICKABLE:
+      return { ...state, isNavbarClickable: action.payload };
     case SET_START_NODE:
       MarkGridAsChanged();
 

@@ -10,6 +10,8 @@ export const INITIALIZE_GRID = 'INITIALIZE_GRID';
 export const SET_START_NODE = 'SET_START_NODE';
 export const SET_END_NODE = 'SET_END_NODE';
 
+export const SET_IS_NAVBAR_CLICKABLE = 'SET_IS_NAVBAR_CLICKABLE';
+
 export const SET_WEIGHT_NODE = 'SET_WEIGHT_NODE';
 export const SET_WALL_NODE = 'SET_WALL_NODE';
 

@@ -1,5 +1,6 @@
 import {
   INITIALIZE_GRID,
+  SET_IS_NAVBAR_CLICKABLE,
   SET_START_NODE,
   SET_END_NODE,
   SET_WEIGHT_NODE,
@@ -14,6 +15,13 @@ import {
 export const initializeGrid = () => {
   return {
     type: INITIALIZE_GRID
+  };
+};
+
+export const setIsNavbarClickable = isClickable => {
+  return {
+    type: SET_IS_NAVBAR_CLICKABLE,
+    payload: isClickable
   };
 };
 
