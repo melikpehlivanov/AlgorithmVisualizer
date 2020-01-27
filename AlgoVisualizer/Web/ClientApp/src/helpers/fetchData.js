@@ -2,6 +2,7 @@ import {
   SHORTEST_PATH_CLASSNAME,
   VISITED_NODE_CLASSNAME
 } from '../constants/gridConstants';
+import { setIsNavbarClickable } from '../store/actions/grid';
 
 const nodeName = 'node';
 const msTimeout = 20;
@@ -29,28 +30,39 @@ export const makePostApiCallAsync = async (url, startNode, endNode, grid) => {
 };
 
 export const visualizeResult = (
+  dispatch,
   visitedNodesInOrder,
   nodesInShortestPathOrder
 ) => {
   const allVisitedNodesInOrder = visitedNodesInOrder;
   const allNodesInShortestPathOrder = nodesInShortestPathOrder;
-  animateResult(allVisitedNodesInOrder, allNodesInShortestPathOrder);
+  dispatch(setIsNavbarClickable(false));
+  animateResult(dispatch, allVisitedNodesInOrder, allNodesInShortestPathOrder);
 };
 
-const animateResult = (allVisitedNodesInOrder, allNodesInShortestPathOrder) => {
+const animateResult = (
+  dispatch,
+  allVisitedNodesInOrder,
+  allNodesInShortestPathOrder
+) => {
   for (let i = 0; i <= allVisitedNodesInOrder.length; i++) {
     if (i === allVisitedNodesInOrder.length) {
       setTimeout(() => {
-        animateShortestPath(allNodesInShortestPathOrder);
+        animateShortestPath(dispatch, allNodesInShortestPathOrder);
+        dispatch(setIsNavbarClickable(true));
       }, msTimeout * i);
       return;
     }
 
     setTimeout(() => {
       const node = allVisitedNodesInOrder[i];
-      document.getElementById(
-        `${nodeName}-${node.row}-${node.col}`
-      ).className = VISITED_NODE_CLASSNAME;
+      if (node) {
+        const element = getElement(nodeName, node.row, node.col);
+        if (element === null) return;
+        element.className = VISITED_NODE_CLASSNAME;
+      }
+
+      return;
     }, msTimeout * i);
   }
 };
@@ -59,9 +71,15 @@ const animateShortestPath = nodes => {
   for (let i = 0; i < nodes.length; i++) {
     setTimeout(() => {
       const node = nodes[i];
-      document.getElementById(
-        `${nodeName}-${node.row}-${node.col}`
-      ).className = SHORTEST_PATH_CLASSNAME;
+      if (node) {
+        const element = getElement(nodeName, node.row, node.col);
+        if (element === null) return;
+        element.className = SHORTEST_PATH_CLASSNAME;
+      }
+      return;
     }, 50 * i * 2);
   }
 };
+
+const getElement = (nodeName, row, col) =>
+  document.getElementById(`${nodeName}-${row}-${col}`);
