@@ -19,11 +19,14 @@ const GridNavbar = () => {
   const { dispatchError } = useContext(ErrorContext);
 
   const handleOnClick = (algorithm, algorithmDescription) => {
+    if (!state.isNavbarClickable) return;
     dispatch(setAlgorithm(algorithm));
     dispatch(setAlgorithmDescription(algorithmDescription));
   };
 
   const fetchData = async (algorithm, startNode, endNode, grid) => {
+    if (!state.isNavbarClickable) return;
+
     dispatch(clearGrid());
     dispatch(clearErrors());
 
@@ -37,7 +40,11 @@ const GridNavbar = () => {
       }
       const allVisitedNodesInOrder = result.allVisitedNodesInOrder;
       const allNodesInShortestPathOrder = result.allNodesInShortestPathOrder;
-      visualizeResult(allVisitedNodesInOrder, allNodesInShortestPathOrder);
+      visualizeResult(
+        dispatch,
+        allVisitedNodesInOrder,
+        allNodesInShortestPathOrder
+      );
     }
   };
 
@@ -84,7 +91,7 @@ const GridNavbar = () => {
         <NavItem className="w-25 mb-2">
           {state.algorithm !== '' ? (
             <Button
-              variant="success"
+              variant={state.isNavbarClickable ? 'success' : 'danger'}
               onClick={() =>
                 fetchData(
                   state.algorithm,
@@ -103,7 +110,12 @@ const GridNavbar = () => {
         <Nav className="w-50">
           <div className="ml-sm-auto">
             <NavItem>
-              <Button variant="danger" onClick={() => dispatch(clearState())}>
+              <Button
+                variant="danger"
+                onClick={() =>
+                  state.isNavbarClickable ? dispatch(clearState()) : null
+                }
+              >
                 Clear board
               </Button>
             </NavItem>
