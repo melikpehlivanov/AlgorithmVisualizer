@@ -1,14 +1,15 @@
-﻿namespace AlgoVisualizer.Models
+﻿namespace AlgoVisualizer.Models.Dfs
 {
+    using System.ComponentModel.DataAnnotations;
     using Enums;
 
-    public class Node : INode
+    public class DfsNode : INode
     {
+        [Required]
         public int Row { get; set; }
 
+        [Required]
         public int Col { get; set; }
-
-        public double Distance { get; set; }
 
         public bool IsVisited { get; set; }
 
