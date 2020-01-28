@@ -21,18 +21,6 @@ const Grid = () => {
   const { state, dispatch } = useContext(GridContext);
   const [isMouseStillClicked, setIsMouseStillClicked] = useState(false);
   const [isShiftStillPressed, setIsShiftStillPressed] = useState(false);
-
-  useEffect(() => {
-    document.addEventListener(KeyDownEvent, handleKeyPress);
-    document.addEventListener(KeyUpEvent, handleKeyUp);
-    dispatch(initializeGrid());
-
-    return () => {
-      document.removeEventListener(KeyDownEvent, handleKeyPress);
-      document.removeEventListener(KeyUpEvent, handleKeyUp);
-    };
-  }, [dispatch]);
-
   const {
     grid,
     algorithmDescription,
@@ -40,6 +28,22 @@ const Grid = () => {
     isWeightNodeAllowed,
     isNavbarClickable
   } = state;
+
+  useEffect(() => {
+    document.addEventListener(KeyDownEvent, handleKeyPress);
+    document.addEventListener(KeyUpEvent, handleKeyUp);
+    dispatch(initializeGrid());
+    return () => {
+      document.removeEventListener(KeyDownEvent, handleKeyPress);
+      document.removeEventListener(KeyUpEvent, handleKeyUp);
+    };
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (!isWeightNodeAllowed) {
+      dispatch(removeWeightNodes());
+    }
+  }, [isWeightNodeAllowed]);
 
   const handleKeyPress = e => {
     if (e.keyCode === ShiftKeyCode) {
@@ -82,17 +86,12 @@ const Grid = () => {
 
   const handleMouseOver = (event, row, col) => {
     if (!isMouseStillClicked || !isNavbarClickable) return;
-    console.log('we are in ot mouse over');
     if (event && isWeightNodeAllowed && isShiftStillPressed) {
       dispatch(setWeightNode(grid, row, col));
     } else {
       dispatch(setWallNode(grid, row, col));
     }
   };
-
-  if (!isWeightNodeAllowed) {
-    dispatch(removeWeightNodes());
-  }
 
   return (
     <Fragment>

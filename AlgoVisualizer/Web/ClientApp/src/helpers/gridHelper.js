@@ -33,6 +33,7 @@ export function getInitialGrid() {
 }
 
 export const removeAllWeightNodes = grid => {
+  if (!grid) return;
   for (let row = 0; row < ROWS; row++) {
     for (let col = 0; col < COLS; col++) {
       if (grid[row][col].isWeight) {
