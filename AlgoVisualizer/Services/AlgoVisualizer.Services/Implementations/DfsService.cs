@@ -10,6 +10,11 @@
     {
         public Result FindPath(DfsServiceModel model)
         {
+            if (!this.IsEntityStateValid(model))
+            {
+                return null;
+            }
+
             var path = new List<INode>
             {
                 model.StartNode

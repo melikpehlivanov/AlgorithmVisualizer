@@ -16,6 +16,11 @@
 
         public Result FindPath(DijkstraServiceModel model)
         {
+            if (!this.IsEntityStateValid(model))
+            {
+                return null;
+            }
+
             this.startNode = model.StartNode;
             this.endNode = model.EndNode;
             var grid = model.Grid;
