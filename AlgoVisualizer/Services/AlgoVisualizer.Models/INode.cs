@@ -12,5 +12,7 @@
         bool IsVisited { get; set; }
 
         INode PreviousNode { get; set; }
+
+        NodeType? NodeType { get; set; }
     }
 }

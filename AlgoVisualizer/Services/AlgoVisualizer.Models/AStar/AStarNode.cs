@@ -19,21 +19,18 @@
 
         public INode PreviousNode { get; set; }
 
+        public NodeType? NodeType { get; set; }
+
         public double GScore { get; set; } = double.PositiveInfinity;
 
         public double HScore { get; set; }
 
         public double FScore => this.GScore + this.HScore;
 
-        public NodeType? NodeType { get; set; }
-
         public NodeDirection? Direction { get; set; }
 
         public override bool Equals(object obj)
             => obj is AStarNode other && (this.Row == other.Row && this.Col == other.Col);
-
-        protected bool Equals(AStarNode other)
-            => this.Row == other.Row && this.Col == other.Col;
 
         public override int GetHashCode()
         {
