@@ -117,7 +117,7 @@ const gridReducer = (state = initialState, action) => {
       clearGrid();
       return state;
     case REMOVE_WEIGHT_NODES:
-      let newGrid = removeAllWeightNodes(state.data);
+      let newGrid = removeAllWeightNodes(state.grid);
       return {
         ...state,
         grid: newGrid

@@ -30,7 +30,7 @@ const GridNavbar = () => {
     if (!state.isNavbarClickable) return;
 
     dispatch(clearGrid());
-    dispatch(clearErrors());
+    dispatchError(clearErrors());
 
     const url = `${PATHFINDING_ALGORITHMS_API_URL}/${algorithm}`;
     const result = await makePostApiCallAsync(
