@@ -7,6 +7,7 @@ import { showError } from '../store/actions/error';
 
 const nodeName = 'node';
 const msTimeout = 20;
+const errorMessage = 'Something terribly went wrong! Please try again later.';
 
 export const makePostApiCallAsync = async (
   url,
@@ -27,16 +28,15 @@ export const makePostApiCallAsync = async (
         grid: grid
       })
     });
-    const message = 'Something terribly went wrong! Please try again later.';
 
     const result = response.json();
     if (response.status <= 400) {
       return result;
     } else {
-      dispatchError(showError(true, [message]));
+      dispatchError(showError(true, [errorMessage]));
     }
   } catch (error) {
-    dispatchError(showError(true, [message]));
+    dispatchError(showError(true, [errorMessage]));
   }
 };
 
