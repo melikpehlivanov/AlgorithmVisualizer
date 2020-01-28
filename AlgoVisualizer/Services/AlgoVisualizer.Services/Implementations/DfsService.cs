@@ -1,6 +1,7 @@
 ﻿namespace AlgoVisualizer.Services.Implementations
 {
     using System.Collections.Generic;
+    using System.Linq;
     using Interfaces;
     using Models;
     using Models.Dfs;
@@ -15,10 +16,7 @@
                 return null;
             }
 
-            var path = new List<INode>
-            {
-                model.StartNode
-            };
+            var path = new List<INode>();
 
             return this.PathFound(model.Grid, model.StartNode, model.EndNode, path)
                 ? new Result(path, path)
@@ -33,6 +31,7 @@
         {
             if (node.Equals(endNode))
             {
+                path.Remove(path.ElementAt(path.Count - 1));
                 return true;
             }
 
