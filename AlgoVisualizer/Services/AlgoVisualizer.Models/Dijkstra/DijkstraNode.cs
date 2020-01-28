@@ -1,7 +1,6 @@
 ﻿namespace AlgoVisualizer.Models.Dijkstra
 {
     using System.ComponentModel.DataAnnotations;
-    using AStar;
     using Enums;
 
     public class DijkstraNode : INode
@@ -29,12 +28,8 @@
                 _ => 0
             };
 
-
         public override bool Equals(object obj)
             => obj is INode other && (this.Row == other.Row && this.Col == other.Col);
-
-        protected bool Equals(DijkstraNode other)
-            => this.Row == other.Row && this.Col == other.Col;
 
         public override int GetHashCode()
         {
