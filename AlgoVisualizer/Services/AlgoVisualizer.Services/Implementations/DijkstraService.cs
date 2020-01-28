@@ -20,16 +20,16 @@
             this.endNode = model.EndNode;
             var grid = model.Grid;
 
-            var heap = new Queue<DijkstraNode>();
+            var heap = new MinHeap<DijkstraNode>();
             var allSteps = new HashSet<INode>();
 
             this.startNode.Distance = 0;
             this.startNode.IsVisited = true;
-            heap.Enqueue(this.startNode);
+            heap.Add(this.startNode);
 
             while (heap.Count != 0)
             {
-                var currentNode = heap.Dequeue();
+                var currentNode = heap.Pop();
 
                 if (grid[currentNode.Row, currentNode.Col].NodeType == NodeType.Wall)
                     continue;
@@ -68,7 +68,7 @@
         private void AddNodeToHeap(
             DijkstraNode currentNode,
             DijkstraNode targetNode,
-            Queue<DijkstraNode> heap)
+            MinHeap<DijkstraNode> heap)
         {
             if (targetNode.IsVisited || !(targetNode.Distance > currentNode.Distance))
                 return;
@@ -78,7 +78,7 @@
 
             targetNode.PreviousNode = currentNode;
             targetNode.IsVisited = true;
-            heap.Enqueue(targetNode);
+            heap.Add(targetNode);
         }
 
         private double AddAdditionalWeight(
