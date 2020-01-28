@@ -27,13 +27,15 @@ export const makePostApiCallAsync = async (
         grid: grid
       })
     });
+    const message = 'Something terribly went wrong! Please try again later.';
 
     const result = response.json();
     if (response.status <= 400) {
       return result;
+    } else {
+      dispatchError(showError(true, [message]));
     }
   } catch (error) {
-    const message = 'Something terribly went wrong! Please try again later.';
     dispatchError(showError(true, [message]));
   }
 };
