@@ -1,0 +1,8 @@
+.disabled {
+  cursor: not-allowed !important;
+}
+.disabled > a {
+  display: inline-block; /* For IE11/ MS Edge bug */
+  pointer-events: none;
+  text-decoration: none;
+}

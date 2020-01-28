@@ -14,6 +14,8 @@ import { showError, clearErrors } from '../../store/actions/error';
 import { ErrorContext } from '../../store/context/errorContext';
 import { GridContext } from '../../store/context/gridContext';
 
+import './GridNavbar.css';
+
 const GridNavbar = () => {
   const { state, dispatch } = useContext(GridContext);
   const { dispatchError } = useContext(ErrorContext);
@@ -31,7 +33,13 @@ const GridNavbar = () => {
     dispatch(clearErrors());
 
     const url = `${PATHFINDING_ALGORITHMS_API_URL}/${algorithm}`;
-    const result = await makePostApiCallAsync(url, startNode, endNode, grid);
+    const result = await makePostApiCallAsync(
+      url,
+      startNode,
+      endNode,
+      grid,
+      dispatchError
+    );
 
     if (result) {
       if (result.isSuccess !== undefined && !result.isSuccess) {
@@ -48,13 +56,15 @@ const GridNavbar = () => {
     }
   };
 
+  const isClickable = () => (!state.isNavbarClickable ? 'disabled' : '');
+
   return (
     <Navbar
       className="navbar-expand-sm navbar-toggleable-sm ng-white justify-content-between border-bottom box-shadow mb-3"
       bg="dark"
       expand="lg"
     >
-      <Navbar.Brand>
+      <Navbar.Brand className={!state.isNavbarClickable ? 'disabled' : ''}>
         <NavLink tag={Link} className="text-white" to="/">
           AlgoVisualizer
         </NavLink>
@@ -62,7 +72,7 @@ const GridNavbar = () => {
       <Navbar.Toggle className="bg-white" aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="w-50">
-          <NavItem>
+          <NavItem className={isClickable()}>
             <NavLink tag={Link} className="text-white" to="/">
               Home
             </NavLink>
@@ -91,6 +101,7 @@ const GridNavbar = () => {
         <NavItem className="w-25 mb-2">
           {state.algorithm !== '' ? (
             <Button
+              className={isClickable()}
               variant={state.isNavbarClickable ? 'success' : 'danger'}
               onClick={() =>
                 fetchData(
@@ -111,6 +122,7 @@ const GridNavbar = () => {
           <div className="ml-sm-auto">
             <NavItem>
               <Button
+                className={isClickable()}
                 variant="danger"
                 onClick={() =>
                   state.isNavbarClickable ? dispatch(clearState()) : null
