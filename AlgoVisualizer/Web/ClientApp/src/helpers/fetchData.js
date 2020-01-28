@@ -3,29 +3,38 @@ import {
   VISITED_NODE_CLASSNAME
 } from '../constants/gridConstants';
 import { setIsNavbarClickable } from '../store/actions/grid';
+import { showError } from '../store/actions/error';
 
 const nodeName = 'node';
 const msTimeout = 20;
 
-export const makePostApiCallAsync = async (url, startNode, endNode, grid) => {
-  const response = await fetch(url, {
-    method: 'POST',
-    headers: {
-      'content-type': 'application/json'
-    },
-    body: JSON.stringify({
-      startNode: startNode,
-      endNode: endNode,
-      grid: grid
-    })
-  });
+export const makePostApiCallAsync = async (
+  url,
+  startNode,
+  endNode,
+  grid,
+  dispatchError
+) => {
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify({
+        startNode: startNode,
+        endNode: endNode,
+        grid: grid
+      })
+    });
 
-  const result = response.json();
-  if (response.status <= 400) {
-    return result;
-  } else {
-    // TODO: dispatch error
-    return null;
+    const result = response.json();
+    if (response.status <= 400) {
+      return result;
+    }
+  } catch (error) {
+    const message = 'Something terribly went wrong! Please try again later.';
+    dispatchError(showError(true, [message]));
   }
 };
 

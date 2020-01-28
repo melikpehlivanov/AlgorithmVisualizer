@@ -14,9 +14,11 @@ const Error = () => {
       dismissible
     >
       <Alert.Heading>Oh snap!</Alert.Heading>
-      {state.messages.map((message, i) => {
-        return <p key={i}>{message}</p>;
-      })}
+      {state.messages.length === 1 ? (
+        <p>{state.messages[0]}</p>
+      ) : (
+        state.messages.map((element, i) => <p key={i}>{element}</p>)
+      )}
     </Alert>
   ) : null;
 };
