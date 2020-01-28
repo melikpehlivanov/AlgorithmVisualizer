@@ -59,8 +59,7 @@ const animateResult = (
   for (let i = 0; i <= allVisitedNodesInOrder.length; i++) {
     if (i === allVisitedNodesInOrder.length) {
       setTimeout(() => {
-        animateShortestPath(allNodesInShortestPathOrder);
-        dispatch(setIsNavbarClickable(true));
+        animateShortestPath(dispatch, allNodesInShortestPathOrder);
       }, msTimeout * i);
       return;
     }
@@ -78,16 +77,20 @@ const animateResult = (
   }
 };
 
-const animateShortestPath = nodes => {
-  for (let i = 0; i < nodes.length; i++) {
-    setTimeout(() => {
+const animateShortestPath = (dispatch, nodes) => {
+  for (let i = 0; i <= nodes.length; i++) {
+    var time = setTimeout(() => {
       const node = nodes[i];
       if (node) {
         const element = getElement(nodeName, node.row, node.col);
         if (element === null) return;
         element.className = SHORTEST_PATH_CLASSNAME;
       }
-      return;
+
+      if (i === nodes.length - 1) {
+        dispatch(setIsNavbarClickable(true));
+        clearTimeout(time);
+      }
     }, 50 * i * 2);
   }
 };
