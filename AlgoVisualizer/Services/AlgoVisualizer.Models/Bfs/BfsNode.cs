@@ -6,6 +6,14 @@
 
     public class BfsNode : INode
     {
+        public BfsNode(int row, int col, INode previousNode = null, double distance = double.PositiveInfinity)
+        {
+            this.Row = row;
+            this.Col = col;
+            this.PreviousNode = previousNode;
+            this.Distance = distance;
+        }
+
         [Required]
         public int Row { get; set; }
 
@@ -14,7 +22,7 @@
 
         public bool IsVisited { get; set; }
 
-        public double Distance { get; set; } = double.PositiveInfinity;
+        public double Distance { get; set; }
 
         public INode PreviousNode { get; set; }
 
