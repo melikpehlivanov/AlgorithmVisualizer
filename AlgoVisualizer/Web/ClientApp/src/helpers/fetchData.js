@@ -79,7 +79,7 @@ const animateResult = (
 
 const animateShortestPath = (dispatch, nodes) => {
   for (let i = 0; i <= nodes.length; i++) {
-    var time = setTimeout(() => {
+    setTimeout(() => {
       const node = nodes[i];
       if (node) {
         const element = getElement(nodeName, node.row, node.col);
@@ -89,7 +89,7 @@ const animateShortestPath = (dispatch, nodes) => {
 
       if (i === nodes.length - 1) {
         dispatch(setIsNavbarClickable(true));
-        clearTimeout(time);
+        clearTimeout();
       }
     }, 50 * i * 2);
   }
