@@ -9,10 +9,14 @@ const VerticallyCenteredModal = props => {
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
-      <Modal.Header closeButton>
+      <Modal.Header closeButton={false}>
         <Modal.Title id="contained-modal-title-vcenter">
           {props.title}
         </Modal.Title>
+
+        <div className="ml-auto">
+          {props.currentPage}/{props.totalPages}
+        </div>
       </Modal.Header>
       <Modal.Body dangerouslySetInnerHTML={props.body} />
       <Modal.Footer>
