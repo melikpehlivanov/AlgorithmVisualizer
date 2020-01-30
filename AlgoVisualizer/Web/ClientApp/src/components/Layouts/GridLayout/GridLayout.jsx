@@ -27,6 +27,13 @@ const modalContent = [
       __html:
         '<h4>Choose an algorithm from the "Algorithms" drop-down menu.</h4><p>Note that some algorithms are <strong><i>unweighted</i></strong>, while others are <strong><i>weighted</i></strong>. Unweighted algorithms do not take weight nodes into account, whereas weighted ones do. Furthermore, not all algorithms guarantee the shortest path.</p><img class="rounded mx-auto d-block" src="algorithms-menu.jpg" />'
     }
+  },
+  {
+    title: 'How to move start and end point nodes',
+    body: {
+      __html:
+        '<div><div><h4>1. How to set a new start point.</h4><p>1.1 In order to set new start point you simply need to hold down "Ctrl" key while clicking on the desired node.</p></div><div><h4>2. How to set a new end point.</h4><p>2.1 Setting an end node is the same as setting start node but instead of holding down <b>"Ctrl"</b> key you must hold down <b>"Alt"</b> key.</p><img class="img-fluid mx-auto d-block" src="set-start-end-nodes.gif" /></div></div>'
+    }
   }
 ];
 
