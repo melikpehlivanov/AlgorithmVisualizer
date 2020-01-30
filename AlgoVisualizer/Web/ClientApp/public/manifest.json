@@ -18,6 +18,10 @@
     {
       "src": "set-start-end-nodes.gif",
       "type": "image/x-icon"
+    },
+    {
+      "src": "set-weight-and-wall-nodes.gif",
+      "type": "image/x-icon"
     }
   ],
   "start_url": "./index.html",
