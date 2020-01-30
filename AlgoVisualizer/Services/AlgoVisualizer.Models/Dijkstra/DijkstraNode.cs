@@ -1,6 +1,7 @@
 ﻿namespace AlgoVisualizer.Models.Dijkstra
 {
     using System.ComponentModel.DataAnnotations;
+    using Common;
     using Enums;
 
     public class DijkstraNode : INode
@@ -15,7 +16,7 @@
 
         public double Distance { get; set; } = double.PositiveInfinity;
 
-        public int Weight { get; set; } = 1;
+        public int Weight { get; set; } = ModelConstants.DefaultWeightNodeValue;
 
         public INode PreviousNode { get; set; }
 
