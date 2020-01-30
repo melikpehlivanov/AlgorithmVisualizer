@@ -34,6 +34,13 @@ const modalContent = [
       __html:
         '<div><div><h4>1. How to set a new start point.</h4><p>1.1 In order to set new start point you simply need to hold down "Ctrl" key while clicking on the desired node.</p></div><div><h4>2. How to set a new end point.</h4><p>2.1 Setting an end node is the same as setting start node but instead of holding down <b>"Ctrl"</b> key you must hold down <b>"Alt"</b> key.</p><img class="img-fluid mx-auto d-block" src="set-start-end-nodes.gif" /></div></div>'
     }
+  },
+  {
+    title: 'How to add weight and wall nodes',
+    body: {
+      __html:
+        '<div><div><h4>1. How to add wall node.</h4><p>1.1 In order to add wall node you need to click on the desired node. Additionaly, you can hold down your left mouse button while moving over the nodes and this will also set wall nodes.</p></div><div><h4>2. How to add weight node.</h4><p>2.1 Adding a wall node is the same as adding weight node except we have to keep the <b>"Shift"</b> key pressed.</p><img class="img-fluid mx-auto d-block" src="set-weight-and-wall-nodes.gif" /></div></div>'
+    }
   }
 ];
 
