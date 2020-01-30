@@ -29,6 +29,13 @@ const modalContent = [
     }
   },
   {
+    title: 'Meet the algorithms',
+    body: {
+      __html:
+        "<h4>Not all algorithms are equal. Please read the notes down below!</h4><ul><li><b>A* Search</b> is <b><i>weighted</i></b> and it is arguably the best pathfinding algorithm out there. It uses heuristics to <b>guarantee</b> the shortest path and is much faster than Dijkstra's Algorithm</li><li><b>Dijkstra's Algorithm is also </b> <b><i>weighted</i></b>. Dijkstra's algorithm is the father of pathfinding algorithms and it </b> <b>guarantees</b> the shortest path</li><li><b>Breath-first Search</b> is <b><i>unweighted</i></b> and it's a good algorithm which <b>guarantees</b> the shortest path</li><li><b>Depth-first Search</b> is <b><i>unweighted</i></b> and it's a very bad algorithm for pathfinding. Moreover, it <b>does not guarantee</b> the shortest path</li></ul><p><b>P.S</b> Many new algorithms are going to come out with the next version of this app!</p>"
+    }
+  },
+  {
     title: 'How to move start and end point nodes',
     body: {
       __html:
