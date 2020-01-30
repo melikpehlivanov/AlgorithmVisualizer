@@ -7,14 +7,14 @@ export const Home = () => {
       <div>
         <h1>Welcome to AlgoVisualizer!</h1>
         <p>Please choose one of the following algorithms</p>
-        <li>
-          <ul>
+        <ol>
+          <li>
             <Link to="/pathfindingAlgorithms">Pathfinding algorithms</Link>
-          </ul>
-          <ul>
+          </li>
+          <li>
             <p>Sorting algorithms - coming soon...</p>
-          </ul>
-        </li>
+          </li>
+        </ol>
       </div>
     </Fragment>
   );
