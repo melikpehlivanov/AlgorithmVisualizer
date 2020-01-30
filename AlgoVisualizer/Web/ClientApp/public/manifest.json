@@ -10,6 +10,10 @@
     {
       "src": "dumbbell-solid.svg",
       "type": "image/x-icon"
+    },
+    {
+      "src": "algorithms-menu.jpg",
+      "type": "image/x-icon"
     }
   ],
   "start_url": "./index.html",
