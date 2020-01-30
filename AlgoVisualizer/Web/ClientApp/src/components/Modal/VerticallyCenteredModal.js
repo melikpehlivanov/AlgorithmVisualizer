@@ -8,6 +8,7 @@ const VerticallyCenteredModal = props => {
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
+      scrollable={true}
     >
       <Modal.Header closeButton={false}>
         <Modal.Title id="contained-modal-title-vcenter">
