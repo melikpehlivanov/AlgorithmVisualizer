@@ -36,10 +36,10 @@ const modalContent = [
     }
   },
   {
-    title: 'How to add weight and wall nodes',
+    title: 'How to add and remove weight and wall nodes',
     body: {
       __html:
-        '<div><div><h4>1. How to add wall node.</h4><p>1.1 In order to add wall node you need to click on the desired node. Additionaly, you can hold down your left mouse button while moving over the nodes and this will also set wall nodes.</p></div><div><h4>2. How to add weight node.</h4><p>2.1 Adding a wall node is the same as adding weight node except we have to keep the <b>"Shift"</b> key pressed.</p><img class="img-fluid mx-auto d-block" src="set-weight-and-wall-nodes.gif" /></div></div>'
+        '<div><div><h4>1. How to add wall node.</h4><p>1.1 In order to add wall node you need to click on the desired node. Additionaly, you can hold down your left mouse button while moving over the nodes and this will also set wall nodes.</p></div><div><h4>2. How to add weight node.</h4><p>2.1 Adding a wall node is the same as adding weight node except we have to keep the <b>"Shift"</b> key pressed.</p><div><h4>3. Removing wall and weight nodes</h4><p>In order to remove wall or weight node, simply click onto the node with the same key combination you have used to add them or use the "Clear board" button.</p></div><img class="img-fluid mx-auto d-block" src="set-weight-and-wall-nodes.gif" /></div></div>'
     }
   }
 ];
