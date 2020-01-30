@@ -27,7 +27,7 @@ export const GridLayout = props => {
                 Wall Node
               </li>
               <li>
-                <i className="dumbbell"></i>
+                <img className="dumbbell" src="dumbbell-solid.svg" />
                 Weight Node
               </li>
               <li>
