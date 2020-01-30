@@ -41,6 +41,13 @@ const modalContent = [
       __html:
         '<div><div><h4>1. How to add wall node.</h4><p>1.1 In order to add wall node you need to click on the desired node. Additionaly, you can hold down your left mouse button while moving over the nodes and this will also set wall nodes.</p></div><div><h4>2. How to add weight node.</h4><p>2.1 Adding a wall node is the same as adding weight node except we have to keep the <b>"Shift"</b> key pressed.</p><div><h4>3. Removing wall and weight nodes</h4><p>In order to remove wall or weight node, simply click onto the node with the same key combination you have used to add them or use the "Clear board" button.</p></div><img class="img-fluid mx-auto d-block" src="set-weight-and-wall-nodes.gif" /></div></div>'
     }
+  },
+  {
+    title: 'How to visualize an algorithm',
+    body: {
+      __html:
+        '<h4>Use the navbar buttons to visualize algorithms and clear grid!</h4><p>Click on the "Visualize" button after you have chosen an algorithm in order to visualize it. Also, you can clear the current path, walls and weights from the "Clear Board" button positioned in the top right corner. Moreover, you do not need to clear the board manually after you have visualized given algorithm, simply choose the new algorithm which you want to visualize and the grid will clear itself automatically when "Visualize" button is clicked.</p><img class="img-fluid rounded ml-auto d-block" src="navbar-menu.jpg" />'
+    }
   }
 ];
 

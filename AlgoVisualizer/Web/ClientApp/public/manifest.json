@@ -25,7 +25,10 @@
     },
     {
       "src": "point-a-b.jpg",
-      "sizes": "16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "navbar-menu.jpg",
       "type": "image/x-icon"
     }
   ],
