@@ -38,7 +38,7 @@ export const modalTutorialContent = [
     title: 'What is a pathfinding algorithm ?',
     body: {
       __html:
-        '<h4>At its core, a pathfinding algorithm searches a graph/grid by starting at one vertex/node and exploring adjacent nodes until the destination node is reached, generally with the intent of finding the cheapest route.</h4><p>All the algorithms for this application are adapted for a 2D grid, where 90 degree turns have a cost of 1, and movements from node to node have cost of 1 again.</p><img class="img-fluid rounded mx-auto d-block" src="point-a-b.jpg" />'
+        '<h4>At its core, a pathfinding algorithm searches a graph/grid by starting at one vertex/node and exploring adjacent nodes until the destination node is reached, generally with the intent of finding the cheapest route.</h4><p>All the algorithms for this application are adapted for a 2D grid, where movements from node to node have cost of 1.</p><img class="img-fluid rounded mx-auto d-block" src="point-a-b.jpg" />'
     }
   },
   {
@@ -66,7 +66,7 @@ export const modalTutorialContent = [
     title: 'How to add and remove weight and wall nodes',
     body: {
       __html:
-        '<div><div><h4>1. How to add wall node.</h4><p>1.1 In order to add wall node you need to click on the desired node. Additionaly, you can hold down your left mouse button while moving over the nodes and this will also set wall nodes.</p></div><div><h4>2. How to add weight node.</h4><p>2.1 Adding a wall node is the same as adding weight node except we have to keep the <b>"Shift"</b> key pressed.</p><div><h4>3. Removing wall and weight nodes</h4><p>In order to remove wall or weight node, simply click onto the node with the same key combination you have used to add them or use the "Clear board" button.</p></div><img class="img-fluid mx-auto d-block" src="set-weight-and-wall-nodes.gif" /></div></div>'
+        '<div><div><h4>1. How to add wall node.</h4><h5>1.1 In order to add wall node you need to click on the desired node. Additionaly, you can hold down your left mouse button while moving over the nodes and this will also set wall nodes.</h5></div><div><h4>2. How to add weight node.</h4><h5>2.1 Adding a wall node is the same as adding weight node except we have to keep the <b>"Shift"</b> key pressed.</h5><div><h4>3. Removing wall and weight nodes</h4><h5>In order to remove wall or weight node, simply click onto the node with the same key combination you have used to add them or use the "Clear board" button.</h6></div></div><p><b>Walls</b> are <b>impassable</b> meaning that a path <i>cannot</i> cross through. <b>Weights</b>, however, are <b>not</b> impassable. They simply cost <b>more</b> to move through. If you are wondering what does that mean, imagine the following situation: It is time to go home after a long day at work and you turn on your GPS, put in your home address and the GPS will calculate the route for you. But in the meantime, there could be a traffic jam so the GPS would say: "Hey, there is a traffic jam, would you like me to take a roundabout route which will save you a lot of time by avoiding the traffic jams and you will get home much faster". In this application, moving through a weight node has a "cost" of 15.</p><img class="img-fluid mx-auto d-block" src="set-weight-and-wall-nodes.gif" /></div></div>'
     }
   },
   {
@@ -74,6 +74,13 @@ export const modalTutorialContent = [
     body: {
       __html:
         '<h4>Use the navbar buttons to visualize algorithms and clear grid!</h4><p>Click on the "Visualize" button after you have chosen an algorithm in order to visualize it. Also, you can clear the current path, walls and weights from the "Clear Board" button positioned in the top right corner. Moreover, you do not need to clear the board manually after you have visualized given algorithm, simply choose the new algorithm which you want to visualize and the grid will clear itself automatically when "Visualize" button is clicked.</p><img class="img-fluid rounded ml-auto d-block" src="navbar-menu.jpg" />'
+    }
+  },
+  {
+    title: 'Thank you for coming to this stage of the tutorial.',
+    body: {
+      __html:
+        '<h4>I believe that you are ready to go on your own now and explore the different algorithms.</h4><p>If for some reason you want to get back to this tutorial simply refresh the page.</p><p> By the way, if you are interested in the source code of this project you can check it out in my <a href="https://github.com/melikpehlivanov/AlgorithmVisualizer" target="_blank">github</a> account.</p>'
     }
   }
 ];
