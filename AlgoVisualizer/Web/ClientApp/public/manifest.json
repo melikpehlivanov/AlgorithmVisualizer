@@ -22,6 +22,11 @@
     {
       "src": "set-weight-and-wall-nodes.gif",
       "type": "image/x-icon"
+    },
+    {
+      "src": "point-a-b.jpg",
+      "sizes": "16x16",
+      "type": "image/x-icon"
     }
   ],
   "start_url": "./index.html",

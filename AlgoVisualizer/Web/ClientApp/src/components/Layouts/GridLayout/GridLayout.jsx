@@ -18,14 +18,14 @@ const modalContent = [
     title: 'What is a pathfinding algorithm ?',
     body: {
       __html:
-        '<h4>At its core, a pathfinding algorithm searches a graph/grid by starting at one vertex/node and exploring adjacent nodes until the destination node is reached, generally with the intent of finding the cheapest route.</h4><p>All the algorithms for this application are adapted for a 2D grid, where 90 degree turns have a cost of 1, and movements from node to node have cost of 1 again.</p>'
+        '<h4>At its core, a pathfinding algorithm searches a graph/grid by starting at one vertex/node and exploring adjacent nodes until the destination node is reached, generally with the intent of finding the cheapest route.</h4><p>All the algorithms for this application are adapted for a 2D grid, where 90 degree turns have a cost of 1, and movements from node to node have cost of 1 again.</p><img class="img-fluid rounded mx-auto d-block" src="point-a-b.jpg" />'
     }
   },
   {
     title: 'How to pick an algorithm',
     body: {
       __html:
-        '<h4>Choose an algorithm from the "Algorithms" drop-down menu.</h4><p>Note that some algorithms are <strong><i>unweighted</i></strong>, while others are <strong><i>weighted</i></strong>. Unweighted algorithms do not take weight nodes into account, whereas weighted ones do. Furthermore, not all algorithms guarantee the shortest path.</p><img class="rounded mx-auto d-block" src="algorithms-menu.jpg" />'
+        '<h4>Choose an algorithm from the "Algorithms" drop-down menu.</h4><p>Note that some algorithms are <strong><i>unweighted</i></strong>, while others are <strong><i>weighted</i></strong>. Unweighted algorithms do not take weight nodes into account, whereas weighted ones do. Furthermore, not all algorithms guarantee the shortest path.</p><img class="img-fluid rounded mx-auto d-block" src="algorithms-menu.jpg" />'
     }
   },
   {
