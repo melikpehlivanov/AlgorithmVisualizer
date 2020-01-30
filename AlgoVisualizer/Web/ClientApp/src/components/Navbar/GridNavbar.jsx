@@ -1,12 +1,21 @@
-import React, { useContext } from 'react';
-import { Navbar, NavDropdown, Nav, NavItem, Button } from 'react-bootstrap';
+import React, { useContext, Fragment } from 'react';
+import {
+  Navbar,
+  NavDropdown,
+  Nav,
+  NavItem,
+  Button,
+  ButtonToolbar,
+  Spinner
+} from 'react-bootstrap';
 import { NavLink } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import {
   setAlgorithm,
   setAlgorithmDescription,
   clearState,
-  clearGrid
+  clearGrid,
+  setIsNavbarClickable
 } from '../../store/actions/grid';
 import { makePostApiCallAsync, visualizeResult } from '../../helpers/fetchData';
 import { PATHFINDING_ALGORITHMS_API_URL } from '../../constants/algorithmConstants';
@@ -33,6 +42,7 @@ const GridNavbar = () => {
     dispatchError(clearErrors());
 
     const url = `${PATHFINDING_ALGORITHMS_API_URL}/${algorithm}`;
+    dispatch(setIsNavbarClickable(false));
     const result = await makePostApiCallAsync(
       url,
       startNode,
@@ -40,6 +50,7 @@ const GridNavbar = () => {
       grid,
       dispatchError
     );
+    dispatch(setIsNavbarClickable(true));
 
     if (result) {
       if (result.isSuccess !== undefined && !result.isSuccess) {
@@ -100,20 +111,35 @@ const GridNavbar = () => {
         </Nav>
         <NavItem className="w-25 mb-2">
           {state.algorithm !== '' ? (
-            <Button
-              className={isClickable()}
-              variant={state.isNavbarClickable ? 'success' : 'danger'}
-              onClick={() =>
-                fetchData(
-                  state.algorithm,
-                  state.startNode,
-                  state.endNode,
-                  state.grid
-                )
-              }
-            >
-              Visualize {state.algorithm}
-            </Button>
+            <ButtonToolbar>
+              <Button
+                className={isClickable()}
+                variant="primary"
+                onClick={() =>
+                  fetchData(
+                    state.algorithm,
+                    state.startNode,
+                    state.endNode,
+                    state.grid
+                  )
+                }
+              >
+                {!state.isNavbarClickable ? (
+                  <Fragment>
+                    <Spinner
+                      as="span"
+                      animation="grow"
+                      size="sm"
+                      role="status"
+                      aria-hidden="true"
+                    />
+                    Loading...
+                  </Fragment>
+                ) : (
+                  `Visualize ${state.algorithm}`
+                )}
+              </Button>
+            </ButtonToolbar>
           ) : (
             ''
           )}
