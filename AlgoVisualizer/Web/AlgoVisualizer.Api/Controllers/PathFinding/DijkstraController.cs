@@ -1,27 +1,27 @@
-﻿namespace AlgoVisualizer.Api.Controllers
+﻿namespace AlgoVisualizer.Api.Controllers.PathFinding
 {
-    using AlgoVisualizer.Models.Dfs;
+    using AlgoVisualizer.Models.Dijkstra;
     using AutoMapper;
     using Microsoft.AspNetCore.Mvc;
     using Models;
     using Services.Interfaces;
 
-    public class DfsController : BasePathFindingController
+    public class DijkstraController : BasePathFindingController
     {
         private readonly IMapper mapper;
-        private readonly IDfsService dfsService;
+        private readonly IDijkstraService dijkstraService;
 
-        public DfsController(IMapper mapper, IDfsService dfsService)
+        public DijkstraController(IMapper mapper, IDijkstraService dijkstraService)
         {
             this.mapper = mapper;
-            this.dfsService = dfsService;
+            this.dijkstraService = dijkstraService;
         }
 
         [HttpPost]
         public IActionResult Post(PathFindingAlgorithmsRequestModel data)
         {
-            var serviceModel = this.mapper.Map<DfsServiceModel>(data);
-            var result = this.dfsService.FindPath(serviceModel);
+            var serviceModel = this.mapper.Map<DijkstraServiceModel>(data);
+            var result = this.dijkstraService.FindPath(serviceModel);
             if (result?.AllNodesInShortestPathOrder == null)
             {
                 return this.BadRequest(new ErrorModel(WebConstants.PathNotFound));

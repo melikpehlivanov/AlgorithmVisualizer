@@ -1,4 +1,4 @@
-﻿namespace AlgoVisualizer.Api.Controllers
+﻿namespace AlgoVisualizer.Api.Controllers.PathFinding
 {
     using Microsoft.AspNetCore.Mvc;
 
