@@ -6,7 +6,7 @@
     using Models;
     using Services.Interfaces;
 
-    public class BfsController : BaseController
+    public class BfsController : BasePathFindingController
     {
         private readonly IMapper mapper;
         private readonly IBfsService bfsService;

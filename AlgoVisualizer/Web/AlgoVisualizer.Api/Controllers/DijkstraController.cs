@@ -7,7 +7,7 @@
     using Models;
     using Services.Interfaces;
 
-    public class DijkstraController : BaseController
+    public class DijkstraController : BasePathFindingController
     {
         private readonly IMapper mapper;
         private readonly IDijkstraService dijkstraService;

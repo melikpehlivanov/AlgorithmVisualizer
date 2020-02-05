@@ -6,7 +6,7 @@
     using Models;
     using Services.Interfaces;
 
-    public class AStarController : BaseController
+    public class AStarController : BasePathFindingController
     {
         private readonly IMapper mapper;
         private readonly IAStarService aStarService;
