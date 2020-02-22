@@ -2,15 +2,41 @@ import React, { useState, useEffect, Fragment } from 'react';
 import { Button } from 'react-bootstrap';
 import { Bar } from 'react-chartjs-2';
 
+const arraySize = 20;
+const randomMultiplyingFactor = 300;
+
 const SortingVisualizer = () => {
-  const [data, setData] = useState({});
+  const [data, setData] = useState({
+    labels: [],
+    datasets: [
+      {
+        label: 'Value',
+        backgroundColor: 'rgba(255,99,132,0.2)',
+        borderColor: 'rgba(255,99,132,1)',
+        borderWidth: 1,
+        hoverBackgroundColor: 'rgba(255,99,132,0.4)',
+        hoverBorderColor: 'rgba(255,99,132,1)',
+        data: []
+      }
+    ]
+  });
 
   useEffect(() => {
-    const value = initializeArray();
-    setData(value);
+    initializeData(data);
   }, []);
 
-  const swapElements = chart => {
+  const initializeData = () => {
+    const dataSet = data.datasets[0];
+    for (let i = 0; i <= arraySize; i++) {
+      const number = Math.floor(Math.random() * randomMultiplyingFactor);
+      data.labels.push(number);
+      dataSet.data.push(number);
+    }
+
+    setData({ ...data, labels: data.labels, datasets: data.datasets });
+  };
+
+  const swapElements = () => {
     // Swapping is hard coded for now
     let dataCopy = data;
     let temp = dataCopy.labels[1];
@@ -29,10 +55,25 @@ const SortingVisualizer = () => {
     );
   };
 
+  const generateNewArray = () => {
+    const dataSet = data.datasets[0];
+    for (let i = 0; i <= arraySize; i++) {
+      const number = Math.floor(Math.random() * randomMultiplyingFactor);
+      data.labels[i] = number;
+      dataSet.data[i] = number;
+    }
+
+    setData(
+      Object.assign({}, data, {
+        data: data
+      })
+    );
+  };
+
   return (
     <Fragment>
       <div>
-        <Button>Generate New Array</Button>
+        <Button onClick={() => generateNewArray()}>Generate New Array</Button>
         <Button>Merge Sort</Button>
         <Button>Bubble Sort</Button>
         <Button>Heap Sort</Button>
@@ -44,31 +85,6 @@ const SortingVisualizer = () => {
       </div>
     </Fragment>
   );
-};
-
-const initializeArray = () => {
-  const data = {
-    labels: [],
-    datasets: [
-      {
-        label: 'Value',
-        backgroundColor: 'rgba(255,99,132,0.2)',
-        borderColor: 'rgba(255,99,132,1)',
-        borderWidth: 1,
-        hoverBackgroundColor: 'rgba(255,99,132,0.4)',
-        hoverBorderColor: 'rgba(255,99,132,1)',
-        data: []
-      }
-    ]
-  };
-
-  const dataSet = data.datasets[0];
-  for (let i = 0; i <= 20; i++) {
-    data.labels.push(i);
-    dataSet.data.push(i);
-  }
-
-  return data;
 };
 
 export default SortingVisualizer;
