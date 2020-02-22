@@ -1,6 +1,12 @@
 import { initialState } from '../context/sortingAlgorithmsContext';
-import { INITIALIZE_CHART_DATA } from '../../constants/sortingAlgorithmsConstants';
-import { getInitialChart } from '../../helpers/sortingAlgorithmsHelper';
+import {
+  INITIALIZE_CHART_DATA,
+  GENERATE_NEW_ARRAY
+} from '../../constants/sortingAlgorithmsConstants';
+import {
+  getInitialChart,
+  generateNewChart
+} from '../../helpers/sortingAlgorithmsHelper';
 
 const sortingAlgorithmsReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -9,6 +15,14 @@ const sortingAlgorithmsReducer = (state = initialState, action) => {
         ...state,
         barChart: getInitialChart(state.barChart),
         isLoading: false
+      };
+    case GENERATE_NEW_ARRAY:
+      let data = state.barChart;
+      return {
+        ...state,
+        barChart: Object.assign({}, data, {
+          data: generateNewChart(data)
+        })
       };
     default:
       return state;

@@ -11,3 +11,14 @@ export const getInitialChart = data => {
 
   return data;
 };
+
+export const generateNewChart = data => {
+  const dataSet = data.datasets[0];
+  for (let i = 0; i <= arraySize; i++) {
+    const number = Math.floor(Math.random() * randomMultiplyingFactor);
+    data.labels[i] = number;
+    dataSet.data[i] = number;
+  }
+
+  return data;
+};
