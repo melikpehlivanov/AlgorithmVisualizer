@@ -17,6 +17,11 @@ const App = () => {
         component={Grid}
         layout={GridLayout}
       />
+      <AppRoute
+        path="/sortingAlgorithms"
+        component={SortingVisualizer}
+        layout={null}
+      />
       <AppRoute path="/404" component={NotFound} layout={null} />
       <Redirect to="/404" />
     </Switch>
