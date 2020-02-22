@@ -3,7 +3,8 @@ import { Switch, Redirect } from 'react-router';
 import { Home } from './components/Home';
 import Grid from './components/Grid/Grid';
 import { GridLayout } from './components/Layouts/GridLayout/GridLayout';
-import SortingVisualizer from './components/SortingAlgorithmsVisualizer/SortingVisualizer';
+import { SortingAlgorithmsLayout } from './components/SortingAlgorithmsVisualizer/Layout';
+import SortingAlgorithmsContainer from './components/SortingAlgorithmsVisualizer/Container';
 
 import AppRoute from './components/AppRoute';
 import NotFound from './components/Error/NotFound';
@@ -19,8 +20,8 @@ const App = () => {
       />
       <AppRoute
         path="/sortingAlgorithms"
-        component={SortingVisualizer}
-        layout={null}
+        component={SortingAlgorithmsContainer}
+        layout={SortingAlgorithmsLayout}
       />
       <AppRoute path="/404" component={NotFound} layout={null} />
       <Redirect to="/404" />
