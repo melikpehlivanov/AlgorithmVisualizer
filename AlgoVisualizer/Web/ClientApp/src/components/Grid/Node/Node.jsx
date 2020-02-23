@@ -21,7 +21,7 @@ const Node = props => {
       onMouseDown={props.onMouseDown}
       onMouseUp={props.onMouseUp}
     >
-      {isWeight ? <i className="node-dumbbell"></i> : ''}
+      {isWeight ? <i className="node-dumbbell" /> : ''}
     </div>
   );
 };
