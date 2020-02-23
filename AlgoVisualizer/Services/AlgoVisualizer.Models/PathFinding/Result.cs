@@ -1,4 +1,4 @@
-﻿namespace AlgoVisualizer.Models
+﻿namespace AlgoVisualizer.Models.PathFinding
 {
     using System.Collections.Generic;
 

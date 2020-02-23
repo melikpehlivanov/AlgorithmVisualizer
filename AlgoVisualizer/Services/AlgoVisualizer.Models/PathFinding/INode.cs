@@ -1,4 +1,4 @@
-﻿namespace AlgoVisualizer.Models
+﻿namespace AlgoVisualizer.Models.PathFinding
 {
     using System;
     using Enums;

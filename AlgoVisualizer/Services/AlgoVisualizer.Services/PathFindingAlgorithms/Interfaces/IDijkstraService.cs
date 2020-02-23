@@ -1,7 +1,7 @@
 ﻿namespace AlgoVisualizer.Services.PathFindingAlgorithms.Interfaces
 {
-    using Models;
-    using Models.Dijkstra;
+    using Models.PathFinding;
+    using Models.PathFinding.Dijkstra;
 
     public interface IDijkstraService
     {

@@ -1,6 +1,6 @@
 ﻿namespace AlgoVisualizer.Api.Controllers.PathFinding
 {
-    using AlgoVisualizer.Models.Dijkstra;
+    using AlgoVisualizer.Models.PathFinding.Dijkstra;
     using AutoMapper;
     using Microsoft.AspNetCore.Mvc;
     using Models;

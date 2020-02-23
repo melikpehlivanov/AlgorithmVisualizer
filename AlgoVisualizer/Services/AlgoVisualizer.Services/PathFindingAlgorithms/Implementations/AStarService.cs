@@ -5,9 +5,9 @@
     using System.Linq;
     using Common.DataStructures;
     using Interfaces;
-    using Models;
-    using Models.AStar;
-    using Models.Enums;
+    using Models.PathFinding;
+    using Models.PathFinding.AStar;
+    using Models.PathFinding.Enums;
 
     public class AStarService : BaseService, IAStarService
     {

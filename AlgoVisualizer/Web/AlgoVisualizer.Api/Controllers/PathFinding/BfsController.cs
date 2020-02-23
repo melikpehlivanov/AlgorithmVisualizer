@@ -1,6 +1,6 @@
 ﻿namespace AlgoVisualizer.Api.Controllers.PathFinding
 {
-    using AlgoVisualizer.Models.Bfs;
+    using AlgoVisualizer.Models.PathFinding.Bfs;
     using AutoMapper;
     using Microsoft.AspNetCore.Mvc;
     using Models;

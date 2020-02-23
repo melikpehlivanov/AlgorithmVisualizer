@@ -1,4 +1,4 @@
-﻿namespace AlgoVisualizer.Models.AStar
+﻿namespace AlgoVisualizer.Models.PathFinding.AStar
 {
     using System;
     using System.ComponentModel.DataAnnotations;

@@ -1,7 +1,6 @@
-﻿namespace AlgoVisualizer.Models
+﻿namespace AlgoVisualizer.Models.PathFinding
 {
     using System.ComponentModel.DataAnnotations;
-    using AStar;
 
     public class BaseServiceModel<T>
     {

@@ -4,8 +4,9 @@
     using System.Linq;
     using Interfaces;
     using Models;
-    using Models.Dfs;
-    using Models.Enums;
+    using Models.PathFinding;
+    using Models.PathFinding.Dfs;
+    using Models.PathFinding.Enums;
 
     public class DfsService : BaseService, IDfsService
     {

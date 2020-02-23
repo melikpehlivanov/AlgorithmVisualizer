@@ -1,6 +1,6 @@
 ﻿namespace AlgoVisualizer.Api.Controllers.PathFinding
 {
-    using AlgoVisualizer.Models.AStar;
+    using AlgoVisualizer.Models.PathFinding.AStar;
     using AutoMapper;
     using Microsoft.AspNetCore.Mvc;
     using Models;

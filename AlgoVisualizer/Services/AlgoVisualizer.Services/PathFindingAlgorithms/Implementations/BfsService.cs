@@ -4,8 +4,9 @@
     using System.Linq;
     using Interfaces;
     using Models;
-    using Models.Bfs;
-    using Models.Enums;
+    using Models.PathFinding;
+    using Models.PathFinding.Bfs;
+    using Models.PathFinding.Enums;
 
     public class BfsService : BaseService, IBfsService
     {

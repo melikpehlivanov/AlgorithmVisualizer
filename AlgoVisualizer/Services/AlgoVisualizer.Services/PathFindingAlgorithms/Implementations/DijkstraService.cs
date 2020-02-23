@@ -5,9 +5,9 @@
     using System.Linq;
     using Common.DataStructures;
     using Interfaces;
-    using Models;
-    using Models.Dijkstra;
-    using Models.Enums;
+    using Models.PathFinding;
+    using Models.PathFinding.Dijkstra;
+    using Models.PathFinding.Enums;
 
     public class DijkstraService : BaseService, IDijkstraService
     {

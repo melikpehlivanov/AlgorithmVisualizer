@@ -8,4 +8,8 @@
     <ProjectReference Include="..\AlgoVisualizer.Models\AlgoVisualizer.Models.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="SortingAlgorithms\Implementations\" />
+  </ItemGroup>
+
 </Project>

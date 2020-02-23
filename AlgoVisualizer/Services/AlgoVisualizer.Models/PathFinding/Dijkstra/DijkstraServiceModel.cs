@@ -1,4 +1,4 @@
-﻿namespace AlgoVisualizer.Models.Dijkstra
+﻿namespace AlgoVisualizer.Models.PathFinding.Dijkstra
 {
     public class DijkstraServiceModel : BaseServiceModel<DijkstraNode>
     {

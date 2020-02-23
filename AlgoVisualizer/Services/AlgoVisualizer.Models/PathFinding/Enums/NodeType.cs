@@ -1,4 +1,4 @@
-﻿namespace AlgoVisualizer.Models.Enums
+﻿namespace AlgoVisualizer.Models.PathFinding.Enums
 {
     public enum NodeType
     {

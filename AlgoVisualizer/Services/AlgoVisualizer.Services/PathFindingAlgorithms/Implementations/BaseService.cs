@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using Models;
+    using Models.PathFinding;
 
     public abstract class BaseService
     {
