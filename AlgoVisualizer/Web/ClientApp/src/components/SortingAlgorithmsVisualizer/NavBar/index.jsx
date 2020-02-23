@@ -37,9 +37,10 @@ const SortingAlgorithmsNavbar = () => {
     });
 
     const result = await makePostApiCallAsync(url, data, dispatchError);
+    dispatch(setIsNavbarClickable(true));
+
     if (result) {
       if (result.isSuccess !== undefined && !result.isSuccess) {
-        dispatch(setIsNavbarClickable(true));
         dispatchError(showError(true, result.messages));
         return;
       }
