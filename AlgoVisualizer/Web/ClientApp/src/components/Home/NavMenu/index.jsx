@@ -49,6 +49,15 @@ export const NavMenu = () => {
                   Pathfinding algorithms
                 </NavLink>
               </NavItem>
+              <NavItem>
+                <NavLink
+                  tag={Link}
+                  className="text-dark"
+                  to="/sortingAlgorithms"
+                >
+                  Sorting algorithms
+                </NavLink>
+              </NavItem>
             </ul>
           </Collapse>
         </Container>

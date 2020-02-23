@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
-import './Index.css';
-import PathfindingAlgorithmsNavbar from '../Navbar';
+import './index.css';
+import PathfindingAlgorithmsNavbar from '../Nav';
 import Error from '../../Error';
 import { PathFindingAlgorithmsProvider } from '../../../store/pathFindingAlgorithms/context';
 import { ErrorProvider } from '../../../store/error/context';

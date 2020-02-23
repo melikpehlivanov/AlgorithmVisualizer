@@ -14,9 +14,21 @@ import {
 const sortingAlgorithmsReducer = (state = initialState, action) => {
   switch (action.type) {
     case INITIALIZE_CHART_DATA:
+      const newChart = getInitialChart();
+      const oldDataSet = state.barChart.datasets[0];
       return {
         ...state,
-        barChart: getInitialChart(state.barChart),
+        barChart: {
+          ...state.barChart,
+          labels: newChart.labels,
+          datasets: [
+            {
+              ...oldDataSet,
+              data: newChart.dataset.data,
+              backgroundColor: newChart.dataset.backgroundColor
+            }
+          ]
+        },
         isLoading: false
       };
     case GENERATE_NEW_ARRAY:

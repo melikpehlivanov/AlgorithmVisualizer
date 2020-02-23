@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { Container } from 'reactstrap';
-import { NavMenu } from '../NavMenu';
+import { NavMenu } from './NavMenu';
 
 const MainLayout = props => {
   return (

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Switch, Redirect } from 'react-router';
 import { Home } from './components/Home';
-import PathFindingAlgorithmsLayout from './components/PathFindingAlgorithms/Layout/Index';
+import PathFindingAlgorithmsLayout from './components/PathFindingAlgorithms/Layout';
 import { SortingAlgorithmsLayout } from './components/SortingAlgorithmsVisualizer/Layout';
 import SortingAlgorithmsContainer from './components/SortingAlgorithmsVisualizer/Container';
 

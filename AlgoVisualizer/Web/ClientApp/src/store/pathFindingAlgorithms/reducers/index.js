@@ -20,7 +20,7 @@ import {
   setWallNode,
   removeAllWeightNodes,
   clearGrid
-} from '../../../helpers/pathFindingAlgorithms';
+} from '../../../helpers/pathFindingAlgorithms/pathFindingHelper';
 import { initialState } from '../context';
 
 let isGridChanged = false;

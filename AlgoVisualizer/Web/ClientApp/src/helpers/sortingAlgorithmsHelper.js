@@ -10,16 +10,24 @@ import {
 const arraySize = 20;
 const randomMultiplyingFactor = 300;
 
-export const getInitialChart = data => {
-  const dataSet = data.datasets[0];
+export const getInitialChart = () => {
+  const barChart = {
+    labels: [],
+    dataset: {
+      backgroundColor: [],
+      data: []
+    }
+  };
+
+  const dataSet = barChart.dataset;
   for (let i = 0; i <= arraySize; i++) {
     const number = Math.floor(Math.random() * randomMultiplyingFactor);
     dataSet.backgroundColor.push(BAR_CHART_DEFAULT_BACKGROUND_COLOR);
-    data.labels.push(number);
+    barChart.labels.push(number);
     dataSet.data.push(number);
   }
 
-  return data;
+  return barChart;
 };
 
 export const generateNewChart = data => {
