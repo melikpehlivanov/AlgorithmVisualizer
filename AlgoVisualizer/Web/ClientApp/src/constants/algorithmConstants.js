@@ -1,4 +1,4 @@
-export const availableAlgorithms = [
+export const availablePathFindingAlgorithms = [
   {
     value: 'astar',
     label: 'A* Search',
