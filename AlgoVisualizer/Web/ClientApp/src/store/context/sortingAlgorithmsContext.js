@@ -10,7 +10,7 @@ export const initialState = {
     datasets: [
       {
         label: 'Value',
-        backgroundColor: 'rgba(255,99,132,0.2)',
+        backgroundColor: [],
         borderColor: 'rgba(255,99,132,1)',
         borderWidth: 1,
         hoverBackgroundColor: 'rgba(255,99,132,0.4)',
