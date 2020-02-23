@@ -24,7 +24,7 @@
 .node-dumbbell {
   width: 74%;
   height: 60%;
-  background-image: url(/static/media/dumbbell-solid.f22d5d7e.svg);
+  background-image: url(/dumbbell-solid.svg);
   display: inline-block;
   margin-left: 3px;
 }
