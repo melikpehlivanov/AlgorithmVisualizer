@@ -1,4 +1,4 @@
-export const availableAlgorithms = [
+export const availablePathFindingAlgorithms = [
   {
     value: 'astar',
     label: 'A* Search',
@@ -28,5 +28,27 @@ export const availableAlgorithms = [
   }
 ];
 
+export const availableSortingAlgorithms = [
+  {
+    value: 'mergesort',
+    label: 'Merge sort'
+  },
+  {
+    value: 'bubblesort',
+    label: 'Bubble Sort'
+  },
+  {
+    value: 'heapsort',
+    label: 'Heap Sort'
+  },
+  {
+    value: 'quicksort',
+    label: 'Quick Sort'
+  }
+];
+
 export const PATHFINDING_ALGORITHMS_API_URL =
   'https://localhost:44370/api/pathfinding';
+
+export const SORTING_ALGORITHMS_API_URL =
+  'https://localhost:44370/api/sortingAlgorithms';

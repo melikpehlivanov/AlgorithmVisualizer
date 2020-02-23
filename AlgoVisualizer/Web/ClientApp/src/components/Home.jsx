@@ -6,13 +6,18 @@ export const Home = () => {
     <Fragment>
       <div>
         <h1>Welcome to AlgoVisualizer!</h1>
-        <p>Please choose one of the following algorithms</p>
+        <p>Please choose one of the following algorithms visualizer</p>
         <ol>
           <li>
-            <Link to="/pathfindingAlgorithms">Pathfinding algorithms</Link>
+            <Link to="/pathfindingAlgorithms">
+              Pathfinding algorithms visualizer
+            </Link>
           </li>
           <li>
-            <p>Sorting algorithms - coming soon...</p>
+            <div>
+              <Link to="/sortingAlgorithms">Sorting algorithms visualizer</Link>
+              &nbsp; - Currently in beta version!
+            </div>
           </li>
         </ol>
       </div>

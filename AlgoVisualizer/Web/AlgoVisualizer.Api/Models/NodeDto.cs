@@ -1,10 +1,10 @@
 ﻿namespace AlgoVisualizer.Api.Models
 {
     using System.ComponentModel.DataAnnotations;
-    using AlgoVisualizer.Models.AStar;
-    using AlgoVisualizer.Models.Bfs;
-    using AlgoVisualizer.Models.Dfs;
-    using AlgoVisualizer.Models.Dijkstra;
+    using AlgoVisualizer.Models.PathFinding.AStar;
+    using AlgoVisualizer.Models.PathFinding.Bfs;
+    using AlgoVisualizer.Models.PathFinding.Dfs;
+    using AlgoVisualizer.Models.PathFinding.Dijkstra;
     using Common;
     using Common.AutoMapping.Interfaces;
 

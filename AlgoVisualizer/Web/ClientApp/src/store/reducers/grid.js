@@ -20,7 +20,7 @@ import {
   setWallNode,
   removeAllWeightNodes,
   clearGrid
-} from '../../helpers/gridHelper';
+} from '../../helpers/grid/gridHelper';
 import { initialState } from '../context/gridContext';
 
 let isGridChanged = false;

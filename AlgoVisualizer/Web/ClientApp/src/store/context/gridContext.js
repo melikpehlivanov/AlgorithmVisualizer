@@ -6,13 +6,13 @@ import {
   END_NODE_ROW,
   END_NODE_COL
 } from '../../constants/gridConstants';
-import { availableAlgorithms } from '../../constants/algorithmConstants';
+import { availablePathFindingAlgorithms } from '../../constants/algorithmConstants';
 
 export const initialState = {
   isLoading: true,
   isNavbarClickable: true,
   grid: [],
-  algorithms: availableAlgorithms,
+  algorithms: availablePathFindingAlgorithms,
   algorithm: '',
   algorithmDescription: '',
   isWeightNodeAllowed: true,
