@@ -2,11 +2,13 @@ import { initialState } from '../context/sortingAlgorithmsContext';
 import {
   INITIALIZE_CHART_DATA,
   GENERATE_NEW_ARRAY,
-  SET_IS_NAVBAR_CLICKABLE
+  SET_IS_NAVBAR_CLICKABLE,
+  SET_BAR_CHART_ELEMENT_BACKGROUND_COLOR
 } from '../../constants/sortingAlgorithmsConstants';
 import {
   getInitialChart,
-  generateNewChart
+  generateNewChart,
+  setBackgroundColorToChartElements
 } from '../../helpers/sortingAlgorithmsHelper';
 
 const sortingAlgorithmsReducer = (state = initialState, action) => {
@@ -18,7 +20,7 @@ const sortingAlgorithmsReducer = (state = initialState, action) => {
         isLoading: false
       };
     case GENERATE_NEW_ARRAY:
-      let data = state.barChart;
+      const data = state.barChart;
       return {
         ...state,
         barChart: Object.assign({}, data, {
@@ -29,6 +31,20 @@ const sortingAlgorithmsReducer = (state = initialState, action) => {
       return {
         ...state,
         isNavbarClickable: action.payload
+      };
+    case SET_BAR_CHART_ELEMENT_BACKGROUND_COLOR:
+      const barChart = state.barChart;
+      return {
+        ...state,
+        barChart: Object.assign({}, barChart, {
+          backgroundColor: Object.assign({}, barChart.backgroundColor, {
+            backgroundColor: setBackgroundColorToChartElements(
+              barChart,
+              action.payload.elementsIndexes,
+              action.payload.color
+            )
+          })
+        })
       };
     default:
       return state;

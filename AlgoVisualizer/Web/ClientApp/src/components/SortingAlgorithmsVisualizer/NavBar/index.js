@@ -39,14 +39,21 @@ const NavBar = () => {
     const result = await makePostApiCallAsync(url, data, dispatchError);
     if (result) {
       if (result.isSuccess !== undefined && !result.isSuccess) {
+        dispatch(setIsNavbarClickable(true));
         dispatchError(showError(true, result.messages));
         return;
       }
 
-      visualizeArrayElementsSwapping(state.barChart, result);
+      visualizeArrayElementsSwapping(dispatch, state.barChart, result);
     }
+  };
 
-    dispatch(setIsNavbarClickable(true));
+  const isClickable = () => (!state.isNavbarClickable ? 'disabled' : '');
+
+  const handleNewArrayGeneration = () => {
+    if (state.isNavbarClickable) {
+      dispatch(generateNewArray());
+    }
   };
 
   return (
@@ -56,20 +63,21 @@ const NavBar = () => {
         bg="dark"
         expand="lg"
       >
-        <Navbar.Brand>
+        <Navbar.Brand className={isClickable()}>
           <NavLink tag={Link} className="text-white" to="/">
-            SortingVisualizer
+            AlgoVisualizer
           </NavLink>
         </Navbar.Brand>
         <Navbar.Toggle className="bg-white" aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="w-50">
-            <NavItem>
+            <NavItem className={isClickable()}>
               <NavLink tag={Link} className="text-white" to="/">
                 Home
               </NavLink>
             </NavItem>
             <NavDropdown
+              className={isClickable()}
               title={<span className="text-white">Algorithms</span>}
               id="basic-nav-dropdown"
             >
@@ -89,7 +97,7 @@ const NavBar = () => {
             {algorithm !== '' ? (
               <ButtonToolbar>
                 <Button
-                  className={!state.isNavbarClickable ? 'disabled' : ''}
+                  className={isClickable()}
                   variant="primary"
                   onClick={() => fetchData()}
                 >
@@ -117,11 +125,11 @@ const NavBar = () => {
             <div className="ml-sm-auto">
               <NavItem>
                 <Button
-                  className={!state.isNavbarClickable ? 'disabled' : ''}
+                  className={isClickable()}
                   variant="outline-danger"
-                  onClick={() => dispatch(generateNewArray())}
+                  onClick={() => handleNewArrayGeneration()}
                 >
-                  Generate New Array
+                  Generate New Data (Array)
                 </Button>
               </NavItem>
             </div>
