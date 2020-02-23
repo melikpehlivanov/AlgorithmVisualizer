@@ -11,7 +11,7 @@
         public const string EmptyArrayErrorMessage = "There is nothing to sort!";
 
         private int[] array;
-        private readonly List<KeyValuePair<int, int>> result = new List<KeyValuePair<int, int>>();
+        private readonly List<int[]> result = new List<int[]>();
 
         public Result<int> Sort(int[] data)
         {
@@ -56,12 +56,12 @@
             return partitionIndex;
         }
 
-        private void Swap(int firstElement, int secondElement)
+        private void Swap(int firstElementIndex, int secondElementIndex)
         {
-            this.result.Add(new KeyValuePair<int, int>(firstElement, secondElement));
-            var temp = this.array[firstElement];
-            this.array[firstElement] = this.array[secondElement];
-            this.array[secondElement] = temp;
+            this.result.Add(new []{firstElementIndex, secondElementIndex});
+            var temp = this.array[firstElementIndex];
+            this.array[firstElementIndex] = this.array[secondElementIndex];
+            this.array[secondElementIndex] = temp;
         }
     }
 }

@@ -4,7 +4,7 @@
 
     public class Result<T>
     {
-        public Result(List<KeyValuePair<T, T>> usedSwapsToSortArray)
+        public Result(List<T[]> usedSwapsToSortArray)
         {
             this.SwapIndexes = usedSwapsToSortArray;
         }
@@ -14,7 +14,7 @@
             this.ErrorMessage = errorMessage;
         }
 
-        public Result(List<KeyValuePair<T, T>> usedSwapsToSortArray, string errorMessage = null)
+        public Result(List<T[]> usedSwapsToSortArray, string errorMessage = null)
         {
             this.ErrorMessage = errorMessage;
             this.SwapIndexes = usedSwapsToSortArray;
@@ -22,6 +22,6 @@
 
         public string ErrorMessage { get; set; }
 
-        public List<KeyValuePair<T, T>> SwapIndexes { get; set; } 
+        public List<T[]> SwapIndexes { get; set; } 
     }
 }
