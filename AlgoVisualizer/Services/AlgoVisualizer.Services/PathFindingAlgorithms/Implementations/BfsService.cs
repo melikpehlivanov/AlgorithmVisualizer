@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Linq;
+    using Common.Utils;
     using Interfaces;
     using Models;
     using Models.PathFinding;
@@ -12,7 +13,7 @@
     {
         public Result FindPath(BfsServiceModel model)
         {
-            if (!this.IsEntityStateValid(model))
+            if (!ValidationUtil.IsObjectValid(model))
             {
                 return null;
             }
