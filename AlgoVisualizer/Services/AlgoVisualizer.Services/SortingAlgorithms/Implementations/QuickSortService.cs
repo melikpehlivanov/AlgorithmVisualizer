@@ -8,14 +8,17 @@
 
     public class QuickSortService : IQuickSortService
     {
-        public const string EmptyArrayErrorMessage = "There is nothing to sort!";
+        private const string EmptyArrayErrorMessage = "There is nothing to sort!";
+        private const string DataAlreadySortedErrorMessage = "Data is already sorted. Please generate new data (array)";
 
         private int[] array;
+        private List<int> unsortedData;
         private readonly List<int[]> result = new List<int[]>();
 
         public Result<int> Sort(int[] data)
         {
             this.array = data;
+            this.unsortedData = new List<int>(data);
 
             if (!data.Any())
             {
@@ -24,7 +27,9 @@
 
             this.QuickSort(0, this.array.Length - 1);
 
-            return new Result<int>(this.result);
+            return this.array.SequenceEqual(this.unsortedData) ? 
+                new Result<int>(DataAlreadySortedErrorMessage) 
+                : new Result<int>(this.result);
         }
 
         private void QuickSort(int start, int end)
@@ -58,6 +63,11 @@
 
         private void Swap(int firstElementIndex, int secondElementIndex)
         {
+            if (this.array[firstElementIndex] == this.array[secondElementIndex])
+            {
+                return;
+            }
+
             this.result.Add(new []{firstElementIndex, secondElementIndex});
             var temp = this.array[firstElementIndex];
             this.array[firstElementIndex] = this.array[secondElementIndex];
