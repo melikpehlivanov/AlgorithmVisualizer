@@ -2,8 +2,8 @@
 {
     using System.Collections.Generic;
     using System.Linq;
+    using Common.Utils;
     using Interfaces;
-    using Models;
     using Models.PathFinding;
     using Models.PathFinding.Dfs;
     using Models.PathFinding.Enums;
@@ -12,7 +12,7 @@
     {
         public Result FindPath(DfsServiceModel model)
         {
-            if (!this.IsEntityStateValid(model))
+            if (!ValidationUtil.IsObjectValid(model))
             {
                 return null;
             }

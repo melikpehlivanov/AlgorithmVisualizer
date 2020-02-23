@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using Common.DataStructures;
+    using Common.Utils;
     using Interfaces;
     using Models.PathFinding;
     using Models.PathFinding.AStar;
@@ -13,7 +14,7 @@
     {
         public Result FindPath(AStarServiceModel model)
         {
-            if (!this.IsEntityStateValid(model))
+            if (!ValidationUtil.IsObjectValid(model))
             {
                 return null;
             }
