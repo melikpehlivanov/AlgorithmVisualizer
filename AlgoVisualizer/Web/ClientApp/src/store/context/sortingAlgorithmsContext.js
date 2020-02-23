@@ -1,10 +1,11 @@
 import React, { createContext, useReducer } from 'react';
 import sortingAlgorithmsReducer from '../reducers/sortingAlgorithms';
+import { availableSortingAlgorithms } from '../../constants/algorithmConstants';
 
 export const initialState = {
   isLoading: true,
   isNavbarClickable: true,
-  algorithms: ['Merge sort', 'Bubble Sort', 'Heap Sort', 'Quick Sort'],
+  algorithms: availableSortingAlgorithms,
   barChart: {
     labels: [],
     datasets: [

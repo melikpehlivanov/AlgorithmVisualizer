@@ -29,7 +29,7 @@ const NavBar = () => {
   const fetchData = async () => {
     dispatchError(clearErrors());
 
-    const url = `${SORTING_ALGORITHMS_API_URL}/quicksort`;
+    const url = `${SORTING_ALGORITHMS_API_URL}/${algorithm.value}`;
     dispatch(setIsNavbarClickable(false));
 
     const data = JSON.stringify({
@@ -87,7 +87,7 @@ const NavBar = () => {
                     key={index}
                     onClick={() => setAlgorithm(currentElement)}
                   >
-                    {currentElement}
+                    {currentElement.label}
                   </NavDropdown.Item>
                 );
               })}
@@ -113,7 +113,7 @@ const NavBar = () => {
                       Loading...
                     </Fragment>
                   ) : (
-                    `Visualize ${algorithm}`
+                    `Visualize ${algorithm.label}`
                   )}
                 </Button>
               </ButtonToolbar>
