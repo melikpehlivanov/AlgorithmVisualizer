@@ -1,4 +1,4 @@
-import { showError } from '../store/actions/error';
+import { showError } from '../store/error/actions';
 
 const errorMessage = 'Something terribly went wrong! Please try again later.';
 

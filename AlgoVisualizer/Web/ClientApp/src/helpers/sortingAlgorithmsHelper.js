@@ -5,7 +5,7 @@ import {
 import {
   setBarChartElementBackgroundColor,
   setIsNavbarClickable
-} from '../store/actions/sortingAlgorithms';
+} from '../store/sortingAlgorithms/actions';
 
 const arraySize = 20;
 const randomMultiplyingFactor = 300;
