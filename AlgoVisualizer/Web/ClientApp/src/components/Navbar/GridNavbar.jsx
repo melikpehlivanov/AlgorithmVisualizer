@@ -17,7 +17,8 @@ import {
   clearGrid,
   setIsNavbarClickable
 } from '../../store/actions/grid';
-import { makePostApiCallAsync, visualizeResult } from '../../helpers/fetchData';
+import { makePostApiCallAsync } from '../../helpers/fetchData';
+import { visualizeResult } from '../../helpers/grid/gridDataVisualizer';
 import { PATHFINDING_ALGORITHMS_API_URL } from '../../constants/algorithmConstants';
 import { showError, clearErrors } from '../../store/actions/error';
 import { ErrorContext } from '../../store/context/errorContext';
@@ -43,13 +44,15 @@ const GridNavbar = () => {
 
     const url = `${PATHFINDING_ALGORITHMS_API_URL}/${algorithm}`;
     dispatch(setIsNavbarClickable(false));
-    const result = await makePostApiCallAsync(
-      url,
-      startNode,
-      endNode,
-      grid,
-      dispatchError
-    );
+
+    const data = JSON.stringify({
+      startNode: startNode,
+      endNode: endNode,
+      grid: grid
+    });
+
+    const result = await makePostApiCallAsync(url, data, dispatchError);
+
     dispatch(setIsNavbarClickable(true));
 
     if (result) {

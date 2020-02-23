@@ -7,7 +7,7 @@ import {
   END_NODE_COL,
   SHORTEST_PATH_CLASSNAME,
   VISITED_NODE_CLASSNAME
-} from '../constants/gridConstants';
+} from '../../constants/gridConstants';
 
 // Modifiable
 let StartNodeRow;
