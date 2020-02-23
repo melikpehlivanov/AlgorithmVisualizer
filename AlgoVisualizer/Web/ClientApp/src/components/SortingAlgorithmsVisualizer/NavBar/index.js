@@ -11,12 +11,40 @@ import {
 import { NavLink } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { SortingAlgorithmsContext } from '../../../store/context/sortingAlgorithmsContext';
-import { generateNewArray } from '../../../store/actions/sortingAlgorithms';
+import {
+  generateNewArray,
+  setIsNavbarClickable
+} from '../../../store/actions/sortingAlgorithms';
+import { ErrorContext } from '../../../store/context/errorContext';
+import { SORTING_ALGORITHMS_API_URL } from '../../../constants/algorithmConstants';
+import { clearErrors, showError } from '../../../store/actions/error';
+import { makePostApiCallAsync } from '../../../helpers/fetchData';
 
-//TODO: move it in separate file
 const NavBar = () => {
   const [algorithm, setAlgorithm] = useState('');
   const { state, dispatch } = useContext(SortingAlgorithmsContext);
+  const { dispatchError } = useContext(ErrorContext);
+
+  const fetchData = async () => {
+    dispatchError(clearErrors());
+
+    const url = `${SORTING_ALGORITHMS_API_URL}/quicksort`;
+    dispatch(setIsNavbarClickable(false));
+
+    const data = JSON.stringify({
+      Array: state.barChart.labels
+    });
+
+    const result = await makePostApiCallAsync(url, data, dispatchError);
+    if (result) {
+      if (result.isSuccess !== undefined && !result.isSuccess) {
+        dispatchError(showError(true, result.messages));
+        return;
+      }
+    }
+
+    dispatch(setIsNavbarClickable(true));
+  };
 
   return (
     <Fragment>
@@ -60,7 +88,7 @@ const NavBar = () => {
                 <Button
                   className={!state.isNavbarClickable ? 'disabled' : ''}
                   variant="primary"
-                  //onClick={() => TODO: make api request and visualize data}
+                  onClick={() => fetchData()}
                 >
                   {!state.isNavbarClickable ? (
                     <Fragment>
@@ -86,6 +114,7 @@ const NavBar = () => {
             <div className="ml-sm-auto">
               <NavItem>
                 <Button
+                  className={!state.isNavbarClickable ? 'disabled' : ''}
                   variant="outline-danger"
                   onClick={() => dispatch(generateNewArray())}
                 >

@@ -1,7 +1,8 @@
 import { initialState } from '../context/sortingAlgorithmsContext';
 import {
   INITIALIZE_CHART_DATA,
-  GENERATE_NEW_ARRAY
+  GENERATE_NEW_ARRAY,
+  SET_IS_NAVBAR_CLICKABLE
 } from '../../constants/sortingAlgorithmsConstants';
 import {
   getInitialChart,
@@ -23,6 +24,11 @@ const sortingAlgorithmsReducer = (state = initialState, action) => {
         barChart: Object.assign({}, data, {
           data: generateNewChart(data)
         })
+      };
+    case SET_IS_NAVBAR_CLICKABLE:
+      return {
+        ...state,
+        isNavbarClickable: action.payload
       };
     default:
       return state;
