@@ -3,7 +3,7 @@
     using System.Linq;
     using System.Reflection;
     using Microsoft.Extensions.DependencyInjection;
-    using Services.Interfaces;
+    using Services;
 
     public static class ServiceCollectionExtensions
     {

@@ -4,7 +4,7 @@
     using AutoMapper;
     using Microsoft.AspNetCore.Mvc;
     using Models;
-    using Services.Interfaces;
+    using Services.PathFindingAlgorithms.Interfaces;
 
     public class AStarController : BasePathFindingController
     {

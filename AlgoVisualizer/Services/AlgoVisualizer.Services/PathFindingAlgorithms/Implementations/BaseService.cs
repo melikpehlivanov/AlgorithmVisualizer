@@ -1,4 +1,4 @@
-﻿namespace AlgoVisualizer.Services.Implementations
+﻿namespace AlgoVisualizer.Services.PathFindingAlgorithms.Implementations
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;

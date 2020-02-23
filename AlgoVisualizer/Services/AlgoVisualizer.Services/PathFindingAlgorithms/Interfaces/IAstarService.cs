@@ -1,4 +1,4 @@
-﻿namespace AlgoVisualizer.Services.Interfaces
+﻿namespace AlgoVisualizer.Services.PathFindingAlgorithms.Interfaces
 {
     using Models;
     using Models.AStar;

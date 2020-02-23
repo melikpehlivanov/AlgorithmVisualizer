@@ -1,4 +1,4 @@
-﻿namespace AlgoVisualizer.Services.Interfaces
+﻿namespace AlgoVisualizer.Services
 {
     // Marker interface
     public interface IService
