@@ -19,6 +19,7 @@ import { ErrorContext } from '../../../store/context/errorContext';
 import { SORTING_ALGORITHMS_API_URL } from '../../../constants/algorithmConstants';
 import { clearErrors, showError } from '../../../store/actions/error';
 import { makePostApiCallAsync } from '../../../helpers/fetchData';
+import { visualizeArrayElementsSwapping } from '../../../helpers/sortingAlgorithmsHelper';
 
 const NavBar = () => {
   const [algorithm, setAlgorithm] = useState('');
@@ -41,6 +42,8 @@ const NavBar = () => {
         dispatchError(showError(true, result.messages));
         return;
       }
+
+      visualizeArrayElementsSwapping(state.barChart, result);
     }
 
     dispatch(setIsNavbarClickable(true));

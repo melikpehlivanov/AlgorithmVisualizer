@@ -22,3 +22,5 @@ export const generateNewChart = data => {
 
   return data;
 };
+
+export const visualizeArrayElementsSwapping = (barChart, swappingIndexes) => {};
