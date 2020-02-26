@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, Fragment } from 'react';
 import { Bar } from 'react-chartjs-2';
-import { SortingAlgorithmsContext } from '../../store/context/sortingAlgorithmsContext';
-import { initializeChartData } from '../../store/actions/sortingAlgorithms';
+import { SortingAlgorithmsContext } from '../../store/sortingAlgorithms/context';
+import { initializeChartData } from '../../store/sortingAlgorithms/actions';
 import { Spinner } from 'react-bootstrap';
 
 const SortingAlgorithmsContainer = () => {

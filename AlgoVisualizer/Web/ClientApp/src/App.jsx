@@ -1,13 +1,13 @@
 import React from 'react';
 import { Switch, Redirect } from 'react-router';
 import { Home } from './components/Home';
-import Grid from './components/Grid/Grid';
-import { GridLayout } from './components/Layouts/GridLayout/GridLayout';
+import PathFindingAlgorithmsLayout from './components/PathFindingAlgorithms/Layout';
 import { SortingAlgorithmsLayout } from './components/SortingAlgorithmsVisualizer/Layout';
 import SortingAlgorithmsContainer from './components/SortingAlgorithmsVisualizer/Container';
 
 import AppRoute from './components/AppRoute';
 import NotFound from './components/Error/NotFound';
+import PathFindingAlgorithmsContainer from './components/PathFindingAlgorithms/Container';
 
 const App = () => {
   return (
@@ -15,8 +15,8 @@ const App = () => {
       <AppRoute exact path="/" component={Home} />
       <AppRoute
         path="/pathfindingAlgorithms"
-        component={Grid}
-        layout={GridLayout}
+        component={PathFindingAlgorithmsContainer}
+        layout={PathFindingAlgorithmsLayout}
       />
       <AppRoute
         path="/sortingAlgorithms"

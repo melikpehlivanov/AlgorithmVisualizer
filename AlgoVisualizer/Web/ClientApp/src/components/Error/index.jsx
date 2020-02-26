@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Alert } from 'react-bootstrap';
-import { ErrorContext } from '../../store/context/errorContext';
-import { clearErrors } from '../../store/actions/error';
+import { ErrorContext } from '../../store/error/context';
+import { clearErrors } from '../../store/error/actions';
 
 const Error = () => {
   const { state, dispatchError } = useContext(ErrorContext);

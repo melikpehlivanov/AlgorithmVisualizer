@@ -1,10 +1,10 @@
 import React, { Fragment } from 'react';
 import { Route } from 'react-router';
-import DefaultLayout from './Layouts/MainLayout';
+import MainLayout from './Home/Layout';
 
 const AppRoute = ({
   component: Component,
-  layout: Layout = DefaultLayout,
+  layout: Layout = MainLayout,
   ...rest
 }) => (
   <Route
