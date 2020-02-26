@@ -88,7 +88,6 @@ export const visualizeArrayElementsSwapping = (
       );
       if (i === swappingIndexes.length - 1) {
         dispatch(setIsNavbarClickable(true));
-        clearTimeout();
       }
     }, 205 * i * 6);
   }
