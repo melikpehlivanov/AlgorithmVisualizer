@@ -3,14 +3,12 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using Common;
     using Interfaces;
     using Models.SortingAlgorithms;
 
     public class QuickSortService : IQuickSortService
     {
-        private const string EmptyArrayErrorMessage = "There is nothing to sort!";
-        private const string DataAlreadySortedErrorMessage = "Data is already sorted. Please generate new data (array)";
-
         private int[] array;
         private List<int> unsortedData;
         private readonly List<int[]> result = new List<int[]>();
@@ -22,13 +20,13 @@
 
             if (!data.Any())
             {
-                return new Result<int>(EmptyArrayErrorMessage);
+                return new Result<int>(NotificationMessages.SortingAlgorithms.EmptyArrayErrorMessage);
             }
 
             this.QuickSort(0, this.array.Length - 1);
 
             return this.array.SequenceEqual(this.unsortedData) ? 
-                new Result<int>(DataAlreadySortedErrorMessage) 
+                new Result<int>(NotificationMessages.SortingAlgorithms.DataAlreadySortedErrorMessage) 
                 : new Result<int>(this.result);
         }
 

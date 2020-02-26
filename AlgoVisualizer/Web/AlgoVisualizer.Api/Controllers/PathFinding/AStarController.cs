@@ -2,6 +2,7 @@
 {
     using AlgoVisualizer.Models.PathFinding.AStar;
     using AutoMapper;
+    using Common;
     using Microsoft.AspNetCore.Mvc;
     using Models;
     using Services.PathFindingAlgorithms.Interfaces;
@@ -24,7 +25,7 @@
             var result = this.aStarService.FindPath(serviceModel);
             if (result?.AllNodesInShortestPathOrder == null)
             {
-                return this.BadRequest(new ErrorModel(WebConstants.PathNotFound));
+                return this.BadRequest(new ErrorModel(NotificationMessages.PathFindingAlgorithms.PathNotFound));
             }
 
             return this.Ok(result);
