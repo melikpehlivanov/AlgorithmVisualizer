@@ -1,5 +1,6 @@
 ﻿namespace AlgoVisualizer.Services.SortingAlgorithms.Implementations
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using Common;
@@ -8,52 +9,67 @@
 
     public class QuickSortService : BaseSortingService, IQuickSortService
     {
-        private int[] array;
-        private List<int> unsortedData;
         private readonly List<int[]> result = new List<int[]>();
 
-        public Result<int> Sort(int[] data)
+        public Result Sort<T>(T[] data)
+            where T : struct,
+            IComparable,
+            IComparable<T>,
+            IConvertible,
+            IEquatable<T>,
+            IFormattable
         {
-            this.array = data;
-            this.unsortedData = new List<int>(data);
-
             if (!data.Any())
             {
-                return new Result<int>(NotificationMessages.SortingAlgorithms.EmptyArrayErrorMessage);
+                return new Result(NotificationMessages.SortingAlgorithms.EmptyArrayErrorMessage);
             }
 
-            this.QuickSort(0, this.array.Length - 1);
+            var unsortedData = new List<T>(data);
 
-            return this.GenerateResult(data, this.unsortedData, this.result);
+            this.QuickSort(data, 0, data.Length - 1);
+
+            return this.GenerateResult(data, unsortedData, this.result);
         }
 
-        private void QuickSort(int start, int end)
+        private void QuickSort<T>(IList<T> array, int start, int end)
+            where T : struct,
+            IComparable,
+            IComparable<T>,
+            IConvertible,
+            IEquatable<T>,
+            IFormattable
         {
             if (start < end)
             {
-                var partitionIndex = this.Partition(start, end);
-                this.QuickSort(start, partitionIndex - 1);
-                this.QuickSort(partitionIndex + 1, end);
+                var partitionIndex = this.Partition(array, start, end);
+                this.QuickSort(array, start, partitionIndex - 1);
+                this.QuickSort(array, partitionIndex + 1, end);
             }
         }
 
-        private int Partition(int start, int end)
+        private int Partition<T>(IList<T> array, int start, int end)
+            where T : struct,
+            IComparable,
+            IComparable<T>,
+            IConvertible,
+            IEquatable<T>,
+            IFormattable
         {
-            var pivot = this.array[end];
+            var pivot = array[end];
             var partitionIndex = start;
 
             for (var i = start; i < end; i++)
             {
-                if (this.array[i] < pivot)
+                if (array[i].CompareTo(pivot) < 0)
                 {
-                    this.Swap(this.array, i, partitionIndex);
+                    this.Swap(array, i, partitionIndex);
                     this.result.Add(new[] { i, partitionIndex });
 
                     partitionIndex++;
                 }
             }
 
-            this.Swap(this.array, partitionIndex, end);
+            this.Swap(array, partitionIndex, end);
 
             return partitionIndex;
         }
