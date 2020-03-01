@@ -13,7 +13,8 @@ import { Link } from 'react-router-dom';
 import { SortingAlgorithmsContext } from '../../../store/sortingAlgorithms/context';
 import {
   generateNewArray,
-  setIsNavbarClickable
+  setIsNavbarClickable,
+  setTotalSwaps
 } from '../../../store/sortingAlgorithms/actions';
 import { ErrorContext } from '../../../store/error/context';
 import { SORTING_ALGORITHMS_API_URL } from '../../../constants/algorithmConstants';
@@ -45,7 +46,12 @@ const SortingAlgorithmsNavbar = () => {
         return;
       }
 
-      visualizeArrayElementsSwapping(dispatch, state.barChart, result);
+      visualizeArrayElementsSwapping(
+        dispatch,
+        state.barChart,
+        result.swapIndexes
+      );
+      dispatch(setTotalSwaps(result.totalSwaps));
     }
   };
 

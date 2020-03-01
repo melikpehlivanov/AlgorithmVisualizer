@@ -6,13 +6,20 @@ import { Spinner } from 'react-bootstrap';
 
 const SortingAlgorithmsContainer = () => {
   const { state, dispatch } = useContext(SortingAlgorithmsContext);
-
   useEffect(() => {
     dispatch(initializeChartData());
   }, [dispatch]);
 
   return (
     <Fragment>
+      {state.totalSwaps ? (
+        <div className="d-flex pb-3 justify-content-center">
+          <p className="mr-1">Total swaps:</p>
+          <p>{state.totalSwaps}</p>
+        </div>
+      ) : (
+        ''
+      )}
       {state.isLoading ? (
         <div className="text-center">
           <Spinner animation="border" role="status">

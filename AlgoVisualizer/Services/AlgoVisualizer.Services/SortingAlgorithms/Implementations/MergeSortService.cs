@@ -144,8 +144,7 @@
             {
                 var element = newArray[i];
                 var swappingIndex = start + i;
-                //array[start + i] != element.Value
-                if (true)
+                if (array[start + i].CompareTo(element.Value) != 0)
                 {
                     this.AddSwappingIndexes(array, newArray, swappingIndex, element);
                 }

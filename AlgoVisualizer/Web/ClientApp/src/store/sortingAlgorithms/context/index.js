@@ -6,6 +6,7 @@ export const initialState = {
   isLoading: true,
   isNavbarClickable: true,
   algorithms: availableSortingAlgorithms,
+  totalSwaps: '',
   barChart: {
     labels: [],
     datasets: [
