@@ -1,14 +1,14 @@
 ﻿namespace AlgoVisualizer.Models.SortingAlgorithms
 {
-    public class MergeSortConciseModel
+    public class MergeSortConciseModel<T>
     {
-        public MergeSortConciseModel(int value, int currentIndex)
+        public MergeSortConciseModel(T value, int currentIndex)
         {
             this.Value = value;
             this.CurrentIndex = currentIndex;
         }
 
-        public int Value { get; set; }
+        public T Value { get; set; }
 
         public int CurrentIndex { get; set; }
     }

@@ -1,5 +1,6 @@
 ﻿namespace AlgoVisualizer.Services.SortingAlgorithms.Implementations
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using Common;
@@ -8,24 +9,35 @@
 
     public class BubbleSortService : BaseSortingService, IBubbleSortService
     {
-        private List<int> unsortedData;
         private readonly List<int[]> swappingIndexes = new List<int[]>();
 
-        public Result<int> Sort(int[] data)
+        public Result Sort<T>(T[] data)
+            where T : struct,
+            IComparable,
+            IComparable<T>,
+            IConvertible,
+            IEquatable<T>,
+            IFormattable
         {
             if (!data.Any())
             {
-                return new Result<int>(NotificationMessages.SortingAlgorithms.EmptyArrayErrorMessage);
+                return new Result(NotificationMessages.SortingAlgorithms.EmptyArrayErrorMessage);
             }
 
-            this.unsortedData = new List<int>(data);
+            var unsortedData = new List<T>(data);
 
             this.BubbleSort(data);
 
-            return this.GenerateResult(data, this.unsortedData, this.swappingIndexes);
+            return this.GenerateResult(data, unsortedData, this.swappingIndexes);
         }
 
-        private void BubbleSort(IList<int> data)
+        private void BubbleSort<T>(IList<T> data)
+            where T : struct,
+            IComparable,
+            IComparable<T>,
+            IConvertible,
+            IEquatable<T>,
+            IFormattable
         {
             for (int i = 1; i <= data.Count - 1; i++)
             {
@@ -34,7 +46,7 @@
                 {
                     var firstElementIndex = j;
                     var adjacentElementIndex = j + 1;
-                    if (data[firstElementIndex] > data[adjacentElementIndex])
+                    if (data[firstElementIndex].CompareTo(data[adjacentElementIndex]) > 0)
                     {
                         this.Swap(data, firstElementIndex, adjacentElementIndex);
                         this.swappingIndexes.Add(new[] { firstElementIndex, adjacentElementIndex });

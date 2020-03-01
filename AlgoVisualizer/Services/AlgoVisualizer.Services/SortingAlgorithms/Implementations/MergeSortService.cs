@@ -1,5 +1,6 @@
 ﻿namespace AlgoVisualizer.Services.SortingAlgorithms.Implementations
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using Common;
@@ -8,24 +9,35 @@
 
     public class MergeSortService : BaseSortingService, IMergeSortService
     {
-        private List<int> unsortedArray;
         private readonly List<int[]> swappingIndexes = new List<int[]>();
 
-        public Result<int> Sort(int[] data)
+        public Result Sort<T>(T[] data)
+            where T : struct,
+            IComparable,
+            IComparable<T>,
+            IConvertible,
+            IEquatable<T>,
+            IFormattable
         {
             if (!data.Any())
             {
-                return new Result<int>(NotificationMessages.SortingAlgorithms.EmptyArrayErrorMessage);
+                return new Result(NotificationMessages.SortingAlgorithms.EmptyArrayErrorMessage);
             }
 
-            this.unsortedArray = new List<int>(data);
+            var unsortedArray = new List<T>(data);
 
             this.MergeSort(0, data.Length - 1, data);
 
-            return this.GenerateResult(data, this.unsortedArray, this.swappingIndexes);
+            return this.GenerateResult(data, unsortedArray, this.swappingIndexes);
         }
 
-        private void MergeSort(int start, int end, IList<int> array)
+        private void MergeSort<T>(int start, int end, T[] array)
+            where T : struct,
+            IComparable,
+            IComparable<T>,
+            IConvertible,
+            IEquatable<T>,
+            IFormattable
         {
             if (start < end)
             {
@@ -36,9 +48,15 @@
             }
         }
 
-        private void Merge(IList<int> array, int start, int midPoint, int end)
+        private void Merge<T>(T[] array, int start, int midPoint, int end)
+            where T : struct,
+            IComparable,
+            IComparable<T>,
+            IConvertible,
+            IEquatable<T>,
+            IFormattable
         {
-            var newArray = new MergeSortConciseModel[(end - start) + 1];
+            var newArray = new MergeSortConciseModel<T>[(end - start) + 1];
 
             var leftSideIndex = start;
             var rightSideIndex = midPoint + 1;
@@ -46,15 +64,15 @@
 
             while ((leftSideIndex <= midPoint) && (rightSideIndex <= end))
             {
-                if (array[leftSideIndex] < array[rightSideIndex])
+                if (array[leftSideIndex].CompareTo(array[rightSideIndex]) < 0)
                 {
-                    newArray[index] = new MergeSortConciseModel(array[leftSideIndex], leftSideIndex);
+                    newArray[index] = new MergeSortConciseModel<T>(array[leftSideIndex], leftSideIndex);
                     leftSideIndex++;
 
                 }
                 else
                 {
-                    newArray[index] = new MergeSortConciseModel(array[rightSideIndex], rightSideIndex);
+                    newArray[index] = new MergeSortConciseModel<T>(array[rightSideIndex], rightSideIndex);
                     rightSideIndex++;
                 }
 
@@ -67,31 +85,43 @@
             this.CopyElements(array, start, newArray);
         }
 
-        private static void CopyRemainingElementsFromTheRight(
-            IList<int> array,
+        private static void CopyRemainingElementsFromTheRight<T>(
+            IReadOnlyList<T> array,
             int end,
             int rightSideIndex,
-            IList<MergeSortConciseModel> newArray,
+            IList<MergeSortConciseModel<T>> newArray,
             int index)
+                where T : struct,
+                IComparable,
+                IComparable<T>,
+                IConvertible,
+                IEquatable<T>,
+                IFormattable
         {
             while (rightSideIndex <= end)
             {
-                newArray[index] = new MergeSortConciseModel(array[rightSideIndex], rightSideIndex);
+                newArray[index] = new MergeSortConciseModel<T>(array[rightSideIndex], rightSideIndex);
                 rightSideIndex++;
                 index++;
             }
         }
 
-        private static int CopyRemainingElementsFromTheLeft(
-            IList<int> array,
+        private static int CopyRemainingElementsFromTheLeft<T>(
+            IReadOnlyList<T> array,
             int midPoint,
             int leftSideIndex,
-            IList<MergeSortConciseModel> newArray,
+            IList<MergeSortConciseModel<T>> newArray,
             int index)
+                where T : struct,
+                IComparable,
+                IComparable<T>,
+                IConvertible,
+                IEquatable<T>,
+                IFormattable
         {
             while (leftSideIndex <= midPoint)
             {
-                newArray[index] = new MergeSortConciseModel(array[leftSideIndex], leftSideIndex);
+                newArray[index] = new MergeSortConciseModel<T>(array[leftSideIndex], leftSideIndex);
                 leftSideIndex++;
                 index++;
             }
@@ -99,17 +129,23 @@
             return index;
         }
 
-        private void CopyElements(
-            IList<int> array,
+        private void CopyElements<T>(
+            IList<T> array,
             int start,
-            IReadOnlyList<MergeSortConciseModel> newArray)
+            IReadOnlyList<MergeSortConciseModel<T>> newArray)
+                where T : struct,
+                IComparable,
+                IComparable<T>,
+                IConvertible,
+                IEquatable<T>,
+                IFormattable
         {
             for (var i = 0; i < newArray.Count; i++)
             {
                 var element = newArray[i];
                 var swappingIndex = start + i;
-
-                if (array[start + i] != element.Value)
+                //array[start + i] != element.Value
+                if (true)
                 {
                     this.AddSwappingIndexes(array, newArray, swappingIndex, element);
                 }
@@ -120,11 +156,17 @@
             }
         }
 
-        private void AddSwappingIndexes(
-            IList<int> array,
-            IEnumerable<MergeSortConciseModel> newArray,
+        private void AddSwappingIndexes<T>(
+            IList<T> array,
+            IEnumerable<MergeSortConciseModel<T>> newArray,
             int swappingIndex,
-            MergeSortConciseModel element)
+            MergeSortConciseModel<T> element)
+                where T : struct,
+                IComparable,
+                IComparable<T>,
+                IConvertible,
+                IEquatable<T>,
+                IFormattable
         {
             var temp = array[swappingIndex];
             array[swappingIndex] = element.Value;
@@ -132,7 +174,7 @@
 
             this.swappingIndexes.Add(new[] { swappingIndex, element.CurrentIndex });
 
-            newArray.First(x => x.Value == temp).CurrentIndex = element.CurrentIndex;
+            newArray.First(x => x.Value.CompareTo(temp) == 0).CurrentIndex = element.CurrentIndex;
             element.CurrentIndex = swappingIndex;
         }
     }

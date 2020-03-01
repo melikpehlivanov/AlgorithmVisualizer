@@ -1,5 +1,6 @@
 ﻿namespace AlgoVisualizer.Services.SortingAlgorithms.Implementations
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using Common;
@@ -7,14 +8,26 @@
 
     public class BaseSortingService
     {
-        public Result<int> GenerateResult(IEnumerable<int> data, IEnumerable<int> unsortedData, List<int[]> swappingIndexes)
+        public Result GenerateResult<T>(IEnumerable<T> data, IEnumerable<T> unsortedData, List<int[]> swappingIndexes)
+            where T : struct,
+            IComparable,
+            IComparable<T>,
+            IConvertible,
+            IEquatable<T>,
+            IFormattable
         {
             return data.SequenceEqual(unsortedData) ?
-                new Result<int>(NotificationMessages.SortingAlgorithms.DataAlreadySortedErrorMessage)
-                : new Result<int>(swappingIndexes);
+                new Result(NotificationMessages.SortingAlgorithms.DataAlreadySortedErrorMessage)
+                : new Result(swappingIndexes);
         }
 
-        public void Swap(IList<int> data, int firstIndex, int secondIndex)
+        public void Swap<T>(IList<T> data, int firstIndex, int secondIndex)
+            where T : struct,
+            IComparable,
+            IComparable<T>,
+            IConvertible,
+            IEquatable<T>,
+            IFormattable
         {
             var firstElement = data[firstIndex];
             data[firstIndex] = data[secondIndex];
