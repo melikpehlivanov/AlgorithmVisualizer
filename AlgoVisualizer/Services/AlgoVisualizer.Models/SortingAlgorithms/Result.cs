@@ -22,6 +22,8 @@
 
         public string ErrorMessage { get; set; }
 
-        public List<int[]> SwapIndexes { get; set; } 
+        public List<int[]> SwapIndexes { get; set; }
+
+        public int TotalSwaps => this.SwapIndexes.Count;
     }
 }

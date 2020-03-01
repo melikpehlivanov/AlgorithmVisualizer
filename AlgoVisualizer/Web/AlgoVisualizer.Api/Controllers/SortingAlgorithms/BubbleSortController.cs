@@ -1,29 +1,34 @@
 ﻿namespace AlgoVisualizer.Api.Controllers.SortingAlgorithms
 {
+    using AutoMapper;
     using Microsoft.AspNetCore.Mvc;
     using Models;
     using Services.SortingAlgorithms.Interfaces;
 
     public class BubbleSortController : BaseSortingAlgorithmsController
     {
+        private readonly IMapper mapper;
         private readonly IBubbleSortService bubbleSortService;
 
-        public BubbleSortController(IBubbleSortService bubbleSortService)
+        public BubbleSortController(IMapper mapper, IBubbleSortService bubbleSortService)
         {
+            this.mapper = mapper;
             this.bubbleSortService = bubbleSortService;
         }
 
         [HttpPost]
         public IActionResult Post([FromBody] SortingAlgorithmsRequestModel data)
         {
-            var result = this.bubbleSortService.Sort(data.Array);
+            var serviceModel = this.bubbleSortService.Sort(data.Array);
 
-            if (result.ErrorMessage != null)
+            if (serviceModel.ErrorMessage != null)
             {
-                return this.BadRequest(new ErrorModel(result.ErrorMessage));
+                return this.BadRequest(new ErrorModel(serviceModel.ErrorMessage));
             }
 
-            return this.Ok(result.SwapIndexes);
+            var result = this.mapper.Map<SortingAlgorithmsResponseModel>(serviceModel);
+
+            return this.Ok(result);
         }
     }
 }

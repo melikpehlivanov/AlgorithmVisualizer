@@ -1,29 +1,34 @@
 ﻿namespace AlgoVisualizer.Api.Controllers.SortingAlgorithms
 {
+    using AutoMapper;
     using Microsoft.AspNetCore.Mvc;
     using Models;
     using Services.SortingAlgorithms.Interfaces;
 
     public class HeapSortController : BaseSortingAlgorithmsController
     {
+        private readonly IMapper mapper;
         private readonly IHeapSortService heapSortService;
 
-        public HeapSortController(IHeapSortService heapSortService)
+        public HeapSortController(IMapper mapper, IHeapSortService heapSortService)
         {
+            this.mapper = mapper;
             this.heapSortService = heapSortService;
         }
 
         [HttpPost]
         public IActionResult Post([FromBody] SortingAlgorithmsRequestModel data)
         {
-            var result = this.heapSortService.Sort(data.Array);
+            var serviceModel = this.heapSortService.Sort(data.Array);
 
-            if (result.ErrorMessage != null)
+            if (serviceModel.ErrorMessage != null)
             {
-                return this.BadRequest(new ErrorModel(result.ErrorMessage));
+                return this.BadRequest(new ErrorModel(serviceModel.ErrorMessage));
             }
 
-            return this.Ok(result.SwapIndexes);
+            var result = this.mapper.Map<SortingAlgorithmsResponseModel>(serviceModel);
+
+            return this.Ok(result);
         }
     }
 }
