@@ -2,9 +2,9 @@
 {
     using System.Collections.Generic;
 
-    public class Result<T>
+    public class Result
     {
-        public Result(List<T[]> usedSwapsToSortArray)
+        public Result(List<int[]> usedSwapsToSortArray)
         {
             this.SwapIndexes = usedSwapsToSortArray;
         }
@@ -14,7 +14,7 @@
             this.ErrorMessage = errorMessage;
         }
 
-        public Result(List<T[]> usedSwapsToSortArray, string errorMessage = null)
+        public Result(List<int[]> usedSwapsToSortArray, string errorMessage = null)
         {
             this.ErrorMessage = errorMessage;
             this.SwapIndexes = usedSwapsToSortArray;
@@ -22,6 +22,6 @@
 
         public string ErrorMessage { get; set; }
 
-        public List<T[]> SwapIndexes { get; set; } 
+        public List<int[]> SwapIndexes { get; set; } 
     }
 }
