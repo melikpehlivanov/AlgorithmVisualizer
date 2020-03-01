@@ -3,7 +3,8 @@ import {
   INITIALIZE_CHART_DATA,
   GENERATE_NEW_ARRAY,
   SET_IS_NAVBAR_CLICKABLE,
-  SET_BAR_CHART_ELEMENT_BACKGROUND_COLOR
+  SET_BAR_CHART_ELEMENT_BACKGROUND_COLOR,
+  SET_TOTAL_SWAPS
 } from '../../../constants/sortingAlgorithmsConstants';
 import {
   getInitialChart,
@@ -44,6 +45,8 @@ const sortingAlgorithmsReducer = (state = initialState, action) => {
         ...state,
         isNavbarClickable: action.payload
       };
+    case SET_TOTAL_SWAPS:
+      return { ...state, totalSwaps: action.payload };
     case SET_BAR_CHART_ELEMENT_BACKGROUND_COLOR:
       const barChart = state.barChart;
       return {
