@@ -6,7 +6,7 @@
     using Interfaces;
     using Models.SortingAlgorithms;
 
-    public class MergeSortService : IMergeSortService
+    public class MergeSortService : BaseSortingService, IMergeSortService
     {
         private List<int> unsortedArray;
         private readonly List<int[]> swappingIndexes = new List<int[]>();
@@ -22,9 +22,7 @@
 
             this.MergeSort(0, data.Length - 1, data);
 
-            return data.SequenceEqual(this.unsortedArray) ?
-                new Result<int>(NotificationMessages.SortingAlgorithms.DataAlreadySortedErrorMessage)
-                : new Result<int>(this.swappingIndexes);
+            return this.GenerateResult(data, this.unsortedArray, this.swappingIndexes);
         }
 
         private void MergeSort(int start, int end, IList<int> array)

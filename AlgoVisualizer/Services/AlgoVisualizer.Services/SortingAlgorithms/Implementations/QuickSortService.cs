@@ -1,13 +1,12 @@
 ﻿namespace AlgoVisualizer.Services.SortingAlgorithms.Implementations
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using Common;
     using Interfaces;
     using Models.SortingAlgorithms;
 
-    public class QuickSortService : IQuickSortService
+    public class QuickSortService : BaseSortingService, IQuickSortService
     {
         private int[] array;
         private List<int> unsortedData;
@@ -25,9 +24,7 @@
 
             this.QuickSort(0, this.array.Length - 1);
 
-            return this.array.SequenceEqual(this.unsortedData) ? 
-                new Result<int>(NotificationMessages.SortingAlgorithms.DataAlreadySortedErrorMessage) 
-                : new Result<int>(this.result);
+            return this.GenerateResult(data, this.unsortedData, this.result);
         }
 
         private void QuickSort(int start, int end)
@@ -47,29 +44,18 @@
 
             for (var i = start; i < end; i++)
             {
-                if (this.array[i] <= pivot)
+                if (this.array[i] < pivot)
                 {
-                    this.Swap(i, partitionIndex);
+                    this.Swap(this.array, i, partitionIndex);
+                    this.result.Add(new[] { i, partitionIndex });
+
                     partitionIndex++;
                 }
             }
 
-            this.Swap(partitionIndex, end);
+            this.Swap(this.array, partitionIndex, end);
 
             return partitionIndex;
-        }
-
-        private void Swap(int firstElementIndex, int secondElementIndex)
-        {
-            if (this.array[firstElementIndex] == this.array[secondElementIndex])
-            {
-                return;
-            }
-
-            this.result.Add(new []{firstElementIndex, secondElementIndex});
-            var temp = this.array[firstElementIndex];
-            this.array[firstElementIndex] = this.array[secondElementIndex];
-            this.array[secondElementIndex] = temp;
         }
     }
 }
