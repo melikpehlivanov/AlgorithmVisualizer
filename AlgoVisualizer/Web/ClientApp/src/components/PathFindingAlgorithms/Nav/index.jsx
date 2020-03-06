@@ -14,7 +14,8 @@ import {
   setAlgorithm,
   setAlgorithmDescription,
   clearState,
-  setIsNavbarClickable
+  setIsNavbarClickable,
+  clearGrid
 } from '../../../store/pathFindingAlgorithms/actions';
 import { makePostApiCallAsync } from '../../../helpers/fetchData';
 import {
@@ -32,7 +33,6 @@ import { PathFindingAlgorithmsContext } from '../../../store/pathFindingAlgorith
 
 import './index.css';
 import { DEFAULT_ERROR_MESSAGE } from '../../../constants/errorConstants';
-import { clearGrid } from '../../../helpers/pathFindingAlgorithms/pathFindingHelper';
 
 const PathfindingAlgorithmsNavbar = () => {
   const { state, dispatch } = useContext(PathFindingAlgorithmsContext);
