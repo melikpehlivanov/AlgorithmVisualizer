@@ -35,7 +35,7 @@ export const modalTutorialContent = [
     title: 'Welcome to Algorithm Visualizer!',
     body: {
       __html:
-        '<h4>This short tutorial will walk you through the basic features of the application and will show you how to use them.</h4><p>If you want to wade right in, feel free to press the "Skip Tutorial" button below. Otherwise, press "Next"!</p>'
+        '<h4>This short tutorial will walk you through the basic features of the application and will show you how to use them.</h4><p>If you want to wade right in, feel free to press the "Skip Tutorial" button below. Otherwise, press "Next"!</p><p><b>P.S Even though that this project is responsive it is not recommended to use it on phones.</b></p>'
     }
   },
   {
@@ -74,6 +74,13 @@ export const modalTutorialContent = [
     }
   },
   {
+    title: 'How to generate mazes/labyrinths',
+    body: {
+      __html:
+        '<h4>Use the navbar menu "Mazes" to generate different mazes/labyrinths!</h4><img class="img-fluid rounded ml-auto d-block" src="navbar-menu.jpg" />'
+    }
+  },
+  {
     title: 'How to visualize an algorithm',
     body: {
       __html:
@@ -84,7 +91,7 @@ export const modalTutorialContent = [
     title: 'Thank you for coming to this stage of the tutorial.',
     body: {
       __html:
-        '<h4>I believe that you are ready to go on your own now and explore the different algorithms.</h4><p>If for some reason you want to get back to this tutorial simply refresh the page.</p><p> By the way, if you are interested in the source code of this project you can check it out in my <a href="https://github.com/melikpehlivanov/AlgorithmVisualizer" target="_blank">github</a> account.</p>'
+        '<h4>I believe that you are ready to go on your own now and explore the different algorithms.</h4><p>If for some reason you want to get back to this tutorial simply refresh the page.</p><p> By the way, if you are interested in the source code of this project you can check it out in my <a href="https://github.com/melikpehlivanov/AlgorithmVisualizer" target="_blank">github</a> account. Giving the project a star is highly appreciated!</p>'
     }
   }
 ];
