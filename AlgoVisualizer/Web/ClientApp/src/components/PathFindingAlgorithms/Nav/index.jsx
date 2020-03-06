@@ -57,7 +57,7 @@ const PathfindingAlgorithmsNavbar = () => {
 
     if (result) {
       if (result.isSuccess !== undefined && !result.isSuccess) {
-        dispatchError(showError(true, result.messages));
+        dispatchError(showError(result.messages));
         return;
       }
       const allVisitedNodesInOrder = result.allVisitedNodesInOrder;

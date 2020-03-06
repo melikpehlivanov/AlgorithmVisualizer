@@ -3,10 +3,10 @@ import {
   CLEAR_ERRORS
 } from '../../../constants/errorConstants';
 
-export const showError = (show, messages) => {
+export const showError = messages => {
   return {
     type: SHOW_ERROR_WITH_MESSAGE,
-    payload: { show, messages }
+    payload: messages
   };
 };
 

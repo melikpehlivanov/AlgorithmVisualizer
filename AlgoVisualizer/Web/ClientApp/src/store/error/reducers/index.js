@@ -9,8 +9,8 @@ const errorReducer = (state = initialState, action) => {
     case SHOW_ERROR_WITH_MESSAGE:
       return {
         ...state,
-        showError: action.payload.show,
-        messages: action.payload.messages
+        showError: true,
+        messages: action.payload
       };
     case CLEAR_ERRORS:
       state = initialState;
