@@ -75,7 +75,7 @@ const Grid = () => {
           dispatch(setEndNode(grid, row, col));
         }
         if (isWeightNodeAllowed && event.shiftKey) {
-          dispatch(setWeightNode(grid, row, col));
+          dispatch(setWeightNode(row, col));
         }
       }
       if (!event.shiftKey && !event.ctrlKey && !event.altKey) {
@@ -87,7 +87,7 @@ const Grid = () => {
   const handleMouseOver = (event, row, col) => {
     if (!isMouseStillClicked || !isNavbarClickable) return;
     if (event && isWeightNodeAllowed && isShiftStillPressed) {
-      dispatch(setWeightNode(grid, row, col));
+      dispatch(setWeightNode(row, col));
     } else {
       dispatch(setWallNode(row, col));
     }

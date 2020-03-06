@@ -68,11 +68,7 @@ const pathFindingAlgorithmsReducer = (state = initialState, action) => {
 
       return {
         ...state,
-        grid: setWeightNode(
-          action.payload.grid,
-          action.payload.row,
-          action.payload.col
-        )
+        grid: setWeightNode(state.grid, action.payload.row, action.payload.col)
       };
     case SET_WALL_NODE:
       MarkGridAsChanged();

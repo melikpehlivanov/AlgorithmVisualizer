@@ -39,10 +39,10 @@ export const setEndNode = (grid, row, col) => {
   };
 };
 
-export const setWeightNode = (grid, row, col) => {
+export const setWeightNode = (row, col) => {
   return {
     type: SET_WEIGHT_NODE,
-    payload: { grid, row, col }
+    payload: { row, col }
   };
 };
 
