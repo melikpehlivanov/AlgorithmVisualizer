@@ -63,13 +63,21 @@
                 if (array[i].CompareTo(pivot) < 0)
                 {
                     this.Swap(array, i, partitionIndex);
-                    this.result.Add(new[] { i, partitionIndex });
+                    if (i != partitionIndex)
+                    {
+                        this.result.Add(new[] { i, partitionIndex });
+
+                    }
 
                     partitionIndex++;
                 }
             }
 
             this.Swap(array, partitionIndex, end);
+            if(partitionIndex != end)
+            {
+                this.result.Add(new[] { partitionIndex, end });
+            }
 
             return partitionIndex;
         }
