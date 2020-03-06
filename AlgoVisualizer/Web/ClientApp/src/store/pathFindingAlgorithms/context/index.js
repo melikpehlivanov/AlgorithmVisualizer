@@ -4,7 +4,8 @@ import {
   START_NODE_ROW,
   START_NODE_COL,
   END_NODE_ROW,
-  END_NODE_COL
+  END_NODE_COL,
+  TOTAL_NODES_EXPLORED_DEFAULT_VALUE
 } from '../../../constants/gridConstants';
 import { availablePathFindingAlgorithms } from '../../../constants/algorithmConstants';
 
@@ -12,6 +13,7 @@ export const initialState = {
   isLoading: true,
   isNavbarClickable: true,
   grid: [],
+  totalNodesExplored: TOTAL_NODES_EXPLORED_DEFAULT_VALUE,
   algorithms: availablePathFindingAlgorithms,
   algorithm: '',
   algorithmDescription: '',

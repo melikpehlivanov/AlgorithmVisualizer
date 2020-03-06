@@ -15,7 +15,8 @@ import {
   setAlgorithmDescription,
   clearState,
   setIsNavbarClickable,
-  clearGrid
+  clearGrid,
+  setTotalNodesExplored
 } from '../../../store/pathFindingAlgorithms/actions';
 import { makePostApiCallAsync } from '../../../helpers/fetchData';
 import {
@@ -33,6 +34,7 @@ import { PathFindingAlgorithmsContext } from '../../../store/pathFindingAlgorith
 
 import './index.css';
 import { DEFAULT_ERROR_MESSAGE } from '../../../constants/errorConstants';
+import { TOTAL_NODES_EXPLORED_DEFAULT_VALUE } from '../../../constants/gridConstants';
 
 const PathfindingAlgorithmsNavbar = () => {
   const { state, dispatch } = useContext(PathFindingAlgorithmsContext);
@@ -73,6 +75,7 @@ const PathfindingAlgorithmsNavbar = () => {
     if (!state.isNavbarClickable) return;
 
     dispatch(clearGrid());
+    dispatch(setTotalNodesExplored(TOTAL_NODES_EXPLORED_DEFAULT_VALUE));
     dispatchError(clearErrors());
 
     const url = `${PATHFINDING_ALGORITHMS_API_URL}/${algorithm}`;
@@ -95,10 +98,12 @@ const PathfindingAlgorithmsNavbar = () => {
       }
       const allVisitedNodesInOrder = result.allVisitedNodesInOrder;
       const allNodesInShortestPathOrder = result.allNodesInShortestPathOrder;
+
       visualizeResult(
         dispatch,
         allVisitedNodesInOrder,
-        allNodesInShortestPathOrder
+        allNodesInShortestPathOrder,
+        result.totalNodesExplored
       );
     }
   };

@@ -5,7 +5,8 @@ import {
 import {
   setIsNavbarClickable,
   setWallNode,
-  setWeightNode
+  setWeightNode,
+  setTotalNodesExplored
 } from '../../store/pathFindingAlgorithms/actions';
 
 const nodeName = 'node';
@@ -14,12 +15,18 @@ const msTimeout = 20;
 export const visualizeResult = (
   dispatch,
   visitedNodesInOrder,
-  nodesInShortestPathOrder
+  nodesInShortestPathOrder,
+  totalNodesExplored
 ) => {
   const allVisitedNodesInOrder = visitedNodesInOrder;
   const allNodesInShortestPathOrder = nodesInShortestPathOrder;
   dispatch(setIsNavbarClickable(false));
-  animateResult(dispatch, allVisitedNodesInOrder, allNodesInShortestPathOrder);
+  animateResult(
+    dispatch,
+    allVisitedNodesInOrder,
+    allNodesInShortestPathOrder,
+    totalNodesExplored
+  );
 };
 
 export const visualizeMazeGeneration = (dispatch, nodes, mazeType) => {
@@ -52,12 +59,17 @@ const animateMazeGeneration = (dispatch, nodes, mazeType) => {
 const animateResult = (
   dispatch,
   allVisitedNodesInOrder,
-  allNodesInShortestPathOrder
+  allNodesInShortestPathOrder,
+  totalNodesExplored
 ) => {
   for (let i = 0; i <= allVisitedNodesInOrder.length; i++) {
     if (i === allVisitedNodesInOrder.length) {
       setTimeout(() => {
-        animateShortestPath(dispatch, allNodesInShortestPathOrder);
+        animateShortestPath(
+          dispatch,
+          allNodesInShortestPathOrder,
+          totalNodesExplored
+        );
       }, msTimeout * i);
       return;
     }
@@ -75,7 +87,7 @@ const animateResult = (
   }
 };
 
-const animateShortestPath = (dispatch, nodes) => {
+const animateShortestPath = (dispatch, nodes, totalNodesExplored) => {
   for (let i = 0; i <= nodes.length; i++) {
     setTimeout(() => {
       const node = nodes[i];
@@ -87,6 +99,7 @@ const animateShortestPath = (dispatch, nodes) => {
 
       if (i === nodes.length - 1) {
         dispatch(setIsNavbarClickable(true));
+        dispatch(setTotalNodesExplored(totalNodesExplored));
         clearTimeout();
       }
     }, 50 * i * 2);
