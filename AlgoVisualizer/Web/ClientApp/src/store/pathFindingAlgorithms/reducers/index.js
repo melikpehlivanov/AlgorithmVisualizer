@@ -36,11 +36,7 @@ const pathFindingAlgorithmsReducer = (state = initialState, action) => {
 
       return {
         ...state,
-        grid: setStartNode(
-          action.payload.grid,
-          action.payload.row,
-          action.payload.col
-        ),
+        grid: setStartNode(state.grid, action.payload.row, action.payload.col),
         startNode: {
           row: action.payload.row,
           col: action.payload.col,

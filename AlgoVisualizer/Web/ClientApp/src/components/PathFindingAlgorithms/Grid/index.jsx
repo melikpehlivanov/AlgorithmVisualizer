@@ -69,7 +69,7 @@ const Grid = () => {
     if (isNavbarClickable) {
       if (event) {
         if (event.ctrlKey) {
-          dispatch(setStartNode(grid, row, col));
+          dispatch(setStartNode(row, col));
         }
         if (event.altKey) {
           dispatch(setEndNode(row, col));

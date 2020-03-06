@@ -25,10 +25,10 @@ export const setIsNavbarClickable = isClickable => {
   };
 };
 
-export const setStartNode = (grid, row, col) => {
+export const setStartNode = (row, col) => {
   return {
     type: SET_START_NODE,
-    payload: { grid, row, col }
+    payload: { row, col }
   };
 };
 
