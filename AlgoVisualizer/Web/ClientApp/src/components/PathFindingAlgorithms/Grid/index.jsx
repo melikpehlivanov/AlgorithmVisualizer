@@ -69,17 +69,17 @@ const Grid = () => {
     if (isNavbarClickable) {
       if (event) {
         if (event.ctrlKey) {
-          dispatch(setStartNode(grid, row, col));
+          dispatch(setStartNode(row, col));
         }
         if (event.altKey) {
-          dispatch(setEndNode(grid, row, col));
+          dispatch(setEndNode(row, col));
         }
         if (isWeightNodeAllowed && event.shiftKey) {
-          dispatch(setWeightNode(grid, row, col));
+          dispatch(setWeightNode(row, col));
         }
       }
       if (!event.shiftKey && !event.ctrlKey && !event.altKey) {
-        dispatch(setWallNode(grid, row, col));
+        dispatch(setWallNode(row, col));
       }
     }
   };
@@ -87,9 +87,9 @@ const Grid = () => {
   const handleMouseOver = (event, row, col) => {
     if (!isMouseStillClicked || !isNavbarClickable) return;
     if (event && isWeightNodeAllowed && isShiftStillPressed) {
-      dispatch(setWeightNode(grid, row, col));
+      dispatch(setWeightNode(row, col));
     } else {
-      dispatch(setWallNode(grid, row, col));
+      dispatch(setWallNode(row, col));
     }
   };
 

@@ -1,6 +1,5 @@
 import { showError } from '../store/error/actions';
-
-const errorMessage = 'Something terribly went wrong! Please try again later.';
+import { DEFAULT_ERROR_MESSAGE } from '../constants/errorConstants';
 
 export const makePostApiCallAsync = async (url, data, dispatchError) => {
   try {
@@ -16,9 +15,9 @@ export const makePostApiCallAsync = async (url, data, dispatchError) => {
     if (response.status <= 400) {
       return result;
     } else {
-      dispatchError(showError(true, [errorMessage]));
+      dispatchError(showError([DEFAULT_ERROR_MESSAGE]));
     }
   } catch (error) {
-    dispatchError(showError(true, [errorMessage]));
+    dispatchError(showError([DEFAULT_ERROR_MESSAGE]));
   }
 };

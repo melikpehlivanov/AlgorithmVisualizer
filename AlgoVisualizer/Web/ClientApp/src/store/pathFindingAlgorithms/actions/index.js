@@ -25,31 +25,31 @@ export const setIsNavbarClickable = isClickable => {
   };
 };
 
-export const setStartNode = (grid, row, col) => {
+export const setStartNode = (row, col) => {
   return {
     type: SET_START_NODE,
-    payload: { grid, row, col }
+    payload: { row, col }
   };
 };
 
-export const setEndNode = (grid, row, col) => {
+export const setEndNode = (row, col) => {
   return {
     type: SET_END_NODE,
-    payload: { grid, row, col }
+    payload: { row, col }
   };
 };
 
-export const setWeightNode = (grid, row, col) => {
+export const setWeightNode = (row, col) => {
   return {
     type: SET_WEIGHT_NODE,
-    payload: { grid, row, col }
+    payload: { row, col }
   };
 };
 
-export const setWallNode = (grid, row, col) => {
+export const setWallNode = (row, col) => {
   return {
     type: SET_WALL_NODE,
-    payload: { grid, row, col }
+    payload: { row, col }
   };
 };
 

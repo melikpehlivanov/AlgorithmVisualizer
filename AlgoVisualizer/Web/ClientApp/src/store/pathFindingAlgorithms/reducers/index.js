@@ -36,11 +36,7 @@ const pathFindingAlgorithmsReducer = (state = initialState, action) => {
 
       return {
         ...state,
-        grid: setStartNode(
-          action.payload.grid,
-          action.payload.row,
-          action.payload.col
-        ),
+        grid: setStartNode(state.grid, action.payload.row, action.payload.col),
         startNode: {
           row: action.payload.row,
           col: action.payload.col,
@@ -52,11 +48,7 @@ const pathFindingAlgorithmsReducer = (state = initialState, action) => {
 
       return {
         ...state,
-        grid: setEndNode(
-          action.payload.grid,
-          action.payload.row,
-          action.payload.col
-        ),
+        grid: setEndNode(state.grid, action.payload.row, action.payload.col),
         endNode: {
           row: action.payload.row,
           col: action.payload.col,
@@ -68,22 +60,14 @@ const pathFindingAlgorithmsReducer = (state = initialState, action) => {
 
       return {
         ...state,
-        grid: setWeightNode(
-          action.payload.grid,
-          action.payload.row,
-          action.payload.col
-        )
+        grid: setWeightNode(state.grid, action.payload.row, action.payload.col)
       };
     case SET_WALL_NODE:
       MarkGridAsChanged();
 
       return {
         ...state,
-        grid: setWallNode(
-          action.payload.grid,
-          action.payload.row,
-          action.payload.col
-        )
+        grid: setWallNode(state.grid, action.payload.row, action.payload.col)
       };
     case SET_ALGORITHM:
       const algorithm = state.algorithms.find(

@@ -14,17 +14,25 @@ import {
   setAlgorithm,
   setAlgorithmDescription,
   clearState,
-  clearGrid,
-  setIsNavbarClickable
+  setIsNavbarClickable,
+  clearGrid
 } from '../../../store/pathFindingAlgorithms/actions';
 import { makePostApiCallAsync } from '../../../helpers/fetchData';
-import { visualizeResult } from '../../../helpers/pathFindingAlgorithms/dataVisualizer';
-import { PATHFINDING_ALGORITHMS_API_URL } from '../../../constants/algorithmConstants';
+import {
+  visualizeResult,
+  visualizeMazeGeneration
+} from '../../../helpers/pathFindingAlgorithms/dataVisualizer';
+import {
+  PATHFINDING_ALGORITHMS_API_URL,
+  MAZE_TYPES,
+  MAZE_API_URL
+} from '../../../constants/algorithmConstants';
 import { showError, clearErrors } from '../../../store/error/actions';
 import { ErrorContext } from '../../../store/error/context';
 import { PathFindingAlgorithmsContext } from '../../../store/pathFindingAlgorithms/context';
 
 import './index.css';
+import { DEFAULT_ERROR_MESSAGE } from '../../../constants/errorConstants';
 
 const PathfindingAlgorithmsNavbar = () => {
   const { state, dispatch } = useContext(PathFindingAlgorithmsContext);
@@ -34,6 +42,31 @@ const PathfindingAlgorithmsNavbar = () => {
     if (!state.isNavbarClickable) return;
     dispatch(setAlgorithm(algorithm));
     dispatch(setAlgorithmDescription(algorithmDescription));
+  };
+
+  const handleMazeGeneration = async (grid, mazeType) => {
+    if (!state.isNavbarClickable) return;
+
+    dispatch(clearState());
+
+    const url = `${MAZE_API_URL}/${mazeType}`;
+    dispatch(setIsNavbarClickable(false));
+
+    const data = JSON.stringify({
+      grid
+    });
+
+    const result = await makePostApiCallAsync(url, data, dispatchError);
+    dispatch(setIsNavbarClickable(true));
+
+    if (result) {
+      if (result.isSuccess === undefined && result.status === 400) {
+        dispatchError(showError([DEFAULT_ERROR_MESSAGE]));
+        return;
+      }
+
+      visualizeMazeGeneration(dispatch, result, mazeType);
+    }
   };
 
   const fetchData = async (algorithm, startNode, endNode, grid) => {
@@ -57,7 +90,7 @@ const PathfindingAlgorithmsNavbar = () => {
 
     if (result) {
       if (result.isSuccess !== undefined && !result.isSuccess) {
-        dispatchError(showError(true, result.messages));
+        dispatchError(showError(result.messages));
         return;
       }
       const allVisitedNodesInOrder = result.allVisitedNodesInOrder;
@@ -104,6 +137,23 @@ const PathfindingAlgorithmsNavbar = () => {
                       currentElement.value,
                       currentElement.description
                     )
+                  }
+                >
+                  {currentElement.label}
+                </NavDropdown.Item>
+              );
+            })}
+          </NavDropdown>
+          <NavDropdown
+            title={<span className="text-white">Mazes</span>}
+            id="basic-nav-dropdown-2"
+          >
+            {MAZE_TYPES.map((currentElement, index) => {
+              return (
+                <NavDropdown.Item
+                  key={index}
+                  onClick={() =>
+                    handleMazeGeneration(state.grid, currentElement.value)
                   }
                 >
                   {currentElement.label}
