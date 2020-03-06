@@ -32,10 +32,10 @@ export const setStartNode = (grid, row, col) => {
   };
 };
 
-export const setEndNode = (grid, row, col) => {
+export const setEndNode = (row, col) => {
   return {
     type: SET_END_NODE,
-    payload: { grid, row, col }
+    payload: { row, col }
   };
 };
 

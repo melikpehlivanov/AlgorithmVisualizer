@@ -72,7 +72,7 @@ const Grid = () => {
           dispatch(setStartNode(grid, row, col));
         }
         if (event.altKey) {
-          dispatch(setEndNode(grid, row, col));
+          dispatch(setEndNode(row, col));
         }
         if (isWeightNodeAllowed && event.shiftKey) {
           dispatch(setWeightNode(row, col));
