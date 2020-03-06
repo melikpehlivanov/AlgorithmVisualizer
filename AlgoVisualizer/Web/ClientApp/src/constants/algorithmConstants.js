@@ -52,3 +52,16 @@ export const PATHFINDING_ALGORITHMS_API_URL =
 
 export const SORTING_ALGORITHMS_API_URL =
   'https://localhost:44370/api/sortingAlgorithms';
+
+export const MAZE_API_URL = 'https://localhost:44370/api/maze';
+
+export const MAZE_TYPES = [
+  {
+    label: 'Generate wall maze',
+    value: 'wall'
+  },
+  {
+    label: 'Generate weight maze',
+    value: 'weight'
+  }
+];

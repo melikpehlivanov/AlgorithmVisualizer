@@ -2,7 +2,11 @@ import {
   SHORTEST_PATH_CLASSNAME,
   VISITED_NODE_CLASSNAME
 } from '../../constants/gridConstants';
-import { setIsNavbarClickable } from '../../store/pathFindingAlgorithms/actions';
+import {
+  setIsNavbarClickable,
+  setWallNode,
+  setWeightNode
+} from '../../store/pathFindingAlgorithms/actions';
 
 const nodeName = 'node';
 const msTimeout = 20;
@@ -16,6 +20,33 @@ export const visualizeResult = (
   const allNodesInShortestPathOrder = nodesInShortestPathOrder;
   dispatch(setIsNavbarClickable(false));
   animateResult(dispatch, allVisitedNodesInOrder, allNodesInShortestPathOrder);
+};
+
+export const visualizeMazeGeneration = (dispatch, nodes, mazeType) => {
+  dispatch(setIsNavbarClickable(false));
+  animateMazeGeneration(dispatch, nodes, mazeType);
+};
+
+const animateMazeGeneration = (dispatch, nodes, mazeType) => {
+  for (let i = 0; i < nodes.length; i++) {
+    const node = nodes[i];
+    const row = node[0];
+    const col = node[1];
+
+    setTimeout(() => {
+      if (mazeType === 'wall') {
+        dispatch(setWallNode(row, col));
+      }
+      if (mazeType === 'weight') {
+        dispatch(setWeightNode(row, col));
+      }
+
+      if (i === nodes.length - 1) {
+        dispatch(setIsNavbarClickable(true));
+        clearTimeout();
+      }
+    }, msTimeout * i);
+  }
 };
 
 const animateResult = (
