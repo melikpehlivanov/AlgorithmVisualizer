@@ -60,7 +60,7 @@ const PathfindingAlgorithmsNavbar = () => {
     dispatch(setIsNavbarClickable(true));
 
     if (result) {
-      if (result.isSuccess === undefined && result.status == 400) {
+      if (result.isSuccess === undefined && result.status === 400) {
         dispatchError(showError([DEFAULT_ERROR_MESSAGE]));
         return;
       }
