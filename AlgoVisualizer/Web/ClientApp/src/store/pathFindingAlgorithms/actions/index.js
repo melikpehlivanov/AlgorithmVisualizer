@@ -46,10 +46,10 @@ export const setWeightNode = (grid, row, col) => {
   };
 };
 
-export const setWallNode = (grid, row, col) => {
+export const setWallNode = (row, col) => {
   return {
     type: SET_WALL_NODE,
-    payload: { grid, row, col }
+    payload: { row, col }
   };
 };
 

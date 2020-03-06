@@ -79,7 +79,7 @@ const Grid = () => {
         }
       }
       if (!event.shiftKey && !event.ctrlKey && !event.altKey) {
-        dispatch(setWallNode(grid, row, col));
+        dispatch(setWallNode(row, col));
       }
     }
   };
@@ -89,7 +89,7 @@ const Grid = () => {
     if (event && isWeightNodeAllowed && isShiftStillPressed) {
       dispatch(setWeightNode(grid, row, col));
     } else {
-      dispatch(setWallNode(grid, row, col));
+      dispatch(setWallNode(row, col));
     }
   };
 

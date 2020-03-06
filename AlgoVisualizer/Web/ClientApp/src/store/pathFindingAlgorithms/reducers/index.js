@@ -79,11 +79,7 @@ const pathFindingAlgorithmsReducer = (state = initialState, action) => {
 
       return {
         ...state,
-        grid: setWallNode(
-          action.payload.grid,
-          action.payload.row,
-          action.payload.col
-        )
+        grid: setWallNode(state.grid, action.payload.row, action.payload.col)
       };
     case SET_ALGORITHM:
       const algorithm = state.algorithms.find(
