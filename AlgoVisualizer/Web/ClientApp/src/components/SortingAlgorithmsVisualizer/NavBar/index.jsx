@@ -26,6 +26,7 @@ const SortingAlgorithmsNavbar = () => {
   const [algorithm, setAlgorithm] = useState('');
   const { state, dispatch } = useContext(SortingAlgorithmsContext);
   const { dispatchError } = useContext(ErrorContext);
+  const [showAlgorithmsMenu, setShowAlgorithmsMenu] = useState(false);
 
   const fetchData = async () => {
     dispatchError(clearErrors());
@@ -84,9 +85,12 @@ const SortingAlgorithmsNavbar = () => {
               </NavLink>
             </NavItem>
             <NavDropdown
+              id="basic-nav-dropdown"
               className={isClickable()}
               title={<span className="text-white">Algorithms</span>}
-              id="basic-nav-dropdown"
+              onMouseOver={() => setShowAlgorithmsMenu(true)}
+              onMouseLeave={() => setShowAlgorithmsMenu(false)}
+              show={showAlgorithmsMenu}
             >
               {state.algorithms.map((currentElement, index) => {
                 return (

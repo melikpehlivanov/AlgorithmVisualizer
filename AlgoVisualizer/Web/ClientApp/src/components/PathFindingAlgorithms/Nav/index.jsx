@@ -35,10 +35,13 @@ import { PathFindingAlgorithmsContext } from '../../../store/pathFindingAlgorith
 import './index.css';
 import { DEFAULT_ERROR_MESSAGE } from '../../../constants/errorConstants';
 import { TOTAL_NODES_EXPLORED_DEFAULT_VALUE } from '../../../constants/gridConstants';
+import { useState } from 'react';
 
 const PathfindingAlgorithmsNavbar = () => {
   const { state, dispatch } = useContext(PathFindingAlgorithmsContext);
   const { dispatchError } = useContext(ErrorContext);
+  const [showAlgorithmsMenu, setShowAlgorithmsMenu] = useState(false);
+  const [showMazesMenu, setShowMazesMenu] = useState(false);
 
   const handleOnClick = (algorithm, algorithmDescription) => {
     if (!state.isNavbarClickable) return;
@@ -130,8 +133,12 @@ const PathfindingAlgorithmsNavbar = () => {
             </NavLink>
           </NavItem>
           <NavDropdown
-            title={<span className="text-white">Algorithms</span>}
             id="basic-nav-dropdown"
+            onMouseOver={() => setShowAlgorithmsMenu(true)}
+            onMouseLeave={() => setShowAlgorithmsMenu(false)}
+            show={showAlgorithmsMenu}
+            title={<span className="text-white">Algorithms</span>}
+            noCaret
           >
             {state.algorithms.map((currentElement, index) => {
               return (
@@ -150,8 +157,11 @@ const PathfindingAlgorithmsNavbar = () => {
             })}
           </NavDropdown>
           <NavDropdown
-            title={<span className="text-white">Mazes</span>}
             id="basic-nav-dropdown-2"
+            title={<span className="text-white">Mazes</span>}
+            onMouseOver={() => setShowMazesMenu(true)}
+            onMouseLeave={() => setShowMazesMenu(false)}
+            show={showMazesMenu}
           >
             {MAZE_TYPES.map((currentElement, index) => {
               return (
