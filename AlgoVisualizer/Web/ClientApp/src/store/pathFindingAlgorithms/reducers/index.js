@@ -9,7 +9,8 @@ import {
   CLEAR_STATE,
   CLEAR_GRID,
   REMOVE_WEIGHT_NODES,
-  SET_IS_NAVBAR_CLICKABLE
+  SET_IS_NAVBAR_CLICKABLE,
+  SET_TOTAL_NODES_EXPLORED
 } from '../../../constants/gridConstants';
 
 import {
@@ -68,6 +69,11 @@ const pathFindingAlgorithmsReducer = (state = initialState, action) => {
       return {
         ...state,
         grid: setWallNode(state.grid, action.payload.row, action.payload.col)
+      };
+    case SET_TOTAL_NODES_EXPLORED:
+      return {
+        ...state,
+        totalNodesExplored: action.payload
       };
     case SET_ALGORITHM:
       const algorithm = state.algorithms.find(

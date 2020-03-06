@@ -12,6 +12,7 @@ import {
 import './index.css';
 import { PathFindingAlgorithmsContext } from '../../../store/pathFindingAlgorithms/context';
 import { useEffect } from 'react';
+import { TOTAL_NODES_EXPLORED_DEFAULT_VALUE } from '../../../constants/gridConstants';
 
 const ShiftKeyCode = 16;
 const KeyDownEvent = 'keydown';
@@ -95,7 +96,18 @@ const Grid = () => {
 
   return (
     <Fragment>
-      <p className="text-center">{algorithmDescription}</p>
+      <div>
+        <p className="text-center">{algorithmDescription}</p>
+        {state.totalNodesExplored != TOTAL_NODES_EXPLORED_DEFAULT_VALUE ? (
+          <div className="d-flex justify-content-center">
+            <p className="mr-1">Total nodes explored:</p>
+            <b>{state.totalNodesExplored}</b>
+          </div>
+        ) : (
+          ''
+        )}
+      </div>
+
       {isLoading ? (
         <p>Loading...</p>
       ) : (

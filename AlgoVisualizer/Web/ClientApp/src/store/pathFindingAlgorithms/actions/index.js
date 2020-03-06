@@ -9,7 +9,8 @@ import {
   SET_ALGORITHM_DESCRIPTION,
   CLEAR_STATE,
   REMOVE_WEIGHT_NODES,
-  CLEAR_GRID
+  CLEAR_GRID,
+  SET_TOTAL_NODES_EXPLORED
 } from '../../../constants/gridConstants';
 
 export const initializeGrid = () => {
@@ -50,6 +51,13 @@ export const setWallNode = (row, col) => {
   return {
     type: SET_WALL_NODE,
     payload: { row, col }
+  };
+};
+
+export const setTotalNodesExplored = value => {
+  return {
+    type: SET_TOTAL_NODES_EXPLORED,
+    payload: value
   };
 };
 
