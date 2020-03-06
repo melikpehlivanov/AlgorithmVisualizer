@@ -1,6 +1,7 @@
 ﻿namespace AlgoVisualizer.Api.Models
 {
     using System.ComponentModel.DataAnnotations;
+    using AlgoVisualizer.Models.Maze;
     using AlgoVisualizer.Models.PathFinding.AStar;
     using AlgoVisualizer.Models.PathFinding.Bfs;
     using AlgoVisualizer.Models.PathFinding.Dfs;
@@ -12,7 +13,8 @@
         IMapWith<AStarNode>, 
         IMapWith<DijkstraNode>, 
         IMapWith<DfsNode>, 
-        IMapWith<BfsNode>
+        IMapWith<BfsNode>,
+        IMapWith<MazeNode>
     {
         [Required]
         public int Row { get; set; }
