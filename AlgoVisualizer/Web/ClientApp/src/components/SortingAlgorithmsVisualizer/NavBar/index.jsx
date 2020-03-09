@@ -47,7 +47,7 @@ const SortingAlgorithmsNavbar = () => {
         return;
       }
 
-      visualizeArrayElementsSwapping(
+      await visualizeArrayElementsSwapping(
         dispatch,
         state.barChart,
         result.swapIndexes

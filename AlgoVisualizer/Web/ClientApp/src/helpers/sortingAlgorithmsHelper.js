@@ -53,11 +53,13 @@ export const setBackgroundColorToChartElements = (
   return barChart.backgroundColor;
 };
 
-export const visualizeArrayElementsSwapping = (
+export const visualizeArrayElementsSwapping = async (
   dispatch,
   barChart,
   swappingIndexes
 ) => {
+  const timeOutMs = 500;
+
   dispatch(setIsNavbarClickable(false));
 
   for (let i = 0; i < swappingIndexes.length; i++) {
@@ -65,32 +67,39 @@ export const visualizeArrayElementsSwapping = (
     const firstIndex = element[0];
     const secondIndex = element[1];
 
-    let timeoutTime = 200 * i * 6;
-    setTimeout(() => {
+    await Promise.all([
       dispatch(
         setBarChartElementBackgroundColor(
           [firstIndex, secondIndex],
           MARKED_ELEMENT_BACKGROUND_COLOR
         )
-      );
-    }, timeoutTime);
+      ),
+      timeout(timeOutMs)
+    ]);
 
-    setTimeout(() => {
-      swapElements(barChart, firstIndex, secondIndex);
-    }, timeoutTime);
+    await Promise.all([
+      swapElements(barChart, firstIndex, secondIndex),
+      timeout(250)
+    ]);
 
-    setTimeout(() => {
+    await Promise.all([
       dispatch(
         setBarChartElementBackgroundColor(
           [firstIndex, secondIndex],
           BAR_CHART_DEFAULT_BACKGROUND_COLOR
         )
-      );
-      if (i === swappingIndexes.length - 1) {
-        dispatch(setIsNavbarClickable(true));
-      }
-    }, 203 * i * 6);
+      ),
+      timeout(timeOutMs)
+    ]);
+
+    if (i === swappingIndexes.length - 1) {
+      dispatch(setIsNavbarClickable(true));
+    }
   }
+};
+
+const timeout = ms => {
+  return new Promise(resolve => setTimeout(resolve, ms));
 };
 
 const swapElements = (barChart, firstIndex, secondIndex) => {
