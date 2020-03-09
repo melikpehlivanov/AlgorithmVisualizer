@@ -4,10 +4,6 @@
 
     public class ErrorModel
     {
-        public bool IsSuccess => false;
-
-        public List<string> Messages { get; }
-
         public ErrorModel(List<string> messages)
         {
             this.Messages = messages ?? new List<string>();
@@ -22,5 +18,9 @@
                 this.Messages.Add(message);
             }
         }
+
+        public bool IsSuccess => false;
+
+        public List<string> Messages { get; }
     }
 }

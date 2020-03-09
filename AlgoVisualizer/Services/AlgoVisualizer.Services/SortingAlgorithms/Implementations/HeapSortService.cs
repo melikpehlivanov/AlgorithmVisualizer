@@ -47,12 +47,12 @@
             //4. Continue until the considered range of elements is 1.
 
             var length = data.Count - 1;
-            for (int i = length / 2; i >= 0; i--)
+            for (var i = length / 2; i >= 0; i--)
             {
                 this.Heapify(data, length, i);
             }
 
-            for (int i = length; i >= 0; i--)
+            for (var i = length; i >= 0; i--)
             {
                 this.Swap(data, 0, i);
                 this.swappingIndexes.Add(new[] { 0, i });
@@ -72,14 +72,18 @@
             var left = 2 * index + 1;
             var right = 2 * index + 2;
 
-            if (left < length && array[left].CompareTo(array[largestElementIndex]) > 0)
+            if (left < length
+                && array[left].CompareTo(array[largestElementIndex]) > 0)
             {
                 largestElementIndex = left;
             }
-            if (right < length && array[right].CompareTo(array[largestElementIndex]) > 0)
+
+            if (right < length
+                && array[right].CompareTo(array[largestElementIndex]) > 0)
             {
                 largestElementIndex = right;
             }
+
             if (largestElementIndex != index)
             {
                 this.Swap(array, index, largestElementIndex);

@@ -56,19 +56,19 @@
             IEquatable<T>,
             IFormattable
         {
-            var newArray = new MergeSortConciseModel<T>[(end - start) + 1];
+            var newArray = new MergeSortConciseModel<T>[end - start + 1];
 
             var leftSideIndex = start;
             var rightSideIndex = midPoint + 1;
             var index = 0;
 
-            while ((leftSideIndex <= midPoint) && (rightSideIndex <= end))
+            while (leftSideIndex <= midPoint
+                   && rightSideIndex <= end)
             {
                 if (array[leftSideIndex].CompareTo(array[rightSideIndex]) < 0)
                 {
                     newArray[index] = new MergeSortConciseModel<T>(array[leftSideIndex], leftSideIndex);
                     leftSideIndex++;
-
                 }
                 else
                 {
@@ -91,12 +91,12 @@
             int rightSideIndex,
             IList<MergeSortConciseModel<T>> newArray,
             int index)
-                where T : struct,
-                IComparable,
-                IComparable<T>,
-                IConvertible,
-                IEquatable<T>,
-                IFormattable
+            where T : struct,
+            IComparable,
+            IComparable<T>,
+            IConvertible,
+            IEquatable<T>,
+            IFormattable
         {
             while (rightSideIndex <= end)
             {
@@ -112,12 +112,12 @@
             int leftSideIndex,
             IList<MergeSortConciseModel<T>> newArray,
             int index)
-                where T : struct,
-                IComparable,
-                IComparable<T>,
-                IConvertible,
-                IEquatable<T>,
-                IFormattable
+            where T : struct,
+            IComparable,
+            IComparable<T>,
+            IConvertible,
+            IEquatable<T>,
+            IFormattable
         {
             while (leftSideIndex <= midPoint)
             {
@@ -133,12 +133,12 @@
             IList<T> array,
             int start,
             IReadOnlyList<MergeSortConciseModel<T>> newArray)
-                where T : struct,
-                IComparable,
-                IComparable<T>,
-                IConvertible,
-                IEquatable<T>,
-                IFormattable
+            where T : struct,
+            IComparable,
+            IComparable<T>,
+            IConvertible,
+            IEquatable<T>,
+            IFormattable
         {
             for (var i = 0; i < newArray.Count; i++)
             {
@@ -160,12 +160,12 @@
             IEnumerable<MergeSortConciseModel<T>> newArray,
             int swappingIndex,
             MergeSortConciseModel<T> element)
-                where T : struct,
-                IComparable,
-                IComparable<T>,
-                IConvertible,
-                IEquatable<T>,
-                IFormattable
+            where T : struct,
+            IComparable,
+            IComparable<T>,
+            IConvertible,
+            IEquatable<T>,
+            IFormattable
         {
             var temp = array[swappingIndex];
             array[swappingIndex] = element.Value;

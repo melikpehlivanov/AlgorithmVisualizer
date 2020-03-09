@@ -39,10 +39,10 @@
             IEquatable<T>,
             IFormattable
         {
-            for (int i = 1; i <= data.Count - 1; i++)
+            for (var i = 1; i <= data.Count - 1; i++)
             {
-                bool isSortingMade = false;
-                for (int j = 0; j < data.Count - 1; j++)
+                var isSortingMade = false;
+                for (var j = 0; j < data.Count - 1; j++)
                 {
                     var firstElementIndex = j;
                     var adjacentElementIndex = j + 1;

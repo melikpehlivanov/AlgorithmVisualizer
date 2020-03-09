@@ -5,6 +5,6 @@
         Start,
         End,
         Wall,
-        Weight,
+        Weight
     }
 }

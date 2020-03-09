@@ -9,8 +9,8 @@
 
     public class AStarController : BasePathFindingController
     {
-        private readonly IMapper mapper;
         private readonly IAStarService aStarService;
+        private readonly IMapper mapper;
 
         public AStarController(IMapper mapper, IAStarService aStarService)
         {

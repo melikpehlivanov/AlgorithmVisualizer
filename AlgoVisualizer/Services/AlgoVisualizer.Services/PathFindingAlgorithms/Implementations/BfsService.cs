@@ -4,7 +4,6 @@
     using System.Linq;
     using Common.Utils;
     using Interfaces;
-    using Models;
     using Models.PathFinding;
     using Models.PathFinding.Bfs;
     using Models.PathFinding.Enums;
@@ -31,7 +30,9 @@
                 var currentNode = queue.Dequeue();
 
                 if (grid[currentNode.Row, currentNode.Col].NodeType == NodeType.Wall)
+                {
                     continue;
+                }
 
                 // Destination target found
                 if (currentNode.Equals(endNode))
@@ -44,8 +45,8 @@
                 allSteps.Add(currentNode);
 
                 // Up 
-                if (currentNode.Row - 1 >= 0 &&
-                    !grid[currentNode.Row - 1, currentNode.Col].IsVisited)
+                if (currentNode.Row - 1 >= 0
+                    && !grid[currentNode.Row - 1, currentNode.Col].IsVisited)
                 {
                     AddNodeToQueue(grid, queue, currentNode, currentNode.Row - 1, currentNode.Col);
                 }
@@ -58,15 +59,15 @@
                 }
 
                 // Down 
-                if (currentNode.Row + 1 < grid.GetLength(0) &&
-                    !grid[currentNode.Row + 1, currentNode.Col].IsVisited)
+                if (currentNode.Row + 1 < grid.GetLength(0)
+                    && !grid[currentNode.Row + 1, currentNode.Col].IsVisited)
                 {
                     AddNodeToQueue(grid, queue, currentNode, currentNode.Row + 1, currentNode.Col);
                 }
 
                 // Left 
-                if (currentNode.Col - 1 >= 0 &&
-                    !grid[currentNode.Row, currentNode.Col - 1].IsVisited)
+                if (currentNode.Col - 1 >= 0
+                    && !grid[currentNode.Row, currentNode.Col - 1].IsVisited)
                 {
                     AddNodeToQueue(grid, queue, currentNode, currentNode.Row, currentNode.Col - 1);
                 }

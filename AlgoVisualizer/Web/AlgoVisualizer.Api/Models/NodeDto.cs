@@ -9,10 +9,10 @@
     using Common;
     using Common.AutoMapping.Interfaces;
 
-    public class NodeDto : 
-        IMapWith<AStarNode>, 
-        IMapWith<DijkstraNode>, 
-        IMapWith<DfsNode>, 
+    public class NodeDto :
+        IMapWith<AStarNode>,
+        IMapWith<DijkstraNode>,
+        IMapWith<DfsNode>,
         IMapWith<BfsNode>,
         IMapWith<MazeNode>
     {
@@ -35,13 +35,13 @@
         public bool IsWall { get; set; }
 
         public string NodeType
-            => this.IsStart ? ModelConstants.StartNode 
-                : this.IsEnd ? ModelConstants.EndNode 
-                : this.IsWeight ? ModelConstants.WeightNode 
-                : this.IsWall ? ModelConstants.WallNode 
+            => this.IsStart ? ModelConstants.StartNode
+                : this.IsEnd ? ModelConstants.EndNode
+                : this.IsWeight ? ModelConstants.WeightNode
+                : this.IsWall ? ModelConstants.WallNode
                 : null;
 
-        public int Weight 
+        public int Weight
             => this.IsWeight ? ModelConstants.WeightNodeValue : ModelConstants.DefaultWeightNodeValue;
     }
 }

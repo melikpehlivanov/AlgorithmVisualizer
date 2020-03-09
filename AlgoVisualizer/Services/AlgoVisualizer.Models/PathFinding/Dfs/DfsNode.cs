@@ -17,8 +17,11 @@
 
         public NodeType? NodeType { get; set; }
 
+        public int CompareTo(object obj)
+            => 0;
+
         public override bool Equals(object obj)
-            => obj is DfsNode other && (this.Row == other.Row && this.Col == other.Col);
+            => obj is DfsNode other && this.Row == other.Row && this.Col == other.Col;
 
         public override int GetHashCode()
         {
@@ -27,8 +30,5 @@
                 return (this.Row * 397) ^ this.Col;
             }
         }
-
-        public int CompareTo(object obj)
-            => 0;
     }
 }

@@ -15,11 +15,9 @@
             IConvertible,
             IEquatable<T>,
             IFormattable
-        {
-            return data.SequenceEqual(unsortedData) ?
-                new Result(NotificationMessages.SortingAlgorithms.DataAlreadySortedErrorMessage)
+            => data.SequenceEqual(unsortedData)
+                ? new Result(NotificationMessages.SortingAlgorithms.DataAlreadySortedErrorMessage)
                 : new Result(swappingIndexes);
-        }
 
         public void Swap<T>(IList<T> data, int firstIndex, int secondIndex)
             where T : struct,

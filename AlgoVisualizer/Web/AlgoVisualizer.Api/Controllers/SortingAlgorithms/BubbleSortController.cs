@@ -7,8 +7,8 @@
 
     public class BubbleSortController : BaseSortingAlgorithmsController
     {
-        private readonly IMapper mapper;
         private readonly IBubbleSortService bubbleSortService;
+        private readonly IMapper mapper;
 
         public BubbleSortController(IMapper mapper, IBubbleSortService bubbleSortService)
         {

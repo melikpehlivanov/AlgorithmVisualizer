@@ -6,6 +6,10 @@
 
     public class DijkstraNode : INode
     {
+        public double Distance { get; set; } = double.PositiveInfinity;
+
+        public int Weight { get; set; } = ModelConstants.DefaultWeightNodeValue;
+
         [Required]
         public int Row { get; set; }
 
@@ -13,10 +17,6 @@
         public int Col { get; set; }
 
         public bool IsVisited { get; set; }
-
-        public double Distance { get; set; } = double.PositiveInfinity;
-
-        public int Weight { get; set; } = ModelConstants.DefaultWeightNodeValue;
 
         public INode PreviousNode { get; set; }
 
@@ -30,7 +30,7 @@
             };
 
         public override bool Equals(object obj)
-            => obj is INode other && (this.Row == other.Row && this.Col == other.Col);
+            => obj is INode other && this.Row == other.Row && this.Col == other.Col;
 
         public override int GetHashCode()
         {

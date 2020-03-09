@@ -58,7 +58,7 @@
         private void GenerateMazeFrame(MazeNode[,] grid, int row, int col, NodeType nodeType)
         {
             if (!CanTraverse(grid, row, col)
-                    || grid[row, col].IsVisited)
+                || grid[row, col].IsVisited)
             {
                 return;
             }
@@ -68,14 +68,17 @@
             {
                 this.GenerateMazeFrame(grid, row, col + 1, nodeType);
             }
+
             if (col == grid.GetLength(1) - 1)
             {
                 this.GenerateMazeFrame(grid, row + 1, col, nodeType);
             }
+
             if (row == grid.GetLength(0) - 1)
             {
                 this.GenerateMazeFrame(grid, row, col - 1, nodeType);
             }
+
             if (col == 0)
             {
                 this.GenerateMazeFrame(grid, row - 1, col, nodeType);
@@ -85,7 +88,8 @@
         private void SetNode(MazeNode[,] grid, int row, int col, NodeType nodeType, bool shouldRandomize = true)
         {
             var node = grid[row, col];
-            if (node.NodeType != NodeType.Start && node.NodeType != NodeType.End)
+            if (node.NodeType != NodeType.Start
+                && node.NodeType != NodeType.End)
             {
                 if (this.random.Next(1, 11) > 7)
                 {
@@ -106,8 +110,6 @@
             MazeNode[,] grid,
             int currentRowDirection,
             int currentColDirection)
-            => currentRowDirection >= 0 && currentColDirection >= 0
-                                        && (currentRowDirection < grid.GetLength(0)
-                                            && currentColDirection < grid.GetLength(1));
+            => currentRowDirection >= 0 && currentColDirection >= 0 && currentRowDirection < grid.GetLength(0) && currentColDirection < grid.GetLength(1);
     }
 }

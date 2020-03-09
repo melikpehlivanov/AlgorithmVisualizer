@@ -38,7 +38,7 @@
 
             var rowDirection = new[] { -1, 0, +1, 0 };
             var columnDirection = new[] { 0, +1, 0, -1 };
-            for (int i = 0; i < 4; i++)
+            for (var i = 0; i < 4; i++)
             {
                 var currentRowDirection = node.Row + rowDirection[i];
                 var currentColDirection = node.Col + columnDirection[i];
@@ -49,8 +49,11 @@
                 }
 
                 var nextNode = grid[currentRowDirection, currentColDirection];
-                if (nextNode.IsVisited || nextNode.NodeType == NodeType.Wall)
+                if (nextNode.IsVisited
+                    || nextNode.NodeType == NodeType.Wall)
+                {
                     continue;
+                }
 
                 nextNode.IsVisited = true;
                 path.Add(nextNode);
@@ -68,8 +71,6 @@
             DfsNode[,] grid,
             int currentRowDirection,
             int currentColDirection)
-            => currentRowDirection >= 0 && currentColDirection >= 0
-                                        && (currentRowDirection < grid.GetLength(0)
-                                            && currentColDirection < grid.GetLength(1));
+            => currentRowDirection >= 0 && currentColDirection >= 0 && currentRowDirection < grid.GetLength(0) && currentColDirection < grid.GetLength(1);
     }
 }
