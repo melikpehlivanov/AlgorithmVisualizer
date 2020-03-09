@@ -9,8 +9,8 @@
 
     public class BfsController : BasePathFindingController
     {
-        private readonly IMapper mapper;
         private readonly IBfsService bfsService;
+        private readonly IMapper mapper;
 
         public BfsController(IMapper mapper, IBfsService bfsService)
         {

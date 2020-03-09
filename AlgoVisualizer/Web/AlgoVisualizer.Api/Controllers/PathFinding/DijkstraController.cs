@@ -9,8 +9,8 @@
 
     public class DijkstraController : BasePathFindingController
     {
-        private readonly IMapper mapper;
         private readonly IDijkstraService dijkstraService;
+        private readonly IMapper mapper;
 
         public DijkstraController(IMapper mapper, IDijkstraService dijkstraService)
         {

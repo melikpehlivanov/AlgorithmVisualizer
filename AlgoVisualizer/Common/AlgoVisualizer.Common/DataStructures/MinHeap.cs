@@ -8,7 +8,7 @@
         private readonly IComparer<T> comparer;
         private readonly List<T> list = new List<T> { default };
 
-        public MinHeap() 
+        public MinHeap()
             : this(default(IComparer<T>))
         {
         }
@@ -18,12 +18,12 @@
             this.comparer = comparer ?? Comparer<T>.Default;
         }
 
-        public MinHeap(Comparison<T> comparison) 
+        public MinHeap(Comparison<T> comparison)
             : this(Comparer<T>.Create(comparison))
         {
         }
 
-        public int Count 
+        public int Count
             => this.list.Count - 1;
 
         public void Add(T element)
@@ -34,22 +34,27 @@
 
         public T Pop()
         {
-            T result = this.list[1];
+            var result = this.list[1];
             this.list[1] = this.list[^1];
             this.list.RemoveAt(this.list.Count - 1);
             this.ShiftDown(1);
             return result;
         }
 
-        private static int Parent(int i) => i / 2;
-        private static int Left(int i) => i * 2;
-        private static int Right(int i) => i * 2 + 1;
+        private static int Parent(int i)
+            => i / 2;
+
+        private static int Left(int i)
+            => i * 2;
+
+        private static int Right(int i)
+            => i * 2 + 1;
 
         private void ShiftUp(int i)
         {
             while (i > 1)
             {
-                int parent = Parent(i);
+                var parent = Parent(i);
                 if (this.comparer.Compare(this.list[i], this.list[parent]) > 0)
                 {
                     return;
@@ -62,11 +67,12 @@
 
         private void ShiftDown(int i)
         {
-            for (int left = Left(i); left < this.list.Count; left = Left(i))
+            for (var left = Left(i); left < this.list.Count; left = Left(i))
             {
-                int smallest = this.comparer.Compare(this.list[left], this.list[i]) <= 0 ? left : i;
-                int right = Right(i);
-                if (right < this.list.Count && this.comparer.Compare(this.list[right], this.list[smallest]) <= 0)
+                var smallest = this.comparer.Compare(this.list[left], this.list[i]) <= 0 ? left : i;
+                var right = Right(i);
+                if (right < this.list.Count
+                    && this.comparer.Compare(this.list[right], this.list[smallest]) <= 0)
                 {
                     smallest = right;
                 }

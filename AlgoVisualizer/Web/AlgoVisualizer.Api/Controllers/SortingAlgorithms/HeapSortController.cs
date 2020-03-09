@@ -7,8 +7,8 @@
 
     public class HeapSortController : BaseSortingAlgorithmsController
     {
-        private readonly IMapper mapper;
         private readonly IHeapSortService heapSortService;
+        private readonly IMapper mapper;
 
         public HeapSortController(IMapper mapper, IHeapSortService heapSortService)
         {

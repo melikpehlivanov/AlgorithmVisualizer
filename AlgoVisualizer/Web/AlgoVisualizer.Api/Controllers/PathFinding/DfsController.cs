@@ -9,8 +9,8 @@
 
     public class DfsController : BasePathFindingController
     {
-        private readonly IMapper mapper;
         private readonly IDfsService dfsService;
+        private readonly IMapper mapper;
 
         public DfsController(IMapper mapper, IDfsService dfsService)
         {

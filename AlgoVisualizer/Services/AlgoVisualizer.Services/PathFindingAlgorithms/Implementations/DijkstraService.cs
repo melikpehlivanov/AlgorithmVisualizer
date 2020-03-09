@@ -12,8 +12,8 @@
 
     public class DijkstraService : BaseService, IDijkstraService
     {
-        private DijkstraNode startNode;
         private DijkstraNode endNode;
+        private DijkstraNode startNode;
 
         public Result FindPath(DijkstraServiceModel model)
         {
@@ -38,7 +38,9 @@
                 var currentNode = heap.Pop();
 
                 if (grid[currentNode.Row, currentNode.Col].NodeType == NodeType.Wall)
+                {
                     continue;
+                }
 
                 // Destination target found
                 if (currentNode.Equals(this.endNode))
@@ -51,14 +53,15 @@
 
                 var rowDirection = new[] { -1, +1, 0, 0 };
                 var columnDirection = new[] { 0, 0, +1, -1 };
-                for (int i = 0; i < 4; i++)
+                for (var i = 0; i < 4; i++)
                 {
                     var currentRowDirection = currentNode.Row + rowDirection[i];
                     var currentColDirection = currentNode.Col + columnDirection[i];
 
-                    if ((currentRowDirection < 0 || currentColDirection < 0)
-                        || (currentRowDirection >= grid.GetLength(0)
-                            || currentColDirection >= grid.GetLength(1)))
+                    if (currentRowDirection < 0
+                        || currentColDirection < 0
+                        || currentRowDirection >= grid.GetLength(0)
+                        || currentColDirection >= grid.GetLength(1))
                     {
                         continue;
                     }
@@ -76,8 +79,11 @@
             DijkstraNode targetNode,
             MinHeap<DijkstraNode> heap)
         {
-            if (targetNode.IsVisited || !(targetNode.Distance > currentNode.Distance))
+            if (targetNode.IsVisited
+                || !(targetNode.Distance > currentNode.Distance))
+            {
                 return;
+            }
 
             var newDistance = currentNode.Distance + targetNode.Weight + this.AddAdditionalWeight(currentNode, targetNode);
             targetNode.Distance = newDistance < targetNode.Distance ? newDistance : int.MaxValue;

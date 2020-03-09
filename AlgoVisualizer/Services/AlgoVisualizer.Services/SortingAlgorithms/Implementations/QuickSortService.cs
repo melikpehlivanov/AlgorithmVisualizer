@@ -66,7 +66,6 @@
                     if (i != partitionIndex)
                     {
                         this.result.Add(new[] { i, partitionIndex });
-
                     }
 
                     partitionIndex++;
@@ -74,7 +73,7 @@
             }
 
             this.Swap(array, partitionIndex, end);
-            if(partitionIndex != end)
+            if (partitionIndex != end)
             {
                 this.result.Add(new[] { partitionIndex, end });
             }

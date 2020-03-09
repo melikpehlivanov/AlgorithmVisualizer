@@ -13,6 +13,8 @@
             this.Distance = distance;
         }
 
+        public double Distance { get; set; }
+
         [Required]
         public int Row { get; set; }
 
@@ -21,14 +23,15 @@
 
         public bool IsVisited { get; set; }
 
-        public double Distance { get; set; }
-
         public INode PreviousNode { get; set; }
 
         public NodeType? NodeType { get; set; }
 
+        public int CompareTo(object obj)
+            => 0;
+
         public override bool Equals(object obj)
-            => obj is BfsNode other && (this.Row == other.Row && this.Col == other.Col);
+            => obj is BfsNode other && this.Row == other.Row && this.Col == other.Col;
 
         public override int GetHashCode()
         {
@@ -37,8 +40,5 @@
                 return (this.Row * 397) ^ this.Col;
             }
         }
-
-        public int CompareTo(object obj)
-            => 0;
     }
 }

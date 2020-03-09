@@ -37,7 +37,9 @@
                 var currentNode = heap.Pop();
 
                 if (currentNode.NodeType == NodeType.Wall)
+                {
                     continue;
+                }
 
                 if (currentNode.Equals(endNode))
                 {
@@ -50,14 +52,15 @@
 
                 var rowDirection = new[] { -1, +1, 0, 0 };
                 var columnDirection = new[] { 0, 0, +1, -1 };
-                for (int i = 0; i < 4; i++)
+                for (var i = 0; i < 4; i++)
                 {
                     var currentRowDirection = currentNode.Row + rowDirection[i];
                     var currentColDirection = currentNode.Col + columnDirection[i];
 
-                    if ((currentRowDirection < 0 || currentColDirection < 0)
-                        || (currentRowDirection >= grid.GetLength(0)
-                            || currentColDirection >= grid.GetLength(1)))
+                    if (currentRowDirection < 0
+                        || currentColDirection < 0
+                        || currentRowDirection >= grid.GetLength(0)
+                        || currentColDirection >= grid.GetLength(1))
                     {
                         continue;
                     }
@@ -73,7 +76,9 @@
         private void AddNodeToHeap(AStarNode currentNode, AStarNode nextNode, INode end, MinHeap<AStarNode> heap)
         {
             if (nextNode.IsVisited)
+            {
                 return;
+            }
 
             var (additionalWeight, direction) = this.ApplyWeightAndDirection(currentNode, nextNode);
             var g = currentNode.GScore + nextNode.Weight + additionalWeight;
@@ -96,7 +101,7 @@
         {
             var dx = Math.Abs(end.Row - currentNode.Row);
             var dy = Math.Abs(end.Col - currentNode.Col);
-            return (dx + dy);
+            return dx + dy;
         }
 
         private (double weight, NodeDirection? Direction) ApplyWeightAndDirection(AStarNode nodeOne, INode nodeTwo)
@@ -106,7 +111,8 @@
             var x2 = nodeTwo.Row;
             var y2 = nodeTwo.Col;
 
-            if (x2 < x1 && y1 == y2)
+            if (x2 < x1
+                && y1 == y2)
             {
                 switch (nodeOne.Direction)
                 {
@@ -120,7 +126,8 @@
                         return (3, NodeDirection.Up);
                 }
             }
-            else if (x2 > x1 && y1 == y2)
+            else if (x2 > x1
+                     && y1 == y2)
             {
                 switch (nodeOne.Direction)
                 {
@@ -134,7 +141,9 @@
                         return (1, NodeDirection.Down);
                 }
             }
-            if (y2 < y1 && x1 == x2)
+
+            if (y2 < y1
+                && x1 == x2)
             {
                 switch (nodeOne.Direction)
                 {
@@ -148,7 +157,8 @@
                         return (2, NodeDirection.Left);
                 }
             }
-            else if (y2 > y1 && x1 == x2)
+            else if (y2 > y1
+                     && x1 == x2)
             {
                 switch (nodeOne.Direction)
                 {
