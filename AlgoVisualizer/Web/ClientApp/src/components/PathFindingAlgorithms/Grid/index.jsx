@@ -97,14 +97,12 @@ export const Grid = () => {
   return (
     <Fragment>
       <div>
-        <p className="text-center">{algorithmDescription}</p>
         {state.totalNodesExplored !== TOTAL_NODES_EXPLORED_DEFAULT_VALUE ? (
-          <div className="d-flex justify-content-center">
-            <p className="mr-1">Total nodes explored:</p>
-            <b>{state.totalNodesExplored}</b>
-          </div>
+          <p className="text-center">
+            Total nodes explored: <b>{state.totalNodesExplored}</b>
+          </p>
         ) : (
-          ''
+          <p className="text-center">{algorithmDescription}</p>
         )}
       </div>
 
