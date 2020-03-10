@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/AlgorithmVisualizer/static/css/main.67f6e225.chunk.css",
+    "main.js": "/AlgorithmVisualizer/static/js/main.2e76fa03.chunk.js",
+    "main.js.map": "/AlgorithmVisualizer/static/js/main.2e76fa03.chunk.js.map",
+    "runtime-main.js": "/AlgorithmVisualizer/static/js/runtime-main.74c4ec8e.js",
+    "runtime-main.js.map": "/AlgorithmVisualizer/static/js/runtime-main.74c4ec8e.js.map",
+    "static/css/2.67123b20.chunk.css": "/AlgorithmVisualizer/static/css/2.67123b20.chunk.css",
+    "static/js/2.c128da40.chunk.js": "/AlgorithmVisualizer/static/js/2.c128da40.chunk.js",
+    "static/js/2.c128da40.chunk.js.map": "/AlgorithmVisualizer/static/js/2.c128da40.chunk.js.map",
+    "index.html": "/AlgorithmVisualizer/index.html",
+    "precache-manifest.a8db93120d918ba8796f89a617640891.js": "/AlgorithmVisualizer/precache-manifest.a8db93120d918ba8796f89a617640891.js",
+    "service-worker.js": "/AlgorithmVisualizer/service-worker.js",
+    "static/css/2.67123b20.chunk.css.map": "/AlgorithmVisualizer/static/css/2.67123b20.chunk.css.map",
+    "static/css/main.67f6e225.chunk.css.map": "/AlgorithmVisualizer/static/css/main.67f6e225.chunk.css.map",
+    "static/js/2.c128da40.chunk.js.LICENSE": "/AlgorithmVisualizer/static/js/2.c128da40.chunk.js.LICENSE"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.74c4ec8e.js",
+    "static/css/2.67123b20.chunk.css",
+    "static/js/2.c128da40.chunk.js",
+    "static/css/main.67f6e225.chunk.css",
+    "static/js/main.2e76fa03.chunk.js"
+  ]
+}
