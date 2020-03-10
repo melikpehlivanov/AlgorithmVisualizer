@@ -47,6 +47,7 @@ export const PathfindingAlgorithmsNavbar = () => {
     if (!state.isNavbarClickable) return;
     dispatch(setAlgorithm(algorithm));
     dispatch(setAlgorithmDescription(algorithmDescription));
+    dispatch(setTotalNodesExplored(TOTAL_NODES_EXPLORED_DEFAULT_VALUE));
   };
 
   const handleMazeGeneration = async (grid, mazeType) => {
