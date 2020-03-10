@@ -19,4 +19,6 @@
 * Heap sort
 * Quick sort
 
+# My initial idea was to learn algorithms and react in the meantime so I decided to build this project. Firstly, I used react-redux and then switched to react-hooks in order to practice React. If you're interested to see how it's built with react-redux and react-hooks, check the branches.
+
 P.S Many more algorithms are going to come out with the next version of this application. By the way, if you like to project feel free to give it a star.
