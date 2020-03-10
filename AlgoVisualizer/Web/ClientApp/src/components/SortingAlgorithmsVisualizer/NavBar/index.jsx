@@ -22,7 +22,7 @@ import { clearErrors, showError } from '../../../store/error/actions';
 import { makePostApiCallAsync } from '../../../helpers/fetchData';
 import { visualizeArrayElementsSwapping } from '../../../helpers/sortingAlgorithmsHelper';
 
-const SortingAlgorithmsNavbar = () => {
+export const SortingAlgorithmsNavbar = () => {
   const [algorithm, setAlgorithm] = useState('');
   const { state, dispatch } = useContext(SortingAlgorithmsContext);
   const { dispatchError } = useContext(ErrorContext);
@@ -150,5 +150,3 @@ const SortingAlgorithmsNavbar = () => {
     </Fragment>
   );
 };
-
-export default SortingAlgorithmsNavbar;

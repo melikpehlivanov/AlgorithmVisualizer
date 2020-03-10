@@ -2,7 +2,7 @@ import React from 'react';
 import './index.css';
 import { Link } from 'react-router-dom';
 
-const NotFound = () => {
+export const NotFound = () => {
   return (
     <div id="notfound">
       <div class="notfound">
@@ -21,5 +21,3 @@ const NotFound = () => {
     // <!-- This template was made by Colorlib (https://colorlib.com) -->
   );
 };
-
-export default NotFound;

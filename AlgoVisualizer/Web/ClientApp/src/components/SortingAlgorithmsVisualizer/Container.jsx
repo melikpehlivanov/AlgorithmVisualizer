@@ -4,7 +4,7 @@ import { SortingAlgorithmsContext } from '../../store/sortingAlgorithms/context'
 import { initializeChartData } from '../../store/sortingAlgorithms/actions';
 import { Spinner } from 'react-bootstrap';
 
-const SortingAlgorithmsContainer = () => {
+export const SortingAlgorithmsContainer = () => {
   const { state, dispatch } = useContext(SortingAlgorithmsContext);
   useEffect(() => {
     dispatch(initializeChartData());
@@ -32,5 +32,3 @@ const SortingAlgorithmsContainer = () => {
     </Fragment>
   );
 };
-
-export default SortingAlgorithmsContainer;

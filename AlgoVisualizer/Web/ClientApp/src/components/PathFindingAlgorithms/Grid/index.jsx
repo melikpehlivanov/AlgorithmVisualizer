@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useContext } from 'react';
-import Node from './Node';
+import { Node } from './Node';
 import {
   initializeGrid,
   setStartNode,
@@ -18,7 +18,7 @@ const ShiftKeyCode = 16;
 const KeyDownEvent = 'keydown';
 const KeyUpEvent = 'keyup';
 
-const Grid = () => {
+export const Grid = () => {
   const { state, dispatch } = useContext(PathFindingAlgorithmsContext);
   const [isMouseStillClicked, setIsMouseStillClicked] = useState(false);
   const [isShiftStillPressed, setIsShiftStillPressed] = useState(false);
@@ -139,5 +139,3 @@ const Grid = () => {
     </Fragment>
   );
 };
-
-export default Grid;

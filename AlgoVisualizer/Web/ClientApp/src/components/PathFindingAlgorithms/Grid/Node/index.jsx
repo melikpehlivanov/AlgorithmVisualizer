@@ -2,7 +2,7 @@ import React from 'react';
 
 import './index.css';
 
-const Node = props => {
+export const Node = props => {
   const { row, col, isStart, isEnd, isWall, isWeight } = props.node;
   const extraClassName = isStart
     ? 'node-start'
@@ -25,5 +25,3 @@ const Node = props => {
     </div>
   );
 };
-
-export default Node;

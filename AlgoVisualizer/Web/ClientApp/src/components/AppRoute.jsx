@@ -1,8 +1,8 @@
 import React, { Fragment } from 'react';
 import { Route } from 'react-router';
-import MainLayout from './Home/Layout';
+import { MainLayout } from './Home/Layout';
 
-const AppRoute = ({
+export const AppRoute = ({
   component: Component,
   layout: Layout = MainLayout,
   ...rest
@@ -22,5 +22,3 @@ const AppRoute = ({
     )}
   />
 );
-
-export default AppRoute;

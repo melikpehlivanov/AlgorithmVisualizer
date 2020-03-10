@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { Container } from 'reactstrap';
 import { NavMenu } from './NavMenu';
 
-const MainLayout = props => {
+export const MainLayout = props => {
   return (
     <Fragment>
       <NavMenu />
@@ -10,5 +10,3 @@ const MainLayout = props => {
     </Fragment>
   );
 };
-
-export default MainLayout;

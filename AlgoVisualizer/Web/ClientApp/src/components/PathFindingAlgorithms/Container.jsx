@@ -1,9 +1,9 @@
 import React, { Fragment, useState, useEffect } from 'react';
-import VerticallyCenteredModal from '../Modal/VerticallyCenteredModal';
+import { VerticallyCenteredModal } from '../Modal/VerticallyCenteredModal';
 import { modalTutorialContent } from '../../constants/gridConstants';
-import Grid from './Grid';
+import { Grid } from './Grid';
 
-const PathFindingAlgorithmsContainer = () => {
+export const PathFindingAlgorithmsContainer = () => {
   const [modalShow, setModalShow] = useState(false);
   const [pageNumber, setPageNumber] = useState(1);
 
@@ -73,5 +73,3 @@ const PathFindingAlgorithmsContainer = () => {
     </Fragment>
   );
 };
-
-export default PathFindingAlgorithmsContainer;
