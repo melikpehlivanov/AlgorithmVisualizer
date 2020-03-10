@@ -1,11 +1,11 @@
 import React, { Fragment } from 'react';
 import './index.css';
-import PathfindingAlgorithmsNavbar from '../Nav';
-import Error from '../../Error';
+import { PathfindingAlgorithmsNavbar } from '../Nav';
+import { Error } from '../../Error';
 import { PathFindingAlgorithmsProvider } from '../../../store/pathFindingAlgorithms/context';
 import { ErrorProvider } from '../../../store/error/context';
 
-const PathFindingAlgorithmsLayout = props => {
+export const PathFindingAlgorithmsLayout = props => {
   return (
     <PathFindingAlgorithmsProvider>
       <ErrorProvider>
@@ -18,5 +18,3 @@ const PathFindingAlgorithmsLayout = props => {
     </PathFindingAlgorithmsProvider>
   );
 };
-
-export default PathFindingAlgorithmsLayout;

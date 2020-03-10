@@ -3,7 +3,7 @@ import { Alert } from 'react-bootstrap';
 import { ErrorContext } from '../../store/error/context';
 import { clearErrors } from '../../store/error/actions';
 
-const Error = () => {
+export const Error = () => {
   const { state, dispatchError } = useContext(ErrorContext);
 
   return state.showError ? (
@@ -22,5 +22,3 @@ const Error = () => {
     </Alert>
   ) : null;
 };
-
-export default Error;

@@ -1,13 +1,13 @@
 import React from 'react';
 import { Switch, Redirect } from 'react-router';
 import { Home } from './components/Home';
-import PathFindingAlgorithmsLayout from './components/PathFindingAlgorithms/Layout';
+import { PathFindingAlgorithmsLayout } from './components/PathFindingAlgorithms/Layout';
 import { SortingAlgorithmsLayout } from './components/SortingAlgorithmsVisualizer/Layout';
-import SortingAlgorithmsContainer from './components/SortingAlgorithmsVisualizer/Container';
+import { SortingAlgorithmsContainer } from './components/SortingAlgorithmsVisualizer/Container';
 
-import AppRoute from './components/AppRoute';
-import NotFound from './components/Error/NotFound';
-import PathFindingAlgorithmsContainer from './components/PathFindingAlgorithms/Container';
+import { AppRoute } from './components/AppRoute';
+import { NotFound } from './components/Error/NotFound';
+import { PathFindingAlgorithmsContainer } from './components/PathFindingAlgorithms/Container';
 
 const App = () => {
   return (

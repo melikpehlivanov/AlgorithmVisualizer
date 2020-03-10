@@ -1,4 +1,4 @@
-import React, { useContext, Fragment } from 'react';
+import React, { useContext, Fragment, useState } from 'react';
 import {
   Navbar,
   NavDropdown,
@@ -10,14 +10,6 @@ import {
 } from 'react-bootstrap';
 import { NavLink } from 'reactstrap';
 import { Link } from 'react-router-dom';
-import {
-  setAlgorithm,
-  setAlgorithmDescription,
-  clearState,
-  setIsNavbarClickable,
-  clearGrid,
-  setTotalNodesExplored
-} from '../../../store/pathFindingAlgorithms/actions';
 import { makePostApiCallAsync } from '../../../helpers/fetchData';
 import {
   visualizeResult,
@@ -28,16 +20,24 @@ import {
   MAZE_TYPES,
   MAZE_API_URL
 } from '../../../constants/algorithmConstants';
+import { DEFAULT_ERROR_MESSAGE } from '../../../constants/errorConstants';
+
+import {
+  setAlgorithm,
+  setAlgorithmDescription,
+  clearState,
+  setIsNavbarClickable,
+  clearGrid,
+  setTotalNodesExplored
+} from '../../../store/pathFindingAlgorithms/actions';
 import { showError, clearErrors } from '../../../store/error/actions';
 import { ErrorContext } from '../../../store/error/context';
 import { PathFindingAlgorithmsContext } from '../../../store/pathFindingAlgorithms/context';
+import { TOTAL_NODES_EXPLORED_DEFAULT_VALUE } from '../../../constants/gridConstants';
 
 import './index.css';
-import { DEFAULT_ERROR_MESSAGE } from '../../../constants/errorConstants';
-import { TOTAL_NODES_EXPLORED_DEFAULT_VALUE } from '../../../constants/gridConstants';
-import { useState } from 'react';
 
-const PathfindingAlgorithmsNavbar = () => {
+export const PathfindingAlgorithmsNavbar = () => {
   const { state, dispatch } = useContext(PathFindingAlgorithmsContext);
   const { dispatchError } = useContext(ErrorContext);
   const [showAlgorithmsMenu, setShowAlgorithmsMenu] = useState(false);
@@ -231,5 +231,3 @@ const PathfindingAlgorithmsNavbar = () => {
     </Navbar>
   );
 };
-
-export default PathfindingAlgorithmsNavbar;
