@@ -45,6 +45,7 @@ export const PathfindingAlgorithmsNavbar = () => {
 
   const handleOnClick = (algorithm, algorithmDescription) => {
     if (!state.isNavbarClickable) return;
+    dispatch(setTotalNodesExplored(TOTAL_NODES_EXPLORED_DEFAULT_VALUE));
     dispatch(setAlgorithm(algorithm));
     dispatch(setAlgorithmDescription(algorithmDescription));
   };
