@@ -20,4 +20,4 @@
 * Heap sort
 * Quick sort
 
-P.S Many more algorithms are going to come out with the next version of this application. By the way, if you like to project feel free to give it a star.
+P.S Many more algorithms are going to come out with the next version of this application. By the way, if you like the project feel free to give it a star.
