@@ -169,10 +169,14 @@
 
             this.swappingIndexes.Add(new[] { swappingIndex, element.CurrentIndex });
 
-            foreach (var item in newArray.Where(x => x.Value.CompareTo(temp) == 0))
+            var elementsToIterateThrough = newArray.Where(x => x.Value.CompareTo(temp) == 0);
+            foreach (var item in elementsToIterateThrough)
             {
                 item.CurrentIndex = element.CurrentIndex;
-                element.CurrentIndex++;
+                if (elementsToIterateThrough.Count() > 1)
+                {
+                    element.CurrentIndex++;
+                }
             }
 
             element.CurrentIndex = swappingIndex;
