@@ -144,13 +144,9 @@
             {
                 var element = newArray[i];
                 var swappingIndex = start + i;
-                if (array[start + i].CompareTo(element.Value) != 0)
+                if (array[swappingIndex].CompareTo(element.Value) != 0)
                 {
                     this.AddSwappingIndexes(array, newArray, swappingIndex, element);
-                }
-                else
-                {
-                    array[swappingIndex] = element.Value;
                 }
             }
         }
@@ -173,7 +169,16 @@
 
             this.swappingIndexes.Add(new[] { swappingIndex, element.CurrentIndex });
 
-            newArray.First(x => x.Value.CompareTo(temp) == 0).CurrentIndex = element.CurrentIndex;
+            var elementsToIterateThrough = newArray.Where(x => x.Value.CompareTo(temp) == 0);
+            foreach (var item in elementsToIterateThrough)
+            {
+                item.CurrentIndex = element.CurrentIndex;
+                if (elementsToIterateThrough.Count() > 1)
+                {
+                    element.CurrentIndex++;
+                }
+            }
+
             element.CurrentIndex = swappingIndex;
         }
     }
