@@ -54,6 +54,7 @@ export const PathfindingAlgorithmsNavbar = () => {
     if (!state.isNavbarClickable) return;
 
     dispatch(clearState());
+    dispatch(clearErrors());
 
     const url = `${MAZE_API_URL}/${mazeType}`;
     dispatch(setIsNavbarClickable(false));
