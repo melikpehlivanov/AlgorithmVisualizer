@@ -12,7 +12,7 @@ export const SortingAlgorithmsContainer = () => {
 
   return (
     <Fragment>
-      {state.totalSwaps ? (
+      {state.totalSwaps !== 0 ? (
         <div className="d-flex pb-3 justify-content-center">
           <p className="mr-1">Total swaps:</p>
           <p>{state.totalSwaps}</p>

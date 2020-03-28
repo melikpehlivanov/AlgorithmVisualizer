@@ -17,10 +17,11 @@ import {
   setTotalSwaps
 } from '../../../store/sortingAlgorithms/actions';
 import { ErrorContext } from '../../../store/error/context';
-import { SORTING_ALGORITHMS_API_URL } from '../../../constants/algorithmConstants';
 import { clearErrors, showError } from '../../../store/error/actions';
 import { makePostApiCallAsync } from '../../../helpers/fetchData';
 import { visualizeArrayElementsSwapping } from '../../../helpers/sortingAlgorithmsHelper';
+import { TOTAL_SWAPS_DEFAULT_VALUE } from '../../../constants/sortingAlgorithmsConstants';
+import { SORTING_ALGORITHMS_API_URL } from '../../../constants/apiConstants';
 
 export const SortingAlgorithmsNavbar = () => {
   const [algorithm, setAlgorithm] = useState('');
@@ -30,6 +31,7 @@ export const SortingAlgorithmsNavbar = () => {
 
   const fetchData = async () => {
     dispatchError(clearErrors());
+    dispatch(setTotalSwaps(TOTAL_SWAPS_DEFAULT_VALUE));
 
     const url = `${SORTING_ALGORITHMS_API_URL}/${algorithm.value}`;
     dispatch(setIsNavbarClickable(false));
@@ -121,7 +123,7 @@ export const SortingAlgorithmsNavbar = () => {
                         role="status"
                         aria-hidden="true"
                       />
-                      Visualizing...
+                      Visualizing {algorithm.label} ...
                     </Fragment>
                   ) : (
                     `Visualize ${algorithm.label}`

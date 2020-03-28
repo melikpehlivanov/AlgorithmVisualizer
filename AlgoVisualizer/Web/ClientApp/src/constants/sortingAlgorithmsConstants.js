@@ -9,3 +9,27 @@ export const SET_BAR_CHART_ELEMENT_BACKGROUND_COLOR =
   'SET_BAR_CHART_ELEMENT_BACKGROUND_COLOR';
 
 export const SET_TOTAL_SWAPS = 'SET_TOTAL_SWAPS';
+export const TOTAL_SWAPS_DEFAULT_VALUE = 0;
+
+export const availableSortingAlgorithms = [
+  {
+    value: 'mergesort',
+    label: 'Merge sort'
+  },
+  {
+    value: 'bubblesort',
+    label: 'Bubble Sort'
+  },
+  {
+    value: 'heapsort',
+    label: 'Heap Sort'
+  },
+  {
+    value: 'quicksort',
+    label: 'Quick Sort'
+  },
+  {
+    value: 'selectionsort',
+    label: 'Selection Sort'
+  }
+];
