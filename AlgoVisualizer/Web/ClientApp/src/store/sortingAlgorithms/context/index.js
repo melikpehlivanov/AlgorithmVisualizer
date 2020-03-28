@@ -1,7 +1,9 @@
 import React, { createContext, useReducer } from 'react';
 import sortingAlgorithmsReducer from '../reducers';
-import { availableSortingAlgorithms } from '../../../constants/algorithmConstants';
-import { TOTAL_SWAPS_DEFAULT_VALUE } from '../../../constants/sortingAlgorithmsConstants';
+import {
+  TOTAL_SWAPS_DEFAULT_VALUE,
+  availableSortingAlgorithms
+} from '../../../constants/sortingAlgorithmsConstants';
 
 export const initialState = {
   isLoading: true,

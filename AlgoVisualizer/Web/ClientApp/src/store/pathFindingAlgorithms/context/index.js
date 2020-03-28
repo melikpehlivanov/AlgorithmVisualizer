@@ -7,7 +7,7 @@ import {
   END_NODE_COL,
   TOTAL_NODES_EXPLORED_DEFAULT_VALUE
 } from '../../../constants/gridConstants';
-import { availablePathFindingAlgorithms } from '../../../constants/algorithmConstants';
+import { availablePathFindingAlgorithms } from '../../../constants/pathfindingAlgorithms';
 
 export const initialState = {
   isLoading: true,

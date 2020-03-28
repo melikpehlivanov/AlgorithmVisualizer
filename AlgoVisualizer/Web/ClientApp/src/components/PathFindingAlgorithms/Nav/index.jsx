@@ -15,11 +15,7 @@ import {
   visualizeResult,
   visualizeMazeGeneration
 } from '../../../helpers/pathFindingAlgorithms/dataVisualizer';
-import {
-  PATHFINDING_ALGORITHMS_API_URL,
-  MAZE_TYPES,
-  MAZE_API_URL
-} from '../../../constants/algorithmConstants';
+import { MAZE_TYPES } from '../../../constants/pathfindingAlgorithms';
 import { DEFAULT_ERROR_MESSAGE } from '../../../constants/errorConstants';
 
 import {
@@ -34,6 +30,10 @@ import { showError, clearErrors } from '../../../store/error/actions';
 import { ErrorContext } from '../../../store/error/context';
 import { PathFindingAlgorithmsContext } from '../../../store/pathFindingAlgorithms/context';
 import { TOTAL_NODES_EXPLORED_DEFAULT_VALUE } from '../../../constants/gridConstants';
+import {
+  MAZE_API_URL,
+  PATHFINDING_ALGORITHMS_API_URL
+} from '../../../constants/apiConstants';
 
 import './index.css';
 
