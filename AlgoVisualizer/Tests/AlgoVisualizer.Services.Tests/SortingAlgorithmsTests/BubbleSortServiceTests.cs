@@ -75,6 +75,28 @@
         }
 
         [Fact]
+        public void Sort_With_ValidInput_Should_Return_Correct_TotalSwaps()
+        {
+            // Arrange
+            const int expectedTotalSwaps = 3;
+
+            // We should swap
+            // 1. Elements 50, 10 with indexes 0 and 1
+            // 2. Elements 50, 30 with indexes 1 and 2
+            // 3. Elements 50, 40 with indexes 2 and 3
+            var data = new int[] { 50, 10, 30, 40, 90 };
+
+            // Act
+            var result = this.bubbleSortService.Sort(data);
+
+            // Assert
+            result
+                .TotalSwaps
+                .Should()
+                .Be(expectedTotalSwaps);
+        }
+
+        [Fact]
         public void Sort_With_AlreadySortedData_Should_Return_DataAlreadySortedErrorMessage()
         {
             // Arrange
