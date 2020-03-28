@@ -115,7 +115,7 @@
         }
 
         [Fact]
-        public void Sort_With_InvalidInput_Should_Return_EmptyErrorMessage()
+        public void Sort_With_NoElements_Should_Return_EmptyArrayErrorMessage()
         {
             // Act
             var result = this.bubbleSortService.Sort(new int[0]);
