@@ -1,5 +1,6 @@
 ﻿namespace AlgoVisualizer.Services.Tests.SortingAlgorithmsTests
 {
+    using System.Collections.Generic;
     using Common;
     using FluentAssertions;
     using Models.SortingAlgorithms;
@@ -14,6 +15,22 @@
         public BubbleSortServiceTests()
         {
             this.bubbleSortService = new BubbleSortService();
+        }
+
+        [Fact]
+        public void Sort_With_ValidInput_Should_Not_Return_ErrorMessage()
+        {
+            // Arrange
+            const int arrayLength = 50;
+            var data = this.GenerateRandomArray(arrayLength);
+
+            // Act
+            var result = this.bubbleSortService.Sort(data);
+
+            // Assert
+            result
+                .Should()
+                .Match(x => x.As<Result>().ErrorMessage == null);
         }
 
         [Fact]

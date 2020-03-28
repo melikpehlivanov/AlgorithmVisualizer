@@ -1,6 +1,7 @@
 ﻿namespace AlgoVisualizer.Services.Tests
 {
     using System;
+    using System.Collections.Generic;
 
     public abstract class BaseTest
     {
@@ -28,6 +29,19 @@
             }
 
             return data;
+        }
+
+        protected void Swap<T>(IList<T> data, int firstIndex, int secondIndex)
+            where T : struct,
+            IComparable,
+            IComparable<T>,
+            IConvertible,
+            IEquatable<T>,
+            IFormattable
+        {
+            var firstElement = data[firstIndex];
+            data[firstIndex] = data[secondIndex];
+            data[secondIndex] = firstElement;
         }
     }
 }
