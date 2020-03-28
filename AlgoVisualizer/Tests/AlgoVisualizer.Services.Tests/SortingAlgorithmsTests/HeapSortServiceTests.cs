@@ -86,6 +86,36 @@
                 .BeInAscendingOrder();
         }
 
+        [Fact]
+        public void Sort_With_ValidInput_Should_Return_Correct_TotalSwaps()
+        {
+            // Arrange
+            const int expectedTotalSwaps = 11;
+
+            // We should swap
+            // 1. Indexes 1 and 4
+            // 2. Indexes 0 and 1
+            // 3. Indexes 0 and 5
+            // 4. Indexes 0 and 4
+            // 5. Indexes 0 and 1
+            // 6. Indexes 1 and 3
+            // 7. Indexes 0 and 3
+            // 8. Indexes 1 and 0
+            // 9. Indexes 0 and 2
+            // 10. Indexes 0 and 1
+            // 11. Indexes 0 and 0
+            var data = new[] { 50, 10, 30, 40, 90, 60 }; 
+
+            // Act
+            var result = this.heapSortService.Sort(data);
+
+            // Assert
+            result
+                .TotalSwaps
+                .Should()
+                .Be(expectedTotalSwaps);
+        }
+
         private void SortArrayWithGivenIndexes(IEnumerable<int[]> swapIndexes, IList<int> untouchedData)
         {
             foreach (var swappingIndexes in swapIndexes)
