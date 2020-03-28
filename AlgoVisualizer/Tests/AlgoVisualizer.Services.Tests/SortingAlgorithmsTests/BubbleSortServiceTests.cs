@@ -33,5 +33,19 @@
                 .And
                 .Match(x => x.As<Result>().ErrorMessage == NotificationMessages.SortingAlgorithms.DataAlreadySortedErrorMessage);
         }
+
+        [Fact]
+        public void Sort_With_InvalidInput_Should_Return_EmptyErrorMessage()
+        {
+            // Act
+            var result = this.bubbleSortService.Sort(new int[0]);
+
+            // Assert
+            result
+                .Should()
+                .Match(x => x.As<Result>().ErrorMessage != null)
+                .And
+                .Match(x => x.As<Result>().ErrorMessage == NotificationMessages.SortingAlgorithms.EmptyArrayErrorMessage);
+        }
     }
 }
