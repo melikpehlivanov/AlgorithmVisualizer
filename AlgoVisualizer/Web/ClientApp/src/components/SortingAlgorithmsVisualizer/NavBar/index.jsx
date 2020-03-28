@@ -21,6 +21,7 @@ import { SORTING_ALGORITHMS_API_URL } from '../../../constants/algorithmConstant
 import { clearErrors, showError } from '../../../store/error/actions';
 import { makePostApiCallAsync } from '../../../helpers/fetchData';
 import { visualizeArrayElementsSwapping } from '../../../helpers/sortingAlgorithmsHelper';
+import { TOTAL_SWAPS_DEFAULT_VALUE } from '../../../constants/sortingAlgorithmsConstants';
 
 export const SortingAlgorithmsNavbar = () => {
   const [algorithm, setAlgorithm] = useState('');
@@ -30,6 +31,7 @@ export const SortingAlgorithmsNavbar = () => {
 
   const fetchData = async () => {
     dispatchError(clearErrors());
+    dispatch(setTotalSwaps(TOTAL_SWAPS_DEFAULT_VALUE));
 
     const url = `${SORTING_ALGORITHMS_API_URL}/${algorithm.value}`;
     dispatch(setIsNavbarClickable(false));
