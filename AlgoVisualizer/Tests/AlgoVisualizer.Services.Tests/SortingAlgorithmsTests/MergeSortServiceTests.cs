@@ -8,13 +8,13 @@
     using SortingAlgorithms.Interfaces;
     using Xunit;
 
-    public class HeapSortServiceTests : BaseTest
+    public class MergeSortServiceTests : BaseTest
     {
-        private readonly IHeapSortService heapSortService;
+        private readonly IMergeSortService mergeSortService;
 
-        public HeapSortServiceTests()
+        public MergeSortServiceTests()
         {
-            this.heapSortService = new HeapSortService();
+            this.mergeSortService = new MergeSortService();
         }
 
         [Fact]
@@ -25,7 +25,7 @@
             var sortedData = this.GenerateSortedArray(arrayLength);
 
             // Act
-            var result = this.heapSortService.Sort(sortedData);
+            var result = this.mergeSortService.Sort(sortedData);
 
             // Assert
             result
@@ -39,7 +39,7 @@
         public void Sort_With_NoElements_Should_Return_EmptyArrayErrorMessage()
         {
             // Act
-            var result = this.heapSortService.Sort(new int[0]);
+            var result = this.mergeSortService.Sort(new int[0]);
 
             // Assert
             result
@@ -57,7 +57,7 @@
             var data = this.GenerateRandomArray(arrayLength);
 
             // Act
-            var result = this.heapSortService.Sort(data);
+            var result = this.mergeSortService.Sort(data);
 
             // Assert
             result
@@ -69,12 +69,12 @@
         public void Sort_With_ValidInput_Should_Return_Correct_SwapIndexes()
         {
             // Arrange
-            const int arrayLength = 4;
+            const int arrayLength = 10;
             var data = this.GenerateRandomArray(arrayLength);
             var untouchedData = new List<int>(data);
 
             // Act
-            var result = this.heapSortService.Sort(data);
+            var result = this.mergeSortService.Sort(data);
 
             // Sort the array with the given indexes
             this.SortArrayWithGivenIndexes(result.SwapIndexes, untouchedData);
@@ -89,27 +89,22 @@
         public void Sort_With_ValidInput_Should_Return_Correct_TotalSwaps()
         {
             // Arrange
-            const int expectedTotalSwaps = 10;
+            const int expectedTotalSwaps = 6;
 
             // We should swap
-            // 1. Indexes 1 and 4
-            // 2. Indexes 0 and 1
-            // 3. Indexes 0 and 4
-            // 4. Indexes 0 and 1
-            // 6. Indexes 1 and 3
-            // 7. Indexes 0 and 3
-            // 8. Indexes 0 and 1
-            // 9. Indexes 0 and 2
-            // 10. Indexes 0 and 1
-            // 11. Indexes 0 and 0
-            var data = new[] { 50, 10, 30, 40, 90 }; 
+            // 1. Indexes 3 and 4
+            // 2. Indexes 4 and 5
+            // 3. Indexes 0 and 3
+            // 4. Indexes 1 and 4
+            // 5. Indexes 2 and 3
+            // 6. Indexes 3 and 5
+            var data = new[] { 20, 80, 100, 30, 9, 10 };
 
             // Act
-            var result = this.heapSortService.Sort(data);
+            var result = this.mergeSortService.Sort(data)?.TotalSwaps;
 
             // Assert
             result
-                .TotalSwaps
                 .Should()
                 .Be(expectedTotalSwaps);
         }
@@ -118,11 +113,11 @@
         public void Sort_With_ValidInput_Should_Return_SortedData()
         {
             // Arrange
-            const int arrayLength = 40;
+            const int arrayLength = 30;
             var data = this.GenerateRandomArray(arrayLength);
 
             // Act
-            this.heapSortService.Sort(data);
+            this.mergeSortService.Sort(data);
 
             // Assert
             data
