@@ -129,15 +129,5 @@
                 .Should()
                 .BeInAscendingOrder();
         }
-
-        private void SortArrayWithGivenIndexes(IEnumerable<int[]> swapIndexes, IList<int> untouchedData)
-        {
-            foreach (var swappingIndexes in swapIndexes)
-            {
-                var firstIndex = swappingIndexes[0];
-                var secondIndex = swappingIndexes[1];
-                this.Swap(untouchedData, firstIndex, secondIndex);
-            }
-        }
     }
 }
