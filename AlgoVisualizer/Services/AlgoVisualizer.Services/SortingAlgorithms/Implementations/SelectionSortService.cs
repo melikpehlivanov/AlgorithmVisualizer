@@ -38,16 +38,16 @@
             IEquatable<T>,
             IFormattable
         {
-            int zeroIndex = 0;
-            int indexOfMinElement = FindIndexOfFirstMinElement(data);
+            //int zeroIndex = 0;
+            //int indexOfMinElement = FindIndexOfFirstMinElement(data);
 
-            if (indexOfMinElement != zeroIndex)
-            {
-                swappingIndexes.Add(new int[] { zeroIndex, indexOfMinElement });
-                this.Swap(data, zeroIndex, indexOfMinElement);
-            }
+            //if (indexOfMinElement != zeroIndex)
+            //{
+            //    swappingIndexes.Add(new int[] { zeroIndex, indexOfMinElement });
+            //    this.Swap(data, zeroIndex, indexOfMinElement);
+            //}
 
-            for (int i = 1; i < data.Length - 1; i++)
+            for (int i = 0; i < data.Length - 1; i++)
             {
                 T currentElement = data[i];
                 int indexOfSmallestElement = GetIndexOfSmallestElement(data, currentElement, i);
