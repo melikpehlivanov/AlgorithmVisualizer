@@ -38,15 +38,6 @@
             IEquatable<T>,
             IFormattable
         {
-            //int zeroIndex = 0;
-            //int indexOfMinElement = FindIndexOfFirstMinElement(data);
-
-            //if (indexOfMinElement != zeroIndex)
-            //{
-            //    swappingIndexes.Add(new int[] { zeroIndex, indexOfMinElement });
-            //    this.Swap(data, zeroIndex, indexOfMinElement);
-            //}
-
             for (int i = 0; i < data.Length - 1; i++)
             {
                 T currentElement = data[i];
@@ -81,27 +72,6 @@
             }
 
             return indexOfSmallestElement;
-        }
-
-        private int FindIndexOfFirstMinElement<T>(T[] data)
-            where T : struct,
-            IComparable,
-            IComparable<T>,
-            IConvertible,
-            IEquatable<T>,
-            IFormattable
-        {
-            T minElement = data.First();
-
-            for (int i = 1; i < data.Length; i++)
-            {
-                if (minElement.CompareTo(data[i]) == 1)
-                {
-                    minElement = data[i];
-                }
-            }
-
-            return Array.IndexOf(data, minElement);
         }
     }
 }
