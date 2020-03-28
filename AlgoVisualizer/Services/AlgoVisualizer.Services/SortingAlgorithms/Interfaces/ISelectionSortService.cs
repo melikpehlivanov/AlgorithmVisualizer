@@ -2,14 +2,15 @@
 {
     using System;
     using Models.SortingAlgorithms;
+
     public interface ISelectionSortService
     {
         Result Sort<T>(T[] data)
-             where T : struct,
-             IComparable,
-             IComparable<T>,
-             IConvertible,
-             IEquatable<T>,
-             IFormattable;
+            where T : struct,
+            IComparable,
+            IComparable<T>,
+            IConvertible,
+            IEquatable<T>,
+            IFormattable;
     }
 }

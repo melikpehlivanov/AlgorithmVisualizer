@@ -6,17 +6,18 @@
     using Common;
     using Interfaces;
     using Models.SortingAlgorithms;
+
     public class SelectionSortService : BaseSortingService, ISelectionSortService
     {
         private readonly List<int[]> swappingIndexes = new List<int[]>();
 
         public Result Sort<T>(T[] data)
-                where T : struct,
-                IComparable,
-                IComparable<T>,
-                IConvertible,
-                IEquatable<T>,
-                IFormattable
+            where T : struct,
+            IComparable,
+            IComparable<T>,
+            IConvertible,
+            IEquatable<T>,
+            IFormattable
         {
             if (!data.Any())
             {
@@ -38,40 +39,38 @@
             IEquatable<T>,
             IFormattable
         {
-            for (int i = 0; i < data.Length - 1; i++)
+            for (var i = 0; i < data.Length - 1; i++)
             {
-                T currentElement = data[i];
-                int indexOfSmallestElement = GetIndexOfSmallestElement(data, currentElement, i);
+                var smallestElementIndex = this.GetIndexOfSmallestElement(data, i);
 
-                if (indexOfSmallestElement != -1)
+                // If there's no smaller element than the current - continue
+                if (smallestElementIndex == i)
                 {
-                    swappingIndexes.Add(new int[] { i, indexOfSmallestElement });
-                    this.Swap(data, i, indexOfSmallestElement);
+                    continue;
                 }
+
+                this.swappingIndexes.Add(new[] { i, smallestElementIndex });
+                this.Swap(data, i, smallestElementIndex);
             }
         }
 
-        private int GetIndexOfSmallestElement<T>(T[] data, T currentElement, int startIndex)
-             where T : struct,
-             IComparable,
-             IComparable<T>,
-             IConvertible,
-             IEquatable<T>,
-             IFormattable
+        private int GetIndexOfSmallestElement<T>(IReadOnlyList<T> data, int currentSmallestElementIndex)
+            where T : struct,
+            IComparable,
+            IComparable<T>,
+            IConvertible,
+            IEquatable<T>,
+            IFormattable
         {
-            //if there is no element smaller than currentElement this method will return -1
-            int indexOfSmallestElement = -1;
-
-            for (int j = startIndex + 1; j < data.Length; j++)
+            for (var i = currentSmallestElementIndex + 1; i < data.Count; i++)
             {
-                if (currentElement.CompareTo(data[j]) == 1)
+                if (data[currentSmallestElementIndex].CompareTo(data[i]) > 0)
                 {
-                    currentElement = data[j];
-                    indexOfSmallestElement = j;
+                    currentSmallestElementIndex = i;
                 }
             }
 
-            return indexOfSmallestElement;
+            return currentSmallestElementIndex;
         }
     }
 }
