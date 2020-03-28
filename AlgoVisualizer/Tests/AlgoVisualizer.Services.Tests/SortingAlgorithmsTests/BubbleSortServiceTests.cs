@@ -59,6 +59,22 @@
         }
 
         [Fact]
+        public void Sort_With_ValidInput_Should_Return_SortedData()
+        {
+            // Arrange
+            const int arrayLength = 5;
+            var data = this.GenerateRandomArray(arrayLength);
+
+            // Act
+            this.bubbleSortService.Sort(data);
+
+            // Assert
+            data
+                .Should()
+                .BeInAscendingOrder();
+        }
+
+        [Fact]
         public void Sort_With_AlreadySortedData_Should_Return_DataAlreadySortedErrorMessage()
         {
             // Arrange
