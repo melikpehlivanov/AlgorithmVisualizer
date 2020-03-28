@@ -44,6 +44,10 @@ export const availableSortingAlgorithms = [
   {
     value: 'quicksort',
     label: 'Quick Sort'
+  },
+  {
+    value: 'selectionsort',
+    label: 'Selection Sort'
   }
 ];
 
