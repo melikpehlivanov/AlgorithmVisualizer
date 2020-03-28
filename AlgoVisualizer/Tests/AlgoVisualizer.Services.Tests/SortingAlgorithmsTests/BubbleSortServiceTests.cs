@@ -34,6 +34,31 @@
         }
 
         [Fact]
+        public void Sort_With_ValidInput_Should_Return_Correct_SwapIndexes()
+        {
+            // Arrange
+            const int arrayLength = 5;
+            var data = this.GenerateRandomArray(arrayLength);
+            var untouchedData = new List<int>(data);
+
+            // Act
+            var result = this.bubbleSortService.Sort(data);
+
+            // Sort the array with the given indexes
+            foreach (var swappingIndexes in result.SwapIndexes)
+            {
+                var firstIndex = swappingIndexes[0];
+                var secondIndex = swappingIndexes[1];
+                this.Swap(untouchedData, firstIndex, secondIndex);
+            }
+
+            // Assert
+            untouchedData
+                .Should()
+                .BeInAscendingOrder();
+        }
+
+        [Fact]
         public void Sort_With_AlreadySortedData_Should_Return_DataAlreadySortedErrorMessage()
         {
             // Arrange
