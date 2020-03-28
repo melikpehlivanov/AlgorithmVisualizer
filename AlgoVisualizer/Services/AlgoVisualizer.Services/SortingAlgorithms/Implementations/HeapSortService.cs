@@ -49,7 +49,7 @@
             var length = data.Count - 1;
             for (var i = length / 2; i >= 0; i--)
             {
-                this.Heapify(data, length, i);
+                this.Heapify(data, data.Count, i);
             }
 
             for (var i = length; i >= 0; i--)
