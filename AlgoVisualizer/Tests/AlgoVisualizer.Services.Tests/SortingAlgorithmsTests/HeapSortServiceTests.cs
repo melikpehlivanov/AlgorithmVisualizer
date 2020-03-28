@@ -116,6 +116,22 @@
                 .Be(expectedTotalSwaps);
         }
 
+        [Fact]
+        public void Sort_With_ValidInput_Should_Return_SortedData()
+        {
+            // Arrange
+            const int arrayLength = 40;
+            var data = this.GenerateRandomArray(arrayLength);
+
+            // Act
+            this.heapSortService.Sort(data);
+
+            // Assert
+            data
+                .Should()
+                .BeInAscendingOrder();
+        }
+
         private void SortArrayWithGivenIndexes(IEnumerable<int[]> swapIndexes, IList<int> untouchedData)
         {
             foreach (var swappingIndexes in swapIndexes)
