@@ -39,7 +39,7 @@
             IFormattable
         {
             int zeroIndex = 0;
-            int indexOfMinElement = FindIndexOfMinElement(data);
+            int indexOfMinElement = FindIndexOfFirstMinElement(data);
 
             if (indexOfMinElement != zeroIndex)
             {
@@ -49,30 +49,41 @@
 
             for (int i = 1; i < data.Length - 1; i++)
             {
-                T currentMinElement = data[i];
-                T newMinElement = data[i];
-                int index = 0;
+                T currentElement = data[i];
+                int indexOfSmallestElement = GetIndexOfSmallestElement(data, currentElement, i);
 
-                for (int j = i + 1; j < data.Length; j++)
+                if (indexOfSmallestElement != -1)
                 {
-                    if (newMinElement.CompareTo(data[j]) == 1)
-                    {
-                        newMinElement = data[j];
-                        index = j;
-                    }
+                    swappingIndexes.Add(new int[] { i, indexOfSmallestElement });
+                    this.Swap(data, i, indexOfSmallestElement);
                 }
-
-                if (newMinElement.CompareTo(currentMinElement) == 0)
-                {
-                    continue;
-                }
-
-                swappingIndexes.Add(new int[] { i, index });
-                this.Swap(data, i, index);
             }
         }
 
-        private int FindIndexOfMinElement<T>(T[] data)
+        private int GetIndexOfSmallestElement<T>(T[] data, T currentElement, int startIndex)
+             where T : struct,
+             IComparable,
+             IComparable<T>,
+             IConvertible,
+             IEquatable<T>,
+             IFormattable
+        {
+            //if there is no element smaller than currentElement this method will return -1
+            int indexOfSmallestElement = -1;
+
+            for (int j = startIndex + 1; j < data.Length; j++)
+            {
+                if (currentElement.CompareTo(data[j]) == 1)
+                {
+                    currentElement = data[j];
+                    indexOfSmallestElement = j;
+                }
+            }
+
+            return indexOfSmallestElement;
+        }
+
+        private int FindIndexOfFirstMinElement<T>(T[] data)
             where T : struct,
             IComparable,
             IComparable<T>,
