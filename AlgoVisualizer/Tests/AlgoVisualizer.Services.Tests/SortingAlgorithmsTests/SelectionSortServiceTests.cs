@@ -85,5 +85,26 @@
                 .Should()
                 .BeInAscendingOrder();
         }
+
+        [Fact]
+        public void Sort_With_ValidInput_Should_Return_Correct_TotalSwaps()
+        {
+            // Arrange
+            const int expectedTotalSwaps = 3;
+
+            // We should swap
+            // 1. Indexes 0 and 1
+            // 2. Indexes 2 and 5
+            // 3. Indexes 4 and 5
+            var data = new[] { 40, 10, 800, 400, 900, 100 };
+
+            // Act
+            var result = this.selectionSortService.Sort(data)?.TotalSwaps;
+
+            // Assert
+            result
+                .Should()
+                .Be(expectedTotalSwaps);
+        }
     }
 }
