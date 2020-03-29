@@ -1,5 +1,6 @@
 ﻿namespace AlgoVisualizer.Services.Tests.SortingAlgorithmsTests
 {
+    using System;
     using System.Collections.Generic;
     using Common;
     using FluentAssertions;
@@ -8,24 +9,24 @@
     using SortingAlgorithms.Interfaces;
     using Xunit;
 
-    public class QuickSortServiceTests : BaseTest
+    public class SelectionSortServiceTests : BaseTest
     {
-        private readonly IQuickSortService quickSortService;
+        private readonly ISelectionSortService selectionSortService;
 
-        public QuickSortServiceTests()
+        public SelectionSortServiceTests()
         {
-            this.quickSortService = new QuickSortService();
+            this.selectionSortService = new SelectionSortService();
         }
 
         [Fact]
         public void Sort_With_AlreadySortedData_Should_Return_DataAlreadySortedErrorMessage()
         {
             // Arrange
-            const int arrayLength = 49;
+            const int arrayLength = 10000;
             var sortedData = this.GenerateSortedArray(arrayLength);
 
             // Act
-            var result = this.quickSortService.Sort(sortedData);
+            var result = this.selectionSortService.Sort(sortedData);
 
             // Assert
             result
@@ -39,7 +40,7 @@
         public void Sort_With_NoElements_Should_Return_EmptyArrayErrorMessage()
         {
             // Act
-            var result = this.quickSortService.Sort(new int[0]);
+            var result = this.selectionSortService.Sort(Array.Empty<int>());
 
             // Assert
             result
@@ -53,11 +54,11 @@
         public void Sort_With_ValidInput_Should_Not_Return_ErrorMessage()
         {
             // Arrange
-            const int arrayLength = 100_000;
+            const int arrayLength = 1000;
             var data = this.GenerateRandomArray(arrayLength);
 
             // Act
-            var result = this.quickSortService.Sort(data);
+            var result = this.selectionSortService.Sort(data);
 
             // Assert
             result
@@ -69,18 +70,18 @@
         public void Sort_With_ValidInput_Should_Return_Correct_SwapIndexes()
         {
             // Arrange
-            const int arrayLength = 100_000;
+            const int arrayLength = 10000;
             var data = this.GenerateRandomArray(arrayLength);
-            var untouchedData = new List<int>(data);
+            var unmodifiedData = new List<int>(data);
 
             // Act
-            var result = this.quickSortService.Sort(data);
+            var result = this.selectionSortService.Sort(data);
 
             // Sort the array with the given indexes
-            this.SortArrayWithGivenIndexes(result.SwapIndexes, untouchedData);
+            this.SortArrayWithGivenIndexes(result.SwapIndexes, unmodifiedData);
 
             // Assert
-            untouchedData
+            unmodifiedData
                 .Should()
                 .BeInAscendingOrder();
         }
@@ -89,19 +90,16 @@
         public void Sort_With_ValidInput_Should_Return_Correct_TotalSwaps()
         {
             // Arrange
-            const int expectedTotalSwaps = 6;
+            const int expectedTotalSwaps = 3;
 
             // We should swap
-            // 1. Indexes 4 and 0
-            // 2. Indexes 1 and 5
-            // 3. Indexes 3 and 2
-            // 4. Indexes 4 and 3
-            // 5. Indexes 4 and 5
-            // 6. Indexes 2 and 3
-            var data = new[] { 20, 80, 100, 30, 9, 10 };
+            // 1. Indexes 0 and 1
+            // 2. Indexes 2 and 5
+            // 3. Indexes 4 and 5
+            var data = new[] { 40, 10, 800, 400, 900, 100 };
 
             // Act
-            var result = this.quickSortService.Sort(data)?.TotalSwaps;
+            var result = this.selectionSortService.Sort(data)?.TotalSwaps;
 
             // Assert
             result
@@ -113,11 +111,11 @@
         public void Sort_With_ValidInput_Should_Return_SortedData()
         {
             // Arrange
-            const int arrayLength = 100_000;
+            const int arrayLength = 10000;
             var data = this.GenerateRandomArray(arrayLength);
 
             // Act
-            this.quickSortService.Sort(data);
+            this.selectionSortService.Sort(data);
 
             // Assert
             data
