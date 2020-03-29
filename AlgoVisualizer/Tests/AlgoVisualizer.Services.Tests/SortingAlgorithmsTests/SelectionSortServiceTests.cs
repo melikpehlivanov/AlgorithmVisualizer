@@ -34,5 +34,19 @@
                 .And
                 .Match(x => x.As<Result>().ErrorMessage == NotificationMessages.SortingAlgorithms.DataAlreadySortedErrorMessage);
         }
+
+        [Fact]
+        public void Sort_With_NoElements_Should_Return_EmptyArrayErrorMessage()
+        {
+            // Act
+            var result = this.selectionSortService.Sort(Array.Empty<int>());
+
+            // Assert
+            result
+                .Should()
+                .Match(x => x.As<Result>().ErrorMessage != null)
+                .And
+                .Match(x => x.As<Result>().ErrorMessage == NotificationMessages.SortingAlgorithms.EmptyArrayErrorMessage);
+        }
     }
 }
