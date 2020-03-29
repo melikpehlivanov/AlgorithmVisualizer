@@ -1,6 +1,7 @@
 ﻿namespace AlgoVisualizer.Services.Tests.SortingAlgorithmsTests
 {
     using System;
+    using System.Collections.Generic;
     using Common;
     using FluentAssertions;
     using Models.SortingAlgorithms;
@@ -63,6 +64,26 @@
             result
                 .Should()
                 .Match(x => x.As<Result>().ErrorMessage == null);
+        }
+
+        [Fact]
+        public void Sort_With_ValidInput_Should_Return_Correct_SwapIndexes()
+        {
+            // Arrange
+            const int arrayLength = 10000;
+            var data = this.GenerateRandomArray(arrayLength);
+            var unmodifiedData = new List<int>(data);
+
+            // Act
+            var result = this.selectionSortService.Sort(data);
+
+            // Sort the array with the given indexes
+            this.SortArrayWithGivenIndexes(result.SwapIndexes, unmodifiedData);
+
+            // Assert
+            unmodifiedData
+                .Should()
+                .BeInAscendingOrder();
         }
     }
 }
