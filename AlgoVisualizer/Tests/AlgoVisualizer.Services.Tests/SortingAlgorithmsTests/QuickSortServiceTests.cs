@@ -47,5 +47,21 @@
                 .And
                 .Match(x => x.As<Result>().ErrorMessage == NotificationMessages.SortingAlgorithms.EmptyArrayErrorMessage);
         }
+
+        [Fact]
+        public void Sort_With_ValidInput_Should_Not_Return_ErrorMessage()
+        {
+            // Arrange
+            const int arrayLength = 100_000_0;
+            var data = this.GenerateRandomArray(arrayLength);
+
+            // Act
+            var result = this.quickSortService.Sort(data);
+
+            // Assert
+            result
+                .Should()
+                .Match(x => x.As<Result>().ErrorMessage == null);
+        }
     }
 }
