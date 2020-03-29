@@ -106,5 +106,21 @@
                 .Should()
                 .Be(expectedTotalSwaps);
         }
+
+        [Fact]
+        public void Sort_With_ValidInput_Should_Return_SortedData()
+        {
+            // Arrange
+            const int arrayLength = 10000;
+            var data = this.GenerateRandomArray(arrayLength);
+
+            // Act
+            this.selectionSortService.Sort(data);
+
+            // Assert
+            data
+                .Should()
+                .BeInAscendingOrder();
+        }
     }
 }
