@@ -53,7 +53,7 @@
         public void Sort_With_ValidInput_Should_Not_Return_ErrorMessage()
         {
             // Arrange
-            const int arrayLength = 100_000_0;
+            const int arrayLength = 100_000;
             var data = this.GenerateRandomArray(arrayLength);
 
             // Act
@@ -113,7 +113,7 @@
         public void Sort_With_ValidInput_Should_Return_SortedData()
         {
             // Arrange
-            const int arrayLength = 100_000_0;
+            const int arrayLength = 100_000;
             var data = this.GenerateRandomArray(arrayLength);
 
             // Act
