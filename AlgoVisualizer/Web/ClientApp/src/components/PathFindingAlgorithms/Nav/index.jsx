@@ -6,16 +6,21 @@ import {
   NavItem,
   Button,
   ButtonToolbar,
-  Spinner
+  Spinner,
 } from 'react-bootstrap';
 import { NavLink } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { makePostApiCallAsync } from '../../../helpers/fetchData';
 import {
   visualizeResult,
-  visualizeMazeGeneration
+  visualizeMazeGeneration,
 } from '../../../helpers/pathFindingAlgorithms/dataVisualizer';
-import { MAZE_TYPES } from '../../../constants/pathfindingAlgorithms';
+import {
+  MAZE_TYPES,
+  DEFAULT_ANIMATION_SPEED_VALUE,
+  ANIMATION_SPEEDS,
+  DEFAULT_ANIMATION,
+} from '../../../constants/pathfindingAlgorithms';
 import { DEFAULT_ERROR_MESSAGE } from '../../../constants/errorConstants';
 
 import {
@@ -24,7 +29,7 @@ import {
   clearState,
   setIsNavbarClickable,
   clearGrid,
-  setTotalNodesExplored
+  setTotalNodesExplored,
 } from '../../../store/pathFindingAlgorithms/actions';
 import { showError, clearErrors } from '../../../store/error/actions';
 import { ErrorContext } from '../../../store/error/context';
@@ -32,7 +37,7 @@ import { PathFindingAlgorithmsContext } from '../../../store/pathFindingAlgorith
 import { TOTAL_NODES_EXPLORED_DEFAULT_VALUE } from '../../../constants/gridConstants';
 import {
   MAZE_API_URL,
-  PATHFINDING_ALGORITHMS_API_URL
+  PATHFINDING_ALGORITHMS_API_URL,
 } from '../../../constants/apiConstants';
 
 import './index.css';
@@ -40,8 +45,10 @@ import './index.css';
 export const PathfindingAlgorithmsNavbar = () => {
   const { state, dispatch } = useContext(PathFindingAlgorithmsContext);
   const { dispatchError } = useContext(ErrorContext);
+  const [animationSpeed, setAnimationSpeed] = useState(DEFAULT_ANIMATION);
   const [showAlgorithmsMenu, setShowAlgorithmsMenu] = useState(false);
   const [showMazesMenu, setShowMazesMenu] = useState(false);
+  const [showAnimationSpeed, setShowAnimationSpeed] = useState(false);
 
   const handleOnClick = (algorithm, algorithmDescription) => {
     if (!state.isNavbarClickable) return;
@@ -60,7 +67,7 @@ export const PathfindingAlgorithmsNavbar = () => {
     dispatch(setIsNavbarClickable(false));
 
     const data = JSON.stringify({
-      grid
+      grid,
     });
 
     const result = await makePostApiCallAsync(url, data, dispatchError);
@@ -89,7 +96,7 @@ export const PathfindingAlgorithmsNavbar = () => {
     const data = JSON.stringify({
       startNode: startNode,
       endNode: endNode,
-      grid: grid
+      grid: grid,
     });
 
     const result = await makePostApiCallAsync(url, data, dispatchError);
@@ -108,7 +115,8 @@ export const PathfindingAlgorithmsNavbar = () => {
         dispatch,
         allVisitedNodesInOrder,
         allNodesInShortestPathOrder,
-        result.totalNodesExplored
+        result.totalNodesExplored,
+        animationSpeed.value
       );
     }
   };
@@ -135,6 +143,7 @@ export const PathfindingAlgorithmsNavbar = () => {
             </NavLink>
           </NavItem>
           <NavDropdown
+            className={isClickable()}
             id="basic-nav-dropdown"
             onMouseOver={() => setShowAlgorithmsMenu(true)}
             onMouseLeave={() => setShowAlgorithmsMenu(false)}
@@ -159,6 +168,7 @@ export const PathfindingAlgorithmsNavbar = () => {
             })}
           </NavDropdown>
           <NavDropdown
+            className={isClickable()}
             id="basic-nav-dropdown-2"
             title={<span className="text-white">Mazes</span>}
             onMouseOver={() => setShowMazesMenu(true)}
@@ -216,18 +226,39 @@ export const PathfindingAlgorithmsNavbar = () => {
         </NavItem>
         <Nav className="w-50">
           <div className="ml-sm-auto">
-            <NavItem>
-              <Button
-                className={isClickable()}
-                variant="danger"
-                onClick={() =>
-                  state.isNavbarClickable ? dispatch(clearState()) : null
-                }
-              >
-                Clear board
-              </Button>
-            </NavItem>
+            <NavDropdown
+              id="nav-dropdown"
+              className={isClickable()}
+              title={
+                <span className="text-white">
+                  Animation speed: {animationSpeed.label}
+                </span>
+              }
+              onMouseOver={() => setShowAnimationSpeed(true)}
+              onMouseLeave={() => setShowAnimationSpeed(false)}
+              show={showAnimationSpeed}
+            >
+              {ANIMATION_SPEEDS.map((currentElement, index) => {
+                return (
+                  <NavDropdown.Item
+                    key={index}
+                    onClick={() => setAnimationSpeed(currentElement)}
+                  >
+                    {currentElement.label}
+                  </NavDropdown.Item>
+                );
+              })}
+            </NavDropdown>
           </div>
+          <Button
+            className={isClickable()}
+            variant="danger"
+            onClick={() =>
+              state.isNavbarClickable ? dispatch(clearState()) : null
+            }
+          >
+            Clear board
+          </Button>
         </Nav>
       </Navbar.Collapse>
     </Navbar>
