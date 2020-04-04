@@ -3,6 +3,9 @@
 **AlgorithmVisualizer** is an open-source web project which visualizes different pathfinding and sorting algorithms. I hope that you will enjoy this project just as much as I enjoyed building it. If you find any bugs, feel free to open an issue or make a pull request. https://melikpehlivanov.github.io/AlgorithmVisualizer/
 
 >**My initial idea was to learn algorithms and react in the meantime so I decided to build this project. Firstly, I used react-redux and then switched to react-hooks in order to practice React. If you're interested to see the two different approaches, check the repository branches.**
+
+[![Build status](https://dev.azure.com/melikpehlivanov/AlgoVisualizer/_apis/build/status/AlgoVisualizer-ASP.NET%20Core-CI)](https://dev.azure.com/melikpehlivanov/AlgoVisualizer/_build/latest?definitionId=4)
+
 ## Avalailable algorithms
 
 ***
