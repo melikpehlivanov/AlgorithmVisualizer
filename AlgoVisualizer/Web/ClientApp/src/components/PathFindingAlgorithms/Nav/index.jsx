@@ -17,7 +17,6 @@ import {
 } from '../../../helpers/pathFindingAlgorithms/dataVisualizer';
 import {
   MAZE_TYPES,
-  DEFAULT_ANIMATION_SPEED_VALUE,
   ANIMATION_SPEEDS,
   DEFAULT_ANIMATION,
 } from '../../../constants/pathfindingAlgorithms';
