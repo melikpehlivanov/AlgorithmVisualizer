@@ -30,6 +30,10 @@
     {
       "src": "navbar-menu.jpg",
       "type": "image/x-icon"
+    },
+    {
+      "src": "visualize-button.jpg",
+      "type": "image/x-icon"
     }
   ],
   "start_url": "./index.html",
