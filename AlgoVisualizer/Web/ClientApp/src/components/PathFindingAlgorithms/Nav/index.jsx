@@ -48,6 +48,7 @@ export const PathfindingAlgorithmsNavbar = () => {
   const [animationSpeed, setAnimationSpeed] = useState(DEFAULT_ANIMATION);
   const [showAlgorithmsMenu, setShowAlgorithmsMenu] = useState(false);
   const [showMazesMenu, setShowMazesMenu] = useState(false);
+  const [showAnimationSpeed, setShowAnimationSpeed] = useState(false);
 
   const handleOnClick = (algorithm, algorithmDescription) => {
     if (!state.isNavbarClickable) return;
@@ -142,6 +143,7 @@ export const PathfindingAlgorithmsNavbar = () => {
             </NavLink>
           </NavItem>
           <NavDropdown
+            className={isClickable()}
             id="basic-nav-dropdown"
             onMouseOver={() => setShowAlgorithmsMenu(true)}
             onMouseLeave={() => setShowAlgorithmsMenu(false)}
@@ -166,6 +168,7 @@ export const PathfindingAlgorithmsNavbar = () => {
             })}
           </NavDropdown>
           <NavDropdown
+            className={isClickable()}
             id="basic-nav-dropdown-2"
             title={<span className="text-white">Mazes</span>}
             onMouseOver={() => setShowMazesMenu(true)}
@@ -224,12 +227,16 @@ export const PathfindingAlgorithmsNavbar = () => {
         <Nav className="w-50">
           <div className="ml-sm-auto">
             <NavDropdown
-              className={!state.isNavbarClickable ? 'disabled' : ''}
+              id="nav-dropdown"
+              className={isClickable()}
               title={
                 <span className="text-white">
                   Animation speed: {animationSpeed.label}
                 </span>
               }
+              onMouseOver={() => setShowAnimationSpeed(true)}
+              onMouseLeave={() => setShowAnimationSpeed(false)}
+              show={showAnimationSpeed}
             >
               {ANIMATION_SPEEDS.map((currentElement, index) => {
                 return (
