@@ -114,7 +114,8 @@ export const PathfindingAlgorithmsNavbar = () => {
         dispatch,
         allVisitedNodesInOrder,
         allNodesInShortestPathOrder,
-        result.totalNodesExplored
+        result.totalNodesExplored,
+        animationSpeed.value
       );
     }
   };
@@ -223,6 +224,7 @@ export const PathfindingAlgorithmsNavbar = () => {
         <Nav className="w-50">
           <div className="ml-sm-auto">
             <NavDropdown
+              className={!state.isNavbarClickable ? 'disabled' : ''}
               title={
                 <span className="text-white">
                   Animation speed: {animationSpeed.label}

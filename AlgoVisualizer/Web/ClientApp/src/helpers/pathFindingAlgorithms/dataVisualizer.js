@@ -1,22 +1,23 @@
 import {
   SHORTEST_PATH_CLASSNAME,
-  VISITED_NODE_CLASSNAME
+  VISITED_NODE_CLASSNAME,
 } from '../../constants/gridConstants';
 import {
   setIsNavbarClickable,
   setWallNode,
   setWeightNode,
-  setTotalNodesExplored
+  setTotalNodesExplored,
 } from '../../store/pathFindingAlgorithms/actions';
 
 const nodeName = 'node';
-const msTimeout = 20;
+const mazeGenerationAnimationSpeed = 20;
 
 export const visualizeResult = (
   dispatch,
   visitedNodesInOrder,
   nodesInShortestPathOrder,
-  totalNodesExplored
+  totalNodesExplored,
+  animationSpeed
 ) => {
   const allVisitedNodesInOrder = visitedNodesInOrder;
   const allNodesInShortestPathOrder = nodesInShortestPathOrder;
@@ -25,7 +26,8 @@ export const visualizeResult = (
     dispatch,
     allVisitedNodesInOrder,
     allNodesInShortestPathOrder,
-    totalNodesExplored
+    totalNodesExplored,
+    animationSpeed
   );
 };
 
@@ -52,7 +54,7 @@ const animateMazeGeneration = (dispatch, nodes, mazeType) => {
         dispatch(setIsNavbarClickable(true));
         clearTimeout();
       }
-    }, msTimeout * i);
+    }, mazeGenerationAnimationSpeed * i);
   }
 };
 
@@ -60,7 +62,8 @@ const animateResult = (
   dispatch,
   allVisitedNodesInOrder,
   allNodesInShortestPathOrder,
-  totalNodesExplored
+  totalNodesExplored,
+  animationSpeed
 ) => {
   for (let i = 0; i <= allVisitedNodesInOrder.length; i++) {
     if (i === allVisitedNodesInOrder.length) {
@@ -70,7 +73,7 @@ const animateResult = (
           allNodesInShortestPathOrder,
           totalNodesExplored
         );
-      }, msTimeout * i);
+      }, animationSpeed * i);
       return;
     }
 
@@ -83,7 +86,7 @@ const animateResult = (
       }
 
       return;
-    }, msTimeout * i);
+    }, animationSpeed * i);
   }
 };
 
