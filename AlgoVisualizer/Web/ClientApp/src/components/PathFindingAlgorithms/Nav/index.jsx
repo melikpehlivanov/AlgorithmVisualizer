@@ -241,7 +241,11 @@ export const PathfindingAlgorithmsNavbar = () => {
                 return (
                   <NavDropdown.Item
                     key={index}
-                    onClick={() => setAnimationSpeed(currentElement)}
+                    onClick={() =>
+                      state.isNavbarClickable
+                        ? setAnimationSpeed(currentElement)
+                        : null
+                    }
                   >
                     {currentElement.label}
                   </NavDropdown.Item>
