@@ -4,7 +4,7 @@
 
 >**My initial idea was to learn algorithms and react in the meantime so I decided to build this project. Firstly, I used react-redux and then switched to react-hooks in order to practice React. If you're interested to see the two different approaches, check the repository branches. By the way, the algorithmic part could have been implemented on the front end in order to eliminate the 2x more work but I wanted the algorithms to be written in C#. I also could use event sourcing but it would've been overengineering for such a small project.**
 
-[![Build status](https://dev.azure.com/melikpehlivanov/AlgoVisualizer/_apis/build/status/AlgoVisualizer-ASP.NET%20Core-CI)](https://dev.azure.com/melikpehlivanov/AlgoVisualizer/_build/latest?definitionId=4)
+[![Build status](https://dev.azure.com/melikpehlivanov/AlgoVisualizer/_apis/build/status/AlgoVisualizer)](https://dev.azure.com/melikpehlivanov/AlgoVisualizer/_build/latest?definitionId=7)
 
 ## Avalailable algorithms
 
